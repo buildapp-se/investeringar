@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investeringar · prototyp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Manrope:wght@300;400;500;600&display=swap">
+<style>
+/* Palett hamtad ur Stitch Forslag E. Mork variant tillagd, eftersom E:s
+   temavaxlare inte gjorde nagot. Systemtema ar standard enligt CONTEXT.md. */
+:root {
+  --paper: #fbfbf9;
+  --paper-subtle: #f6f5f1;
+  --surface: #ffffff;
+  --ink: #1a1a1a;
+  --ink-2: #636363;
+  --ink-3: #8c8c88;
+  --divider: #eae8e4;
+  --divider-light: #f1efe9;
+  --accent: #22382c;
+  --accent-soft: #eaf0ec;
+  --varning: #8a5a00;
+  --varning-soft: #fdf5e6;
+  --demo: #5b4a7a;
+  --demo-soft: #f2eef8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="ljust"]) {
+    --paper: #16171a; --paper-subtle: #1c1e22; --surface: #202226;
+    --ink: #ececea; --ink-2: #a8a8a4; --ink-3: #7d7d79;
+    --divider: #2e3136; --divider-light: #26282c;
+    --accent: #8fc4a3; --accent-soft: #1e2b23;
+    --varning: #e0b060; --varning-soft: #2a2317;
+    --demo: #b9a8d8; --demo-soft: #232030;
+  }
+}
+:root[data-tema="morkt"] {
+  --paper: #16171a; --paper-subtle: #1c1e22; --surface: #202226;
+  --ink: #ececea; --ink-2: #a8a8a4; --ink-3: #7d7d79;
+  --divider: #2e3136; --divider-light: #26282c;
+  --accent: #8fc4a3; --accent-soft: #1e2b23;
+  --varning: #e0b060; --varning-soft: #2a2317;
+  --demo: #b9a8d8; --demo-soft: #232030;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .serif { font-family: Newsreader, Georgia, serif; font-weight: 400; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+/* Sektionerna bar bade .wrap och section, och .wrap vinner pa specificitet.
+   Den vertikala luften maste darfor sattas pa den kombinationen. */
+section.wrap { padding: 72px 24px; }
+hr { border: 0; border-top: 1px solid var(--divider); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+.ogonbryn { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; margin-bottom: 12px; }
+.dampad { color: var(--ink-2); }
+.liten { font-size: 13px; }
+.minst { font-size: 12px; }
+
+/* Header */
+header { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--divider); }
+header .wrap { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+nav { display: flex; align-items: center; gap: 24px; font-size: 13px; color: var(--ink-2); }
+nav a { text-decoration: none; }
+nav a:hover { color: var(--ink); }
+.temaval { display: flex; gap: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
+.temaval button { background: none; border: 0; color: var(--ink-3); cursor: pointer; font: inherit; padding: 4px 6px; }
+.temaval button[aria-pressed="true"] { color: var(--ink); font-weight: 600; }
+
+/* Hero */
+h1 { font-size: clamp(30px, 5vw, 50px); line-height: 1.16; letter-spacing: -.015em; margin-bottom: 24px; max-width: 20ch; }
+.ingress { font-size: clamp(16px, 2vw, 19px); color: var(--ink-2); font-weight: 300; max-width: 62ch; margin-bottom: 28px; }
+.fakta { display: flex; flex-wrap: wrap; gap: 10px 28px; padding-top: 20px; border-top: 1px solid var(--divider); font-size: 13px; color: var(--ink-2); }
+.fakta > div { display: flex; align-items: center; gap: 8px; }
+.prick { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; }
+
+/* Ingangar */
+.ingangar { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; }
+.ingang h3 { font-size: 20px; margin-bottom: 10px; }
+.ingang .etikett { font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 13px; color: var(--ink-3); margin-bottom: 10px; }
+.ingang p { font-size: 14px; color: var(--ink-2); font-weight: 300; margin-bottom: 20px; }
+.ingang dl { border-top: 1px solid var(--divider-light); padding-top: 14px; font-size: 12px; display: grid; grid-template-columns: auto auto; gap: 6px 12px; }
+.ingang dt { color: var(--ink-2); }
+.ingang dd { text-align: right; }
+
+/* Scenario */
+.panel { background: var(--surface); border: 1px solid var(--divider); padding: 28px; }
+.mening { font-size: clamp(17px, 2.4vw, 21px); line-height: 1.9; font-family: Newsreader, Georgia, serif; }
+.mening input {
+  font: inherit; font-family: Manrope, sans-serif; font-size: .82em; font-weight: 600;
+  background: var(--accent-soft); color: var(--ink); border: 0; border-bottom: 1px solid var(--accent);
+  padding: 1px 6px; width: 5.2em; text-align: right; border-radius: 3px 3px 0 0;
+}
+.mening input.kort { width: 3.4em; }
+.mening select { font: inherit; font-family: Manrope, sans-serif; font-size: .8em; background: var(--accent-soft); color: var(--ink); border: 0; border-bottom: 1px solid var(--accent); padding: 2px 4px; border-radius: 3px 3px 0 0; }
+.scenariorad { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--divider-light); font-size: 13px; color: var(--ink-2); }
+label.kryss { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+
+/* Resultat */
+.resultat { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; margin-top: 24px; }
+.kort { background: var(--surface); border: 1px solid var(--divider); padding: 22px; }
+.kort .rubrik { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); margin-bottom: 8px; }
+.kort .tal { font-family: Newsreader, Georgia, serif; font-size: 27px; }
+.kort .under { font-size: 12px; color: var(--ink-2); margin-top: 6px; }
+.kort.betonad { border-color: var(--accent); }
+
+/* Verktygsrad */
+.verktyg { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px; }
+.knapp, .flik { font: inherit; font-size: 13px; background: var(--surface); color: var(--ink); border: 1px solid var(--divider); padding: 7px 14px; cursor: pointer; border-radius: 4px; }
+.knapp:hover, .flik:hover { border-color: var(--accent); }
+.flikgrupp { display: inline-flex; border: 1px solid var(--divider); border-radius: 4px; overflow: hidden; }
+.flikgrupp .flik { border: 0; border-radius: 0; }
+.flikgrupp .flik[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+.vaxa { flex: 1; }
+
+/* Tabell */
+.tabellhalla { overflow-x: auto; border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); }
+table { width: 100%; border-collapse: collapse; }
+thead th { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; text-align: right; padding: 14px 10px; border-bottom: 1px solid var(--divider); white-space: nowrap; }
+thead th:first-child { text-align: left; padding-left: 0; }
+tbody td { padding: 16px 10px; text-align: right; font-size: 14px; border-top: 1px solid var(--divider-light); vertical-align: top; }
+tbody td:first-child { text-align: left; padding-left: 0; }
+/* Produktnamnet far inte brytas till tre rader nar leverantorskolumnerna
+   visas. Talkolumnerna halls pa en rad; tabellen scrollar i stallet. */
+thead th:first-child, tbody td:first-child { min-width: 230px; }
+tbody td:not(:first-child) { white-space: nowrap; }
+tbody td:nth-child(2) { white-space: normal; }
+tbody tr.produkt:hover { background: var(--paper-subtle); }
+.produktnamn { font-family: Newsreader, Georgia, serif; font-size: 16px; }
+.produktmeta { display: block; font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+.expandera { display: flex; gap: 8px; align-items: baseline; background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.expandera .pil { color: var(--ink-3); transition: transform .12s; display: inline-block; }
+.expandera[aria-expanded="true"] .pil { transform: rotate(90deg); }
+.expandera:hover .produktnamn { color: var(--accent); }
+
+/* Statusmarkeringar. Farg anvands alltid tillsammans med text. */
+.status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+.status.verifierad { background: var(--accent-soft); color: var(--accent); }
+.status.ovsakerhet { background: var(--paper-subtle); color: var(--ink-2); }
+.status.inaktuell { background: var(--varning-soft); color: var(--varning); }
+.status.demo { background: var(--demo-soft); color: var(--demo); }
+.billigast { color: var(--accent); font-weight: 600; }
+.billigastetikett { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); margin-top: 2px; }
+
+/* Affiliatemarke: syns vid ALLA partners, aven de dyraste, sa att det inte
+   gar att laesa markningen som orsak till placeringen. */
+.partner { font-size: 11px; color: var(--ink-3); cursor: pointer; background: none; border: 0; font-family: inherit; text-decoration: underline dotted; }
+
+.detalj td { background: var(--paper-subtle); font-size: 13px; color: var(--ink-2); }
+.kopvagar { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 12px 0; }
+.kopvag { background: var(--surface); border: 1px solid var(--divider); padding: 12px; text-align: left; }
+.kopvag .namn { font-weight: 600; font-size: 13px; color: var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.kopvag.vinnare { border-color: var(--accent); }
+.uppdelning { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; max-width: 460px; margin: 12px 0; text-align: left; }
+.uppdelning .summa { border-top: 1px solid var(--divider); padding-top: 6px; font-weight: 600; color: var(--ink); }
+
+/* Popover for informationsknappar. Native popover ger tangentbord och Escape
+   utan JavaScript. Hover ensamt vore otillgangligt pa touch. */
+.infoknapp { background: none; border: 0; color: var(--ink-3); cursor: pointer; font: inherit; font-size: 12px; text-decoration: underline dotted; padding: 0; }
+[popover] { max-width: 420px; padding: 20px; border: 1px solid var(--divider); background: var(--surface); color: var(--ink); box-shadow: 0 8px 30px rgba(0,0,0,.14); border-radius: 6px; }
+[popover] h4 { font-family: Newsreader, Georgia, serif; font-size: 17px; margin-bottom: 8px; }
+[popover] p { font-size: 13px; color: var(--ink-2); margin-bottom: 8px; }
+[popover]::backdrop { background: rgba(0,0,0,.28); }
+
+.tomt { padding: 44px 0; text-align: center; }
+.tomt p { color: var(--ink-2); font-size: 14px; max-width: 46ch; margin: 8px auto 16px; }
+
+footer { border-top: 1px solid var(--divider); padding: 56px 0 40px; }
+.fotgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-bottom: 36px; }
+.fotbotten { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 24px; border-top: 1px solid var(--divider-light); font-size: 12px; color: var(--ink-3); }
+
+.doldPaMobil { display: none; }
+@media (min-width: 860px) { .doldPaMobil { display: revert; } }
+
+/* Jamforelsen far bryta ut ur textbredden pa stora skarmar. Densitet varierar
+   med skarm, inte med antagen kunskapsniva. Se CONTEXT.md. */
+@media (min-width: 1200px) { #jamforelse { max-width: 1420px; } }
+
+@media (max-width: 700px) {
+  section.wrap { padding: 48px 16px; }
+  header .wrap { height: 56px; }
+  .wrap { padding: 0 16px; }
+  thead th, tbody td { padding: 12px 6px; }
+  thead th:first-child, tbody td:first-child { min-width: 148px; }
+  /* Rubrikerna far radbrytas pa liten skarm, annars tvingar de fram
+     sidledsscroll aven i enkel vy dar bara fyra kolumner visas. */
+  thead th { white-space: normal; }
+  .produktnamn { font-size: 15px; }
+  .mening { line-height: 2.1; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#" style="text-decoration:none;font-size:13px;font-weight:500">buildapp.se <span style="color:var(--ink-3);font-weight:300">/</span> investeringar</a>
+    <nav>
+      <a href="#ingangar" class="doldPaMobil">Ingångar</a>
+      <a href="#scenario" class="doldPaMobil">Scenario</a>
+      <a href="#jamforelse">Jämförelse</a>
+      <a href="#metod" class="doldPaMobil">Om jämförelsen</a>
+      <div class="temaval" role="group" aria-label="Tema">
+        <button type="button" data-tema-val="system">System</button>
+        <button type="button" data-tema-val="ljust">Ljust</button>
+        <button type="button" data-tema-val="morkt">Mörkt</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap">
+  <p class="ogonbryn">Oberoende publicering · Svenska sparformer</p>
+  <h1>Jämför vad fondsparandet faktiskt kostar</h1>
+  <p class="ingress">Ett handplockat urval av fonder, ETF:er och fondrobotar för svenska privatsparare. Kronor och procent, samma scenario för alla alternativ. Ingen inloggning och inga bankkopplingar.</p>
+  <div class="fakta">
+    <div><span class="prick"></span><span><strong>Urval och ansvar: Patrik.</strong> Handplockat, inte hela marknaden.</span></div>
+    <div><span class="prick"></span><span>Varje uppgift har källa och kontrolldatum</span></div>
+    <div><span class="prick"></span><span>Affiliatelänkar märks med <strong>*</strong> och styr inte rankningen</span></div>
+    <div class="minst" style="color:var(--ink-3)">Prototyp med demodata, inga verifierade siffror</div>
+  </div>
+</section>
+
+<div class="wrap"><hr></div>
+
+<section class="wrap" id="ingangar">
+  <p class="ogonbryn">Tre behov</p>
+  <h2 style="font-size:28px;margin-bottom:8px">Tre vägar, ingen är ett steg upp</h2>
+  <p class="dampad liten" style="max-width:56ch;margin-bottom:36px">Välj den nivå som passar hur mycket tid du vill lägga. Mer komplexitet är inte bättre, och ingen väg är en fortsättning på en annan.</p>
+  <div class="ingangar">
+    <div class="ingang">
+      <div class="etikett">Automatiserat</div>
+      <h3>Slippa välja och sköta</h3>
+      <p>Fondrobotarna LYSA och Opti jämförs på aktieandel, övriga tillgångar, service och totalavgift. Passar när du vill lämna ifrån dig ombalansering och löpande skötsel.</p>
+      <dl>
+        <dt>Totalavgift</dt><dd><span class="status ovsakerhet">Ej verifierat</span></dd>
+        <dt>Egen tidsinsats</dt><dd>Ingen löpande</dd>
+        <dt>Ombalansering</dt><dd>Automatisk</dd>
+      </dl>
+    </div>
+    <div class="ingang">
+      <div class="etikett">Egna fonder</div>
+      <h3>Välja egna indexfonder</h3>
+      <p>Se kandidaterna och jämför köpvägar för samma fond och samma andelsklass hos olika leverantörer. Handlas i kronor utan courtage och utan valutaväxling.</p>
+      <dl>
+        <dt>Årlig fondkostnad</dt><dd><span class="status ovsakerhet">Ej verifierat</span></dd>
+        <dt>Egen tidsinsats</dt><dd>Låg</dd>
+        <dt>Köpvaluta</dt><dd>SEK</dd>
+      </dl>
+    </div>
+    <div class="ingang">
+      <div class="etikett">Fördjupning</div>
+      <h3>Utforska ETF:er och belåning</h3>
+      <p>Handelsavgifter, marginalkostnader, villkor och risker. Belåningsdelen bygger på hypotetiska exempelportföljer, inte dina egna innehav. Ett annat behov, inte ett nästa steg.</p>
+      <dl>
+        <dt>Förvaltningsavgift</dt><dd><span class="status ovsakerhet">Ej verifierat</span></dd>
+        <dt>Friktion</dt><dd>Växling och courtage</dd>
+        <dt>Beteenderisk</dt><dd>Högre</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr></div>
+
+<section class="wrap" id="scenario">
+  <p class="ogonbryn">Ditt scenario</p>
+  <h2 style="font-size:28px;margin-bottom:8px">Samma antaganden för alla alternativ</h2>
+  <p class="dampad liten" style="margin-bottom:28px">Scenariot styr hela tabellen. Det sparas lokalt i din webbläsare, utan konto.</p>
+
+  <div class="panel">
+    <p class="mening">
+      Jag sparar <input id="manad" type="number" min="0" max="50000" step="500" value="2000" aria-label="Månadssparande i kronor"> kr/mån
+      och sätter in <input id="engang" type="number" min="0" max="10000000" step="10000" value="100000" aria-label="Engångsinsättning i kronor"> kr nu,
+      under <input id="ar" class="kort" type="number" min="1" max="40" step="1" value="10" aria-label="Antal år"> år,
+      med räkneantagandet <input id="sats" class="kort" type="number" min="0" max="15" step="0.5" value="7" aria-label="Räkneantagande i procent per år"> % per år.
+      Ingen belåning.
+    </p>
+    <div class="scenariorad">
+      <label class="kryss"><input type="checkbox" id="saljs"> Sälj hela placeringen vid periodens slut</label>
+      <button type="button" class="knapp" id="aterstall">Återställ</button>
+      <span class="vaxa"></span>
+      <button type="button" class="infoknapp" popovertarget="pop-metod">Vad betyder räkneantagandet?</button>
+    </div>
+    <p class="minst" style="color:var(--ink-3);margin-top:12px">Gemensamt räkneantagande före avgifter och inflation, ingen prognos. Totaler visas exklusive försäljning; beräknad säljkostnad redovisas separat när rutan kryssas i.</p>
+  </div>
+
+  <div class="resultat">
+    <div class="kort">
+      <div class="rubrik">Totalt insatt</div>
+      <div class="tal" id="res-insatt">–</div>
+      <div class="under">Dina egna insättningar</div>
+    </div>
+    <div class="kort">
+      <div class="rubrik">Summa avgifter</div>
+      <div class="tal" id="res-avgifter">–</div>
+      <div class="under">Det som dras ur kapitalet vid 0,20 %</div>
+    </div>
+    <div class="kort betonad">
+      <div class="rubrik">Avgifternas totala effekt</div>
+      <div class="tal" id="res-effekt">–</div>
+      <div class="under">Inklusive tillväxt du aldrig fick</div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:20px">
+    <p class="ogonbryn">Därför skiljer sig talen åt</p>
+    <p class="liten dampad" style="max-width:70ch">
+      Skillnaden mellan de två sista talen, <strong id="res-gap" style="color:var(--ink)">–</strong>, är ränta på ränta.
+      En avgift kostar inte bara kronorna som dras. De kronorna ligger sedan inte kvar och växer, och den uteblivna tillväxten fortsätter att växa bort år efter år.
+      Det är samma mekanism som gör långsiktigt sparande meningsfullt, fast riktad åt fel håll.
+    </p>
+    <p class="minst" style="color:var(--ink-3);margin-top:10px">Vi visar därför avgifternas effekt, aldrig ett förväntat slutkapital. Räkneantagandet isolerar kostnadsskillnader och är inte en förutsägelse om vad ditt sparande blir värt.</p>
+  </div>
+</section>
+
+<div class="wrap"><hr></div>
+
+<section class="wrap" id="jamforelse">
+  <p class="ogonbryn">Översikt</p>
+  <h2 style="font-size:28px;margin-bottom:8px">Jämförelse av centrala alternativ</h2>
+  <p class="dampad liten" style="margin-bottom:24px">Samma produkt och andelsklass jämförs mellan leverantörer. Liknande produkter hålls isär, eftersom exponeringen skiljer sig.</p>
+
+  <div class="verktyg">
+    <div class="flikgrupp" role="group" aria-label="Vy">
+      <button type="button" class="flik" data-vy="enkel" aria-pressed="true">Enkel vy</button>
+      <button type="button" class="flik" data-vy="avancerad" aria-pressed="false">Avancerad vy</button>
+    </div>
+    <label class="kryss liten"><input type="checkbox" id="f-verifierad"> Endast verifierade uppgifter</label>
+    <label class="kryss liten"><input type="checkbox" id="f-sek"> Handlas i SEK</label>
+    <span class="vaxa"></span>
+    <button type="button" class="infoknapp" popovertarget="pop-status">Vad betyder markeringarna?</button>
+  </div>
+
+  <div class="tabellhalla">
+    <table id="tabell">
+      <thead><tr id="rubrikrad"></tr></thead>
+      <tbody id="rader"></tbody>
+    </table>
+  </div>
+
+  <div class="tomt" id="tomtlage" hidden>
+    <p class="serif" style="font-size:20px">Inga produkter matchar filtren</p>
+    <p>Urvalet är handplockat, så kombinationen kan sakna kandidater. I det här underlaget utesluter <em>Endast verifierade uppgifter</em> och <em>Handlas i SEK</em> varandra, eftersom de verifierade raderna ännu bara är demodata.</p>
+    <button type="button" class="knapp" id="rensafilter">Ta bort filter</button>
+  </div>
+
+  <p class="minst" style="color:var(--ink-3);margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between">
+    <span><strong>*</strong> Märkta leverantörer är affiliatepartners. Märket visas vid varje partner oavsett placering, även när partnern är dyrast i raden, så att det aldrig kan förväxlas med skälet till markeringen.</span>
+    <span>Källor och kontrolldatum per uppgift i fördjupningen.</span>
+  </p>
+</section>
+
+<div class="wrap"><hr></div>
+
+<section class="wrap">
+  <p class="ogonbryn">Separat jämförelse</p>
+  <h2 style="font-size:28px;margin-bottom:8px">Fondrobotar jämförs för sig</h2>
+  <p class="dampad liten" style="max-width:62ch;margin-bottom:24px">Fondrobotar har en inbyggd ränteandel och en annan risknivå än en ren aktiefond. De ligger därför inte i samma kostnadsrankning. Att redaktionen utgår från LYSA när enkelhet väger tyngst är ett urvalsval av Patrik, inte ett verifierat påstående om att LYSA är bäst.</p>
+  <div class="tabellhalla">
+    <table>
+      <thead><tr>
+        <th scope="col">Fondrobot</th>
+        <th scope="col">Aktieandel</th>
+        <th scope="col">Övriga tillgångar</th>
+        <th scope="col">Service</th>
+        <th scope="col">Totalavgift</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><span class="produktnamn">LYSA</span><div class="produktmeta">Redaktionens utgångspunkt för enkelhet</div></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
+        <tr><td><span class="produktnamn">Opti</span><div class="produktmeta">Jämförbar fondrobot</div></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="minst" style="color:var(--ink-3);margin-top:14px">Räkneantagande för robotar med olika aktieandel är ännu inte beslutat, så ingen totalkostnad räknas ut här.</p>
+</section>
+
+<div class="wrap"><hr></div>
+
+<section class="wrap" id="metod">
+  <p class="ogonbryn">Slutsats och metod</p>
+  <h2 style="font-size:30px;max-width:24ch;margin-bottom:20px">Sparandets uthållighet väger tyngre än sista hundradelen</h2>
+  <div class="dampad" style="max-width:68ch;display:grid;gap:14px">
+    <p>Att jaga lägsta möjliga avgift är rationellt, men inte till varje pris. Om en fondrobot gör att du fortsätter spara i en nedgång i stället för att sälja, kan en högre årlig avgift vara väl använda pengar. Underlaget räcker inte för att påstå att beteendet är den vanligaste risken, men det kan bli kostsamt.</p>
+    <p>Har du redan ett passivt månadssparande via autogiro i en bred global indexfond behöver du sällan betala extra för att någon annan ska allokera åt dig.</p>
+    <p>Pengar du kan behöva inom några år hör inte hemma på börsen. För dem hänvisar vi till sparkonto med insättningsgaranti, inte till räntefonder. Börssparande kräver lång horisont, och fem år är ingen garanti mot förlust.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fotgrid">
+      <div>
+        <div style="font-size:13px;font-weight:500;margin-bottom:8px">buildapp.se / investeringar</div>
+        <p class="minst dampad" style="max-width:44ch;margin-bottom:10px">Ett oberoende initiativ för transparent granskning av svenska sparformer och fondavgifter. Urval och redaktionellt ansvar: Patrik.</p>
+        <p class="minst dampad" style="max-width:44ch"><strong>Transparens:</strong> tjänsten kan finansieras av affiliatelänkar märkta med asterisk. Urval, beräkningar och markeringar påverkas aldrig av ersättning.</p>
+      </div>
+      <div>
+        <div class="ogonbryn">Riskinformation</div>
+        <p class="minst dampad">Historisk avkastning är ingen garanti för framtida avkastning. Fonder kan både öka och minska i värde och det är inte säkert att du får tillbaka hela det insatta kapitalet. Innehållet är inte individuell finansiell rådgivning.</p>
+      </div>
+    </div>
+    <div class="fotbotten">
+      <div>Prototyp · demodata · <span id="idag"></span></div>
+      <div>kontakt@buildapp.se</div>
+    </div>
+  </div>
+</footer>
+
+<div popover id="pop-metod">
+  <h4>Räkneantagandet</h4>
+  <p>Ett gemensamt, ändringsbart antagande om avkastning <em>före</em> avgifter, som gäller lika för alla jämförbara aktiealternativ. Syftet är att isolera vad kostnaderna gör, inte att förutsäga avkastning.</p>
+  <p>Finansinspektionen använder samma nivå i sin kostnadsillustration för fondavgifter. Det betyder inte att någon fond förväntas ge just den avkastningen, och antagandet passar inte fondrobotar med annan aktieandel.</p>
+  <button type="button" class="knapp" popovertarget="pop-metod" popovertargetaction="hide">Stäng</button>
+</div>
+
+<div popover id="pop-status">
+  <h4>Statusmarkeringar</h4>
+  <p><span class="status verifierad">Verifierad</span> Uppgiften har källa och kontrolldatum.</p>
+  <p><span class="status ovsakerhet">Ej verifierat</span> Uppgiften saknas eller är inte kontrollerad. Den kan inte utse billigaste alternativ.</p>
+  <p><span class="status inaktuell">Inaktuell</span> Uppgiften är för gammal och rankas inte.</p>
+  <p><span class="status demo">Fiktiv demodata</span> Påhittade siffror som bara finns för att visa hur gränssnittet ser ut när underlaget är komplett.</p>
+  <p>Färg används alltid tillsammans med text, så att markeringarna fungerar också för den som inte skiljer färgerna åt.</p>
+  <button type="button" class="knapp" popovertarget="pop-status" popovertargetaction="hide">Stäng</button>
+</div>
+
+<div popover id="pop-brytpunkt">
+  <h4>Brytpunkt mellan ETF och jämförbar fond</h4>
+  <p>En ETF med lägre löpande avgift är inte automatiskt billigare. Valutaväxling och courtage betalas vid <em>varje</em> köp, medan den lägre avgiften tjänas in långsamt över åren.</p>
+  <p>Vid månadssparande betalas växlingen varje månad, vilket gör att en ETF med marginellt lägre avgift kan sakna brytpunkt helt. Vid en stor engångsinsättning betalas den en gång, och då kan brytpunkten infalla inom sparhorisonten.</p>
+  <p><strong>Brytpunkten är inte fastställd i det här underlaget.</strong> Den räknas ut per produktpar först när avgifter, courtage och växlingspåslag är verifierade hos respektive leverantör.</p>
+  <button type="button" class="knapp" popovertarget="pop-brytpunkt" popovertargetaction="hide">Stäng</button>
+</div>
+
+<script type="module">
+import { avgiftseffekt, totalArligAvgift, kronor, procent } from './avgifter.js';
+
+/* ---------- Tema ---------- */
+const temaKnappar = document.querySelectorAll('[data-tema-val]');
+function sattTema(val) {
+  if (val === 'system') delete document.documentElement.dataset.tema;
+  else document.documentElement.dataset.tema = val;
+  try { localStorage.setItem('tema', val); } catch {}
+  temaKnappar.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.temaVal === val)));
+}
+temaKnappar.forEach(b => b.addEventListener('click', () => sattTema(b.dataset.temaVal)));
+let sparatTema = 'system';
+try { sparatTema = localStorage.getItem('tema') || 'system'; } catch {}
+sattTema(sparatTema);
+
+document.getElementById('idag').textContent = new Date().toLocaleDateString('sv-SE');
+
+/* ---------- Demodata ----------
+   Verkliga produktnamn star medvetet som Ej verifierat rakt igenom, eftersom
+   ingenting i researchunderlaget ar faktakontrollerat an. De tva demoraderna
+   finns for att visa hur tabellen ser ut nar underlaget ar komplett, samt for
+   att visa laget dar tva leverantorer ar lika billiga.
+   LEVERANTORER: partner styr enbart om affiliatemarket visas, aldrig rankning. */
+const LEVERANTORER = [
+  { id: 'avanza',   namn: 'Avanza',   partner: true },
+  { id: 'nordnet',  namn: 'Nordnet',  partner: false },
+  { id: 'montrose', namn: 'Montrose', partner: true },
+  { id: 'savr',     namn: 'SAVR',     partner: true },
+  { id: 'fondo',    namn: 'Fondo',    partner: false },
+];
+
+const EJ = { status: 'ovsakerhet', text: 'Ej verifierat' };
+const INAKTUELL = { status: 'inaktuell', text: 'Inaktuell · 2024-11-12' };
+
+const PRODUKTER = [
+  {
+    namn: 'Länsförsäkringar Global Index', typ: 'Indexfond · andelsklass ej verifierad',
+    tackning: 'Global, omfång ej verifierat', sek: true, etf: false, verifierad: false,
+    kopvagar: Object.fromEntries(LEVERANTORER.map(l => [l.id, EJ])),
+  },
+  {
+    namn: 'DNB Global Indeks', typ: 'Indexfond · andelsklass ej verifierad',
+    tackning: 'Global, omfång ej verifierat', sek: true, etf: false, verifierad: false,
+    anmarkning: 'Uppgift utgått. Inaktuella uppgifter rankas inte.',
+    kopvagar: Object.fromEntries(LEVERANTORER.map(l => [l.id, l.id === 'fondo' ? INAKTUELL : EJ])),
+  },
+  {
+    namn: 'WEBN', typ: 'ETF · andelsklass ej verifierad',
+    tackning: 'Global. Exponeringen skiljer sig från fonderna ovan', sek: false, etf: true, verifierad: false,
+    kopvagar: Object.fromEntries(LEVERANTORER.map(l => [l.id, EJ])),
+  },
+  {
+    namn: 'Global Vanguard-ETF', typ: 'Exakt produkt ej fastställd',
+    tackning: 'Global. Kandidat i urvalet', sek: false, etf: true, verifierad: false, endastAvancerad: true,
+    kopvagar: Object.fromEntries(LEVERANTORER.map(l => [l.id, EJ])),
+  },
+  {
+    namn: 'Demofond Global A', typ: 'Indexfond · andelsklass A', demo: true,
+    tackning: 'Global, utvecklade marknader', sek: true, etf: false, verifierad: true,
+    isin: 'DEMO0000000A', index: 'Demo Global Index', replikering: 'Fysisk, full', valuta: 'SEK', utdelning: 'Ackumulerande',
+    kopvagar: {
+      avanza:   { fondavgift: 0.0020, plattformsavgift: 0,       kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
+      nordnet:  { fondavgift: 0.0020, plattformsavgift: 0,       kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
+      montrose: EJ,
+      savr:     { fondavgift: 0.0011, plattformsavgift: 0.0003,  kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
+      fondo:    EJ,
+    },
+  },
+  {
+    namn: 'Demofond Global B', typ: 'Indexfond · visar det oavgjorda läget', demo: true,
+    tackning: 'Global inklusive tillväxtmarknader', sek: true, etf: false, verifierad: true,
+    isin: 'DEMO0000000B', index: 'Demo All Country', replikering: 'Fysisk, sampling', valuta: 'SEK', utdelning: 'Ackumulerande',
+    kopvagar: {
+      avanza:   { fondavgift: 0.0016, plattformsavgift: 0, kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
+      nordnet:  { fondavgift: 0.0016, plattformsavgift: 0, kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
+      montrose: { fondavgift: 0.0024, plattformsavgift: 0, kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
+      savr:     EJ,
+      fondo:    EJ,
+    },
+  },
+];
+
+/* ---------- Tillstand ---------- */
+const STANDARD = { manad: 2000, engang: 100000, ar: 10, sats: 7, saljs: false };
+let vy = 'enkel';
+const falt = ['manad', 'engang', 'ar', 'sats'];
+
+function lasScenario() {
+  const s = {};
+  for (const f of falt) s[f] = Number(document.getElementById(f).value);
+  s.saljs = document.getElementById('saljs').checked;
+  return s;
+}
+function skrivScenario(s) {
+  for (const f of falt) document.getElementById(f).value = s[f];
+  document.getElementById('saljs').checked = s.saljs;
+}
+function sparaScenario(s) { try { localStorage.setItem('scenario', JSON.stringify(s)); } catch {} }
+
+/* ---------- Hjalpare ---------- */
+const arVerifierad = k => typeof k.fondavgift === 'number';
+function scenarioObj(s) {
+  return { engangsinsattning: s.engang, manadssparande: s.manad, ar: s.ar, raknesats: s.sats / 100 };
+}
+/** Totalkostnad for en kopvag i valt scenario. Kastar om kopvagen ar overifierad. */
+function kostnad(kopvag, s) {
+  if (!arVerifierad(kopvag)) throw new TypeError('Overifierad kopvag kan inte kostnadsberaknas');
+  const arlig = totalArligAvgift(kopvag);
+  const r = avgiftseffekt(scenarioObj(s), arlig);
+  return { arlig, ...r };
+}
+/** Billigaste verifierade kopvagar. Flera vid oavgjort, tom lista nar inget gar att avgora. */
+function billigaste(produkt, s) {
+  const kandidater = LEVERANTORER
+    .filter(l => arVerifierad(produkt.kopvagar[l.id]))
+    .map(l => ({ id: l.id, total: kostnad(produkt.kopvagar[l.id], s).totalEffekt }));
+  if (kandidater.length === 0) return [];
+  const lagst = Math.min(...kandidater.map(k => k.total));
+  return kandidater.filter(k => Math.abs(k.total - lagst) < 0.5).map(k => k.id);
+}
+
+/* ---------- Rendering ---------- */
+function statusChip(k) { return `<span class="status ${k.status}">${k.text}</span>`; }
+
+function rubriker() {
+  const rad = document.getElementById('rubrikrad');
+  const kolumner = ['<th scope="col">Fond eller ETF</th>'];
+  if (vy === 'avancerad') kolumner.push('<th scope="col">Marknadstäckning</th>');
+  kolumner.push('<th scope="col">Årlig fondkostnad</th>');
+  if (vy === 'avancerad') for (const l of LEVERANTORER) kolumner.push(`<th scope="col">${l.namn}${l.partner ? ' *' : ''}</th>`);
+  kolumner.push('<th scope="col">Billigaste verifierade köpväg</th>', '<th scope="col">Totalkostnad, valt scenario</th>');
+  rad.innerHTML = kolumner.join('');
+}
+
+function radHtml(p, s, i) {
+  const vinnare = billigaste(p, s);
+  const detaljId = `detalj-${i}`;
+  const celler = [];
+
+  celler.push(`<td>
+    <button type="button" class="expandera" aria-expanded="false" aria-controls="${detaljId}">
+      <span class="pil" aria-hidden="true">›</span>
+      <span><span class="produktnamn">${p.namn}</span>${p.demo ? ' ' + statusChip({ status: 'demo', text: 'Fiktiv demodata' }) : ''}
+      <span class="produktmeta">${p.typ}</span></span>
+    </button>
+    ${p.etf ? `<button type="button" class="infoknapp" popovertarget="pop-brytpunkt" style="margin-top:6px">Brytpunkt mot fond</button>` : ''}
+    ${p.anmarkning ? `<div class="produktmeta">${p.anmarkning}</div>` : ''}</td>`);
+
+  if (vy === 'avancerad') celler.push(`<td style="text-align:left" class="liten dampad">${p.tackning}</td>`);
+
+  // Fondkostnaden kan skilja mellan leverantorer nar en plattform aterfor
+  // distributionsersattning. Ett enda tal skulle dolja just den skillnaden,
+  // sa ett intervall visas nar de gar isar. Se BACKLOG.md om Fondo.
+  const fondavgifter = LEVERANTORER.map(l => p.kopvagar[l.id]).filter(arVerifierad).map(k => k.fondavgift);
+  if (fondavgifter.length === 0) {
+    celler.push(`<td>${statusChip(EJ)}</td>`);
+  } else {
+    const lag = Math.min(...fondavgifter), hog = Math.max(...fondavgifter);
+    celler.push(`<td>${lag === hog ? procent(lag) : `${procent(lag)}–${procent(hog)}`}${lag === hog ? '' : '<span class="billigastetikett" style="color:var(--ink-3)">skiljer per leverantör</span>'}</td>`);
+  }
+
+  if (vy === 'avancerad') for (const l of LEVERANTORER) {
+    const k = p.kopvagar[l.id];
+    if (!arVerifierad(k)) { celler.push(`<td>${statusChip(k)}</td>`); continue; }
+    const vann = vinnare.includes(l.id);
+    celler.push(`<td class="${vann ? 'billigast' : ''}">${procent(totalArligAvgift(k))}${vann ? '<span class="billigastetikett">Billigast</span>' : ''}</td>`);
+  }
+
+  if (vinnare.length === 0) {
+    celler.push(`<td><span class="status ovsakerhet">Utses inte</span><div class="produktmeta">Underlaget räcker inte</div></td>`);
+    celler.push(`<td><span class="status ovsakerhet">Beräknas inte</span></td>`);
+  } else {
+    const namn = vinnare.map(id => LEVERANTORER.find(l => l.id === id));
+    const k = kostnad(p.kopvagar[vinnare[0]], s);
+    celler.push(`<td class="billigast">${namn.map(l => l.namn + (l.partner ? ' *' : '')).join(' och ')}
+      <span class="billigastetikett">${vinnare.length > 1 ? 'Lika billigast' : 'Billigast, valt scenario'}</span></td>`);
+    celler.push(`<td class="billigast">${kronor(k.totalEffekt)}<span class="billigastetikett">exkl. försäljning</span></td>`);
+  }
+
+  // colspan raknas fran de faktiska cellerna, sa den inte glider isar nar
+  // kolumnuppsattningen andras.
+  const detalj = `<tr class="detalj" id="${detaljId}" hidden><td colspan="${celler.length}">${detaljHtml(p, s, vinnare)}</td></tr>`;
+  return `<tr class="produkt">${celler.join('')}</tr>${detalj}`;
+}
+
+function detaljHtml(p, s, vinnare) {
+  const kort = LEVERANTORER.map(l => {
+    const k = p.kopvagar[l.id];
+    const marke = l.partner ? ' <span class="partner" title="Affiliatepartner">*</span>' : '';
+    if (!arVerifierad(k)) return `<div class="kopvag"><div class="namn"><span>${l.namn}${marke}</span></div><div class="minst" style="margin-top:6px">${statusChip(k)}</div></div>`;
+    const vann = vinnare.includes(l.id);
+    return `<div class="kopvag ${vann ? 'vinnare' : ''}"><div class="namn"><span>${l.namn}${marke}</span>${vann ? '<span class="billigastetikett" style="margin:0">Billigast</span>' : ''}</div>
+      <div class="minst dampad" style="margin-top:6px">${procent(k.kopavgift)} köp · ${procent(k.fondavgift)} fond${k.plattformsavgift ? ' · ' + procent(k.plattformsavgift) + ' plattform' : ''}</div>
+      <div class="minst" style="color:var(--ink-3);margin-top:4px">Källa: ${k.kalla}</div></div>`;
+  }).join('');
+
+  let uppdelning = '';
+  if (vinnare.length > 0) {
+    const l = LEVERANTORER.find(x => x.id === vinnare[0]);
+    const k = kostnad(p.kopvagar[vinnare[0]], s);
+    uppdelning = `<p class="ogonbryn" style="margin-top:18px">Kostnad över ${s.ar} år hos ${l.namn}</p>
+      <div class="uppdelning">
+        <div>Summa avgifter</div><div>${kronor(k.dragnaAvgifter)}</div>
+        <div>Utebliven tillväxt</div><div>${kronor(k.uteblivenTillvaxt)}</div>
+        <div class="summa">Avgifternas totala effekt</div><div class="summa">${kronor(k.totalEffekt)}</div>
+        ${s.saljs ? '<div>Beräknad säljkostnad</div><div><span class="status ovsakerhet">Ej verifierat</span></div>' : ''}
+      </div>
+      <p class="minst" style="color:var(--ink-3)">Förväntat slutkapital visas inte. Ordinarie avgifter gäller; tillfälliga erbjudanden redovisas separat med villkor och giltighet.</p>`;
+  }
+
+  const fordjupning = (vy === 'avancerad' && p.isin) ? `<p class="ogonbryn" style="margin-top:18px">Fördjupning</p>
+    <div class="uppdelning"><div>ISIN och andelsklass</div><div>${p.isin}</div>
+      <div>Index</div><div>${p.index}</div>
+      <div>Replikering</div><div>${p.replikering}</div>
+      <div>Handelsvaluta</div><div>${p.valuta}</div>
+      <div>Utdelning</div><div>${p.utdelning}</div></div>` : '';
+
+  return `<p class="ogonbryn">Köpvägar för samma andelsklass</p><div class="kopvagar">${kort}</div>
+    ${uppdelning}${fordjupning}
+    ${p.demo ? '<p class="minst" style="color:var(--demo)">Samtliga siffror i den här raden är fiktiv demodata och hör inte till någon verklig produkt eller leverantör.</p>' : ''}
+    <p style="margin-top:12px"><a class="minst" href="mailto:kontakt@buildapp.se?subject=Fel i raden ${encodeURIComponent(p.namn)}">Rapportera fel i raden</a></p>`;
+}
+
+function rita() {
+  const s = lasScenario();
+  sparaScenario(s);
+
+  const e = avgiftseffekt(scenarioObj(s), 0.002);
+  document.getElementById('res-insatt').textContent = kronor(e.insatt);
+  document.getElementById('res-avgifter').textContent = kronor(e.dragnaAvgifter);
+  document.getElementById('res-effekt').textContent = kronor(e.totalEffekt);
+  document.getElementById('res-gap').textContent = kronor(e.uteblivenTillvaxt);
+
+  rubriker();
+  const baraVerifierad = document.getElementById('f-verifierad').checked;
+  const baraSek = document.getElementById('f-sek').checked;
+  const synliga = PRODUKTER.filter(p =>
+    (!p.endastAvancerad || vy === 'avancerad') &&
+    (!baraVerifierad || p.verifierad) &&
+    (!baraSek || p.sek));
+
+  document.getElementById('rader').innerHTML = synliga.map((p, i) => radHtml(p, s, i)).join('');
+  document.getElementById('tabell').hidden = synliga.length === 0;
+  document.getElementById('tomtlage').hidden = synliga.length !== 0;
+
+  for (const knapp of document.querySelectorAll('.expandera')) {
+    knapp.addEventListener('click', () => {
+      const rad = document.getElementById(knapp.getAttribute('aria-controls'));
+      const oppen = knapp.getAttribute('aria-expanded') === 'true';
+      knapp.setAttribute('aria-expanded', String(!oppen));
+      rad.hidden = oppen;
+    });
+  }
+}
+
+/* ---------- Handelser ---------- */
+document.querySelectorAll('[data-vy]').forEach(b => b.addEventListener('click', () => {
+  vy = b.dataset.vy;
+  document.querySelectorAll('[data-vy]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.vy === vy)));
+  rita();
+}));
+[...falt, 'saljs', 'f-verifierad', 'f-sek'].forEach(id => document.getElementById(id).addEventListener('input', rita));
+document.getElementById('aterstall').addEventListener('click', () => { skrivScenario(STANDARD); rita(); });
+document.getElementById('rensafilter').addEventListener('click', () => {
+  document.getElementById('f-verifierad').checked = false;
+  document.getElementById('f-sek').checked = false;
+  rita();
+});
+
+let start = STANDARD;
+try { start = { ...STANDARD, ...JSON.parse(localStorage.getItem('scenario') || '{}') }; } catch {}
+skrivScenario(start);
+rita();
+</script>
+</body>
+</html>
