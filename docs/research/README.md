@@ -1,0 +1,19 @@
+# Researchöversikt och Index: Investeringar, Fonder och ETF:er
+
+Välkommen till researchmappen för projektet. Här finns strukturerade, evidensbaserade analyser av fonder, ETF:er, kostnadsmodeller, belåning och analysverktyg, baserade på primärkällor, vetenskaplig forskning samt konsensus från svenska (*RikaTillsammans*) och internationella (*Bogleheads*, *Rational Reminder*) investeringsforum.
+
+---
+
+## Dokumentkatalog
+
+| Dokument | Beskrivning & Huvudfokus |
+| :--- | :--- |
+| [rikatillsammans-indexfonder-och-etfer.md](file:///C:/dev/investeringar/docs/research/rikatillsammans-indexfonder-och-etfer.md) | **Mest använda och rekommenderade fonder och ETF:er på RikaTillsammans.** Analys av basportföljen, skiftet från LF Global till DNB Global p.g.a. ESG, Avanza Globals förvaltningsflytt, samt PLUS Allabolag Sverige och ETF:erna SPYI, WEBN och VWCE. |
+| [bogleheads-och-internationell-indexforskning.md](file:///C:/dev/investeringar/docs/research/bogleheads-och-internationell-indexforskning.md) | **Bogleheads US, European Bogleheads (UCITS) och Rational Reminder.** Den klassiska Three-Fund-portföljen (VTI/VXUS/BND), "VWCE and chill", irländsk skattedomicil (IE) vs. amerikanska skattefällor, samt Fama-French faktorinvestering och Avantis (AVWS/AVUV). |
+| [lagsta-avgifter-och-kostnadsoptimering.md](file:///C:/dev/investeringar/docs/research/lagsta-avgifter-och-kostnadsoptimering.md) | **Marknadens absolut lägsta avgifter och totalkostnad (TCO).** Från 0,00 % (Avanza Zero) till 0,03 % (SPDR S&P 500 SPYL), 0,05 % (Amundi Prime Global PRIW) och 0,07 % (Amundi Prime All Country WEBN). Inkluderar analys av syntetiska ETF:er (Section 871(m) med 0 % källskatt) och brytpunktskalkyler för valutaväxling (0,25 %) vid månadssparande vs. klumpsumma. |
+| [belaning-havstang-fonder-och-etfer.md](file:///C:/dev/investeringar/docs/research/belaning-havstang-fonder-och-etfer.md) | **Hävstång och belåning i fonder och ETF:er.** *Lifecycle Investing* (Ayres & Nalebuff), Mertons optimala hävstång, matematisk volatilitetsurholkning (*volatility decay*), AP7 Såfa i PPM, Nordnet 125, Carnegie Global Plus, Bogleheads HFEA (UPRO/TMF), samt varför egen värdepapperskredit på ISK (10–12 %) ofta slår hävstångsfonder. |
+| [jamforelsetjanster-och-analysverktyg.md](file:///C:/dev/investeringar/docs/research/jamforelsetjanster-och-analysverktyg.md) | **Jämförelsetjänster, överlappsverktyg och backtesting.** Bakgrund till nedlagda FeeFighters.se (@RobertK) och dess aktiva ersättare: ETF Research Center (etfrc.com) för innehavsöverlapp, Morningstar X-Ray, JustETF (UCITS-screener), Fondkollen, Curvo Backtest och Portfolio Visualizer. |
+| [kandidatgenomgang.md](file:///C:/dev/investeringar/docs/research/kandidatgenomgang.md) | **Kandidatgenomgång för tjänsten.** Sammanställning av handplockade fond- och ETF-kandidater, plattformar (Avanza, Nordnet, SAVR, Fondo, Montrose) och verifieringspunkter inför produktintervju. |
+| [kostnadsmetod.md](file:///C:/dev/investeringar/docs/research/kostnadsmetod.md) | **Metod och principer för kostnadsjämförelser.** Etablerade exempel (FINRA, SEC, FI, Pensionsmyndigheten) och metod för att hantera avkastningsantagande, utebliven tillväxt och dolda handelsavgifter. |
+| [forskningsunderlag.md](file:///C:/dev/investeringar/docs/research/forskningsunderlag.md) | **Vetenskapligt forskningsunderlag.** Primärkällor och akademiska artiklar som styrker principerna om passiv förvaltning, marknadsefficiens, avgiftens betydelse och diversifiering. |
+| [beteende-och-sparhorisont.md](file:///C:/dev/investeringar/docs/research/beteende-och-sparhorisont.md) | **Investerarbeteende, sparhorisont och risktolerans.** Hur tidshorisonten bestämmer tillgångsallokering och hur man undviker vanliga beteendemisstag. |

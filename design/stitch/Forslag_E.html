@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sv"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>buildapp.se / investeringar – Saklig svensk fondjämförelse</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,0,0" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            paper: "#fbfbf9",
+            "paper-subtle": "#f6f5f1",
+            "paper-surface": "#ffffff",
+            ink: "#1a1a1a",
+            "ink-secondary": "#636363",
+            "ink-tertiary": "#8c8c88",
+            divider: "#eae8e4",
+            "divider-light": "#f1efe9",
+            accent: "#22382c",
+            "accent-soft": "#eaf0ec"
+          },
+          fontFamily: {
+            serif: ["Newsreader", "Georgia", "serif"],
+            sans: ["Manrope", "-apple-system", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #fbfbf9;
+      color: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+    }
+    input[type=range] {
+      accent-color: #22382c;
+    }
+  </style>
+</head>
+<body class="bg-paper font-sans text-ink selection:bg-accent-soft selection:text-accent flex flex-col min-h-screen">
+<!-- Minimalistisk Header -->
+<header class="w-full border-b border-divider bg-paper/90 backdrop-blur-sm sticky top-0 z-40">
+<div class="max-w-5xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<a class="font-sans text-sm tracking-wide font-medium text-ink hover:text-ink-secondary transition-colors" href="#">
+          buildapp.se <span class="text-ink-tertiary font-light">/</span> investeringar
+        </a>
+</div>
+<nav class="flex items-center gap-8 text-sm text-ink-secondary">
+<a class="hover:text-ink transition-colors hidden sm:inline-block" href="#ingangar">Ingångar</a>
+<a class="hover:text-ink transition-colors hidden sm:inline-block" href="#kalkyl">Scenarier</a>
+<a class="hover:text-ink transition-colors" href="#jamforelse">Jämförelsetabell</a>
+<a class="hover:text-ink transition-colors hidden md:inline-block" href="#metodik">Om jämförelsen</a>
+<div class="h-4 w-[1px] bg-divider hidden sm:block"></div>
+<div class="flex items-center gap-2 text-xs tracking-wider text-ink-tertiary uppercase">
+<button class="font-medium text-ink hover:text-ink transition-colors" onclick="document.documentElement.classList.remove('dark')" type="button">Ljust</button>
+<span class="">/</span>
+<button class="hover:text-ink transition-colors" onclick="document.documentElement.classList.add('dark')" type="button">Mörkt</button>
+</div>
+</nav>
+</div>
+</header>
+<main class="flex-1 w-full">
+<!-- Redaktionell Ingress & Rubrik -->
+<section class="max-w-5xl mx-auto px-6 lg:px-8 pt-20 pb-16 lg:pt-28 lg:pb-24">
+<div class="max-w-3xl"><p class="text-xs uppercase tracking-widest text-ink-tertiary mb-6 font-medium">Oberoende publicering · Svenska sparformer</p>
+<h1 class="font-serif text-4xl sm:text-5xl lg:text-[3.25rem] leading-[1.18] font-normal tracking-tight text-ink mb-8">
+  Oberoende fondjämförelse för långsiktigt sparande.
+</h1>
+<p class="text-lg lg:text-xl text-ink-secondary font-light leading-relaxed mb-8">
+  En saklig kartläggning av reella förvaltningsavgifter, plattformsbelastningar och transaktionskostnader. Tydlig transparens kring affiliatelänkar – villkoren och oberoendet i granskningen styrs aldrig av provisioner.
+</p>
+<div class="flex flex-wrap items-center gap-x-8 gap-y-3 pt-4 text-sm text-ink-secondary border-t border-divider">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+<span class=""><strong class="font-medium text-ink">Objektiv metodik</strong> utan köpta placeringar</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+<span class="">Verifierat mot legala faktablad (KID)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+<span class="text-ink-secondary">Tydligt märkta affiliatepartners (*)</span>
+</div>
+<div class="text-ink-tertiary text-xs">
+    Uppdaterad: Q1 2025
+  </div>
+</div></div>
+</section>
+<div class="max-w-5xl mx-auto px-6 lg:px-8"><hr class="border-divider"/></div>
+<!-- Tre Ingångar -->
+<section class="max-w-5xl mx-auto px-6 lg:px-8 py-20 lg:py-24" id="ingangar">
+<div class="mb-14">
+<p class="text-xs uppercase tracking-widest text-ink-tertiary font-medium mb-3">Strukturering</p>
+<h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal">Tre rationella vägar</h2>
+<p class="text-sm text-ink-secondary mt-2 max-w-xl">Välj den förvaltningsnivå som harmonierar med din tidsbudget. Ingen väg är universellt överlägsen.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
+<!-- Ingång 1 -->
+<div class="flex flex-col justify-between">
+<div>
+<div class="text-xs font-serif italic text-ink-tertiary mb-3">01 / Automatiserat</div>
+<h3 class="font-serif text-xl font-normal text-ink mb-3">Slippa välja och sköta</h3>
+<p class="text-sm text-ink-secondary leading-relaxed font-light mb-6">
+              Diskretionär förvaltning genom fondrobotar som LYSA och Opti. Passar när du vill delegera portföljbalansering, ränteallokering och automatisk återinvestering över konjunkturcykler.
+            </p>
+</div>
+<div class="pt-4 border-t border-divider-light text-xs text-ink-secondary space-y-1.5">
+<div class="flex justify-between"><span class="">Typisk avgift:</span> <span class="font-medium text-ink">0,34 % – 0,70 %</span></div>
+<div class="flex justify-between"><span class="">Egen tidsinsats:</span> <span class="text-ink">0 timmar / år</span></div>
+<div class="flex justify-between"><span class="">Rebalansering:</span> <span class="text-ink">Helautomatisk</span></div>
+</div>
+</div>
+<!-- Ingång 2 -->
+<div class="flex flex-col justify-between">
+<div>
+<div class="text-xs font-serif italic text-ink-tertiary mb-3">02 / Indexbas</div>
+<h3 class="font-serif text-xl font-normal text-ink mb-3">Välja egna indexfonder</h3>
+<p class="text-sm text-ink-secondary leading-relaxed font-light mb-6">
+              Breda globala basfonder i svensk depå eller ISK. För dig som själv kombinerar global exponering med eventuella hemmamarknader via traditionella fonder utan courtage eller växlingsavgift.
+            </p>
+</div>
+<div class="pt-4 border-t border-divider-light text-xs text-ink-secondary space-y-1.5">
+<div class="flex justify-between"><span class="">Typisk avgift:</span> <span class="font-medium text-ink">0,15 % – 0,22 %</span></div>
+<div class="flex justify-between"><span class="">Egen tidsinsats:</span> <span class="text-ink">1 timme / år</span></div>
+<div class="flex justify-between"><span class="">Köpvaluta:</span> <span class="text-ink">SEK (ingen FX-spread)</span></div>
+</div>
+</div>
+<!-- Ingång 3 -->
+<div class="flex flex-col justify-between">
+<div>
+<div class="text-xs font-serif italic text-ink-tertiary mb-3">03 / Granulärt</div>
+<h3 class="font-serif text-xl font-normal text-ink mb-3">Utforska ETF:er &amp; marginaler</h3>
+<p class="text-sm text-ink-secondary leading-relaxed font-light mb-6">
+              Börshandlade fonder och eventuell värdepapperskredit. Erbjuder extremt låga förvaltningsavgifter men medför friktion som courtage, spread och 0,25 % valutaväxling vid varje avslut.
+            </p>
+</div>
+<div class="pt-4 border-t border-divider-light text-xs text-ink-secondary space-y-1.5">
+<div class="flex justify-between"><span class="">Förvaltningsavgift:</span> <span class="font-medium text-ink">0,07 % – 0,18 %</span></div>
+<div class="flex justify-between"><span class="">Friktion:</span> <span class="text-ink">Växling + courtage</span></div>
+<div class="flex justify-between"><span class="">Passar för:</span> <span class="text-ink">Större enskilda poster</span></div>
+</div>
+</div>
+</div>
+</section>
+<div class="max-w-5xl mx-auto px-6 lg:px-8"><hr class="border-divider"/></div>
+<!-- Scenariorad & Kostnadssimulering -->
+<section class="max-w-5xl mx-auto px-6 lg:px-8 py-20 lg:py-24" id="kalkyl">
+<div class="mb-12">
+<p class="text-xs uppercase tracking-widest text-ink-tertiary font-medium mb-3">Simulering</p>
+<h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal">Kapitalbelastning över tid</h2>
+<p class="text-sm text-ink-secondary mt-2">Hur små skillnader i årlig avgift ackumuleras i kronor och ören.</p>
+</div>
+<!-- Scenariokontroller -->
+<div class="bg-paper-surface border border-divider p-8 lg:p-10 mb-10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+<div>
+<div class="flex justify-between text-xs uppercase tracking-wider text-ink-secondary font-medium mb-2">
+<label class="" for="monthly-slider">Månadssparande</label>
+<span class="text-ink font-semibold" id="monthly-text">2 000 kr/mån</span>
+</div>
+<input class="w-full h-1 bg-divider rounded-lg appearance-none cursor-pointer" id="monthly-slider" max="20000" min="0" oninput="recalc()" step="500" type="range" value="2000"/>
+<div class="flex justify-between text-[11px] text-ink-tertiary mt-2">
+<span class="">0 kr</span>
+<span class="">10 000 kr</span>
+<span class="">20 000 kr</span>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs uppercase tracking-wider text-ink-secondary font-medium mb-2">
+<label class="" for="lump-slider">Engångsinsättning</label>
+<span class="text-ink font-semibold" id="lump-text">100 000 kr</span>
+</div>
+<input class="w-full h-1 bg-divider rounded-lg appearance-none cursor-pointer" id="lump-slider" max="500000" min="0" oninput="recalc()" step="10000" type="range" value="100000"/>
+<div class="flex justify-between text-[11px] text-ink-tertiary mt-2">
+<span class="">0 kr</span>
+<span class="">250 000 kr</span>
+<span class="">500 000 kr</span>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs uppercase tracking-wider text-ink-secondary font-medium mb-2">
+<label class="" for="years-slider">Sparhorisont</label>
+<span class="text-ink font-semibold" id="years-text">10 år</span>
+</div>
+<input class="w-full h-1 bg-divider rounded-lg appearance-none cursor-pointer" id="years-slider" max="30" min="1" oninput="recalc()" step="1" type="range" value="10"/>
+<div class="flex justify-between text-[11px] text-ink-tertiary mt-2">
+<span class="">1 år</span>
+<span class="">15 år</span>
+<span class="">30 år</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-divider-light flex items-center justify-between flex-wrap gap-4 text-xs text-ink-tertiary">
+<span class="">Gemensamt räkneantagande 7,0 % nominellt brutto, ingen prognos.</span>
+<span class="text-ink-secondary">Beräkning avser sammansatt ränta före skatt</span>
+</div>
+</div>
+<!-- Resultatkolumner -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+<div class="p-6 bg-paper-surface border border-divider">
+<span class="text-xs text-ink-tertiary uppercase tracking-wider block mb-2">Totalt insatt</span>
+<div class="font-serif text-2xl text-ink font-normal" id="res-invested">340 000 kr</div>
+<span class="text-xs text-ink-secondary mt-1 block">Egna insättningar</span>
+</div>
+<div class="p-6 bg-paper-surface border border-divider">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs text-ink-tertiary uppercase tracking-wider">Indexfond (0,20 %)</span>
+<span class="text-[11px] text-accent font-medium">Lågkostnad</span>
+</div>
+<div class="font-serif text-2xl text-ink font-normal" id="res-index-total">531 664 kr</div>
+<span class="text-xs text-ink-secondary mt-1 block" id="res-index-fee">Avgiftsbortfall: –7 155 kr</span>
+</div>
+<div class="p-6 bg-paper-surface border border-divider">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs text-ink-tertiary uppercase tracking-wider">Fondrobot (0,40 %)</span>
+<span class="text-[11px] text-ink-tertiary">Diskretionär</span>
+</div>
+<div class="font-serif text-2xl text-ink font-normal" id="res-robot-total">524 609 kr</div>
+<span class="text-xs text-ink-secondary mt-1 block" id="res-robot-fee">Avgiftsbortfall: –14 210 kr</span>
+</div>
+</div>
+</section>
+<div class="max-w-5xl mx-auto px-6 lg:px-8"><hr class="border-divider"/></div>
+<!-- Jämförelsetabell -->
+<section class="max-w-5xl mx-auto px-6 lg:px-8 py-20 lg:py-24" id="jamforelse"><div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<p class="text-xs uppercase tracking-widest text-ink-tertiary font-medium mb-3">Översikt</p>
+<h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal">Jämförelse av centrala alternativ</h2>
+<p class="text-sm text-ink-secondary mt-2">Klicka på en rad för att granska plattformsspecifika villkor och handelsvägar.</p>
+</div>
+<div class="w-full md:w-72">
+<div class="relative">
+<input class="w-full text-xs bg-paper-surface border border-divider rounded-lg px-3 py-2 text-ink placeholder:text-ink-tertiary focus:outline-none focus:border-accent" id="table-search" oninput="filterTable()" placeholder="Filtrera produkt eller handelsplats..." type="text"/>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto border-t border-b border-divider">
+<table class="w-full text-left border-collapse" id="matrix-table">
+<thead>
+<tr class="text-[11px] tracking-wider uppercase text-ink-tertiary border-b border-divider font-medium">
+<th class="py-4 pr-4 font-normal">Produkt &amp; Sparform</th>
+<th class="py-4 px-3 text-right font-normal">Avanza</th>
+<th class="py-4 px-3 text-right font-normal">Nordnet</th>
+<th class="py-4 px-3 text-right font-normal">Montrose</th>
+<th class="py-4 px-3 text-right font-normal">SAVR / Fondo</th>
+<th class="py-4 px-3 text-right font-normal">Lägsta totalkostnad</th>
+<th class="py-4 pl-3 text-right font-normal">Åtgärd &amp; Partner</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-divider-light text-sm">
+<!-- DNB Global Indeks S -->
+<tr class="matrix-row cursor-pointer hover:bg-paper-subtle transition-colors group" onclick="toggleDetails('det-dnb', this)">
+<td class="py-5 pr-4">
+<div class="font-serif text-base text-ink font-medium group-hover:text-accent transition-colors">DNB Global Indeks S</div>
+<div class="text-xs text-ink-tertiary">Global indexfond · SEK · Basvaluta</div>
+</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,20 %</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,20 %</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,20 %</td>
+<td class="py-5 px-3 text-right font-semibold text-accent">0,15 %</td>
+<td class="py-5 px-3 text-right font-semibold text-accent">0,15 % / år</td>
+<td class="py-5 pl-3 text-right text-xs">
+<a class="inline-block px-2.5 py-1 bg-paper-surface hover:bg-paper border border-divider rounded text-ink text-xs transition-colors hover:border-accent" href="#" onclick="event.stopPropagation()">Öppna hos SAVR *</a>
+</td>
+</tr>
+<tr class="hidden bg-paper-subtle/60" id="det-dnb">
+<td class="py-4 px-6 text-xs text-ink-secondary" colspan="7">
+<div class="max-w-2xl space-y-2">
+<div class="text-ink font-medium">Detaljer kring handelsplatser &amp; villkor:</div>
+<p>Fondo och SAVR återför distributionsersättning, vilket sänker den reella avgiften till 0,15 %. Hos Avanza, Nordnet och Montrose tillämpas standardavgiften 0,20 %. Ingen valutaväxling tillkommer då fonden handlas i SEK.</p>
+</div>
+</td>
+</tr>
+<!-- Länsförsäkringar Global Index -->
+<tr class="matrix-row cursor-pointer hover:bg-paper-subtle transition-colors group" onclick="toggleDetails('det-lf', this)">
+<td class="py-5 pr-4">
+<div class="font-serif text-base text-ink font-medium group-hover:text-accent transition-colors">Länsförsäkringar Global Index</div>
+<div class="text-xs text-ink-tertiary">Global indexfond · SEK · Bred exponering</div>
+</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,22 %</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,22 %</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,22 %</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,22 %</td>
+<td class="py-5 px-3 text-right font-medium text-ink">0,22 % / år</td>
+<td class="py-5 pl-3 text-right text-xs">
+<a class="inline-block px-2.5 py-1 bg-paper-surface hover:bg-paper border border-divider rounded text-ink text-xs transition-colors hover:border-accent" href="#" onclick="event.stopPropagation()">Öppna hos Avanza *</a>
+</td>
+</tr>
+<tr class="hidden bg-paper-subtle/60" id="det-lf">
+<td class="py-4 px-6 text-xs text-ink-secondary" colspan="7">
+<div class="max-w-2xl space-y-2">
+<div class="text-ink font-medium">Detaljer kring handelsplatser:</div>
+<p>Enhetlig avgift om 0,22 % på samtliga svenska depåer. Ingen plattformsavgift eller växlingskostnad vid månatligt sparande.</p>
+</div>
+</td>
+</tr>
+<!-- Amundi Prime All Country (WEBN) -->
+<tr class="matrix-row cursor-pointer hover:bg-paper-subtle transition-colors group" onclick="toggleDetails('det-webn', this)">
+<td class="py-5 pr-4">
+<div class="font-serif text-base text-ink font-medium group-hover:text-accent transition-colors">Amundi Prime All Country (WEBN)</div>
+<div class="text-xs text-ink-tertiary">Börshandlad ETF · EUR · Solactive GBS</div>
+</td>
+<td class="py-5 px-3 text-right font-semibold text-accent">0,07 %*</td>
+<td class="py-5 px-3 text-right font-semibold text-accent">0,07 %*</td>
+<td class="py-5 px-3 text-right font-semibold text-accent">0,07 %*</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right font-semibold text-accent">0,07 % + friktion</td>
+<td class="py-5 pl-3 text-right text-xs">
+<a class="inline-block px-2.5 py-1 bg-paper-surface hover:bg-paper border border-divider rounded text-ink text-xs transition-colors hover:border-accent" href="#" onclick="event.stopPropagation()">Öppna hos Nordnet *</a>
+</td>
+</tr>
+<tr class="hidden bg-paper-subtle/60" id="det-webn">
+<td class="py-4 px-6 text-xs text-ink-secondary" colspan="7">
+<div class="max-w-2xl space-y-2">
+<div class="text-ink font-medium">Friktionskostnader vid börshandlade ETF:er:</div>
+<p>* Extremt låg löpande förvaltningsavgift (0,07 %), men valutaväxling (typiskt 0,25 % vid köp och sälj) samt courtage tillkommer vid varje transaktion. Handlas ej hos Fondo/SAVR.</p>
+</div>
+</td>
+</tr>
+<!-- Vanguard All-World (Ej fastställd) -->
+<tr class="matrix-row cursor-pointer hover:bg-paper-subtle transition-colors group" onclick="toggleDetails('det-vanguard', this)">
+<td class="py-5 pr-4">
+<div class="font-serif text-base text-ink font-medium group-hover:text-accent transition-colors">Vanguard FTSE All-World (VWCE)</div>
+<div class="text-xs text-ink-tertiary">Börshandlad ETF · EUR · Ackumulerande</div>
+</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,22 %*</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,22 %*</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,22 %*</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right text-ink-secondary">0,22 % + friktion</td>
+<td class="py-5 pl-3 text-right text-xs">
+<a class="inline-block px-2.5 py-1 bg-paper-surface hover:bg-paper border border-divider rounded text-ink text-xs transition-colors hover:border-accent" href="#" onclick="event.stopPropagation()">Öppna hos Montrose *</a>
+</td>
+</tr>
+<tr class="hidden bg-paper-subtle/60" id="det-vanguard">
+<td class="py-4 px-6 text-xs text-ink-secondary" colspan="7">
+<div class="max-w-2xl space-y-2">
+<div class="text-ink font-medium">Global benchmark ETF:</div>
+<p>Vanguards flaggskepp för global allokering. Löpande avgift 0,22 % plus tillkommande valutaväxling (0,25 %) och courtage. Tillgänglig hos Avanza, Nordnet och Montrose.</p>
+</div>
+</td>
+</tr>
+<!-- LYSA Bred -->
+<tr class="matrix-row cursor-pointer hover:bg-paper-subtle transition-colors group" onclick="toggleDetails('det-lysa', this)">
+<td class="py-5 pr-4">
+<div class="font-serif text-base text-ink font-medium group-hover:text-accent transition-colors">LYSA Bred (100 % aktier)</div>
+<div class="text-xs text-ink-tertiary">Diskretionär automatisk portfölj</div>
+</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right font-medium text-ink">ca 0,34 % / år</td>
+<td class="py-5 pl-3 text-right text-xs">
+<a class="inline-block px-2.5 py-1 bg-paper-surface hover:bg-paper border border-divider rounded text-ink text-xs transition-colors hover:border-accent" href="#" onclick="event.stopPropagation()">Öppna hos Lysa *</a>
+</td>
+</tr>
+<tr class="hidden bg-paper-subtle/60" id="det-lysa">
+<td class="py-4 px-6 text-xs text-ink-secondary" colspan="7">
+<div class="max-w-2xl space-y-2">
+<div class="text-ink font-medium">Direkttjänst med helautomatisk skötsel:</div>
+<p>Erbjuds exklusivt via lysa.se. Total avgift inklusive underliggande instrument och diskretionär avgift ca 0,34 % vid 100 % aktieexponering. Ingen distribution via traditionella nätmäklare.</p>
+</div>
+</td>
+</tr>
+<!-- Opti 9 -->
+<tr class="matrix-row cursor-pointer hover:bg-paper-subtle transition-colors group" onclick="toggleDetails('det-opti', this)">
+<td class="py-5 pr-4">
+<div class="font-serif text-base text-ink font-medium group-hover:text-accent transition-colors">Opti 9 (Hög risk)</div>
+<div class="text-xs text-ink-tertiary">Diskretionär förvaltning inkl. råvaror</div>
+</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right text-ink-tertiary">—</td>
+<td class="py-5 px-3 text-right font-medium text-ink">ca 0,82 % / år</td>
+<td class="py-5 pl-3 text-right text-xs">
+<a class="inline-block px-2.5 py-1 bg-paper-surface hover:bg-paper border border-divider rounded text-ink text-xs transition-colors hover:border-accent" href="#" onclick="event.stopPropagation()">Öppna hos Opti *</a>
+</td>
+</tr>
+<tr class="hidden bg-paper-subtle/60" id="det-opti">
+<td class="py-4 px-6 text-xs text-ink-secondary" colspan="7">
+<div class="max-w-2xl space-y-2">
+<div class="text-ink font-medium">Mobil portföljapplikation:</div>
+<p>Tecknas enbart via Optis app till en helhetskostnad om ca 0,82 % per år inklusive råvaruexponering och portföljförvaltning.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-4 text-xs text-ink-tertiary flex justify-between flex-wrap gap-2">
+<span>* Märkta länkar är kommersiella affiliatelänkar. De påverkar inte granskningens slutsatser, rankning eller dina avgifter hos respektive plattform.</span>
+<span>Källor: Officiella prislistor &amp; KID-faktablad per Q1 2025.</span>
+</div></section>
+<div class="max-w-5xl mx-auto px-6 lg:px-8"><hr class="border-divider"/></div>
+<!-- Metodologiskt Avslut / Redaktionellt sammanfattning -->
+<section class="max-w-5xl mx-auto px-6 lg:px-8 py-20 lg:py-24" id="metodik">
+<div class="max-w-3xl">
+<p class="text-xs uppercase tracking-widest text-ink-tertiary font-medium mb-4">Slutsats &amp; metod</p>
+<h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mb-6">Sparandets disciplin väger tyngre än sista baspunkten</h2>
+<div class="space-y-4 text-ink-secondary leading-relaxed font-light text-base">
+<p class="">
+            Jakten på den lägsta möjliga förvaltningsavgiften är matematisk rationell, men inte på bekostnad av ditt eget beteende. Om en automatiserad fondrobot medför att du inte säljer i panik vid marknadsoro eller skjuter upp dina insättningar, är en merkostnad på 0,20 % per år ofta väl investerade pengar.
+          </p>
+<p class="">
+            Har du däremot redan etablerat ett stoiskt, passivt sparande via autogiro i en bred global indexfond behöver du sällan betala extra för extern allokering.
+          </p>
+</div>
+</div>
+</section>
+</main>
+<!-- Diskret och lugn footer -->
+<footer class="border-t border-divider bg-paper py-16"><div class="max-w-5xl mx-auto px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+<div class="md:col-span-6">
+<div class="font-sans text-sm font-medium text-ink mb-2">buildapp.se / investeringar</div>
+<p class="text-xs text-ink-tertiary font-light leading-relaxed max-w-sm mb-3">
+        Ett oberoende initiativ för transparent granskning av svenska sparformer och fondavgifter. Redigerad och kurerad av Patrik.
+      </p>
+<p class="text-xs text-ink-secondary font-light leading-relaxed max-w-sm">
+<strong>Transparens &amp; Metod:</strong> Tjänsten finansieras delvis av affiliatelänkar märkta med asterisk (*). Våra beräkningar, urval och rekommendationer är strikt matematiska och påverkas aldrig av provisioner.
+      </p>
+</div>
+<div class="md:col-span-6 text-xs text-ink-tertiary leading-relaxed">
+<p class="mb-2 font-medium text-ink-secondary uppercase tracking-wider text-[10px]">Riskinformation</p>
+      Historisk avkastning garanterar inte framtida avkastning. Fonder kan både minska och öka i värde och det är inte säkert att du får tillbaka hela det insatta kapitalet. Detta utgör inte individuell finansiell rådgivning.
+    </div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-divider-light text-xs text-ink-tertiary">
+<div class="">© 2025 buildapp.se</div>
+<div class="flex gap-6">
+<a class="hover:text-ink transition-colors" href="mailto:patrik@buildapp.se">patrik@buildapp.se</a>
+<a class="hover:text-ink transition-colors" href="#metodik">Metodik &amp; Datakällor</a>
+</div>
+</div>
+</div></footer>
+<script>
+    function fmt(val) {
+      return Math.round(val).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " kr";
+    }
+
+    function recalc() {
+      const m = parseFloat(document.getElementById('monthly-slider').value) || 0;
+      const l = parseFloat(document.getElementById('lump-slider').value) || 0;
+      const y = parseFloat(document.getElementById('years-slider').value) || 10;
+
+      document.getElementById('monthly-text').innerText = fmt(m) + "/mån";
+      document.getElementById('lump-text').innerText = fmt(l);
+      document.getElementById('years-text').innerText = y + " år";
+
+      const rGross = 0.07;
+      const mGross = Math.pow(1 + rGross, 1/12) - 1;
+      const months = y * 12;
+
+      const principal = l + (m * months);
+
+      // Gross
+      const grossLump = l * Math.pow(1 + rGross, y);
+      const grossMonth = m > 0 ? m * ((Math.pow(1 + mGross, months) - 1) / mGross) : 0;
+      const grossTotal = grossLump + grossMonth;
+
+      // Index 0.20%
+      const rIndex = rGross - 0.0020;
+      const mIndex = Math.pow(1 + rIndex, 1/12) - 1;
+      const indexTotal = (l * Math.pow(1 + rIndex, y)) + (m > 0 ? m * ((Math.pow(1 + mIndex, months) - 1) / mIndex) : 0);
+      const indexLoss = grossTotal - indexTotal;
+
+      // Robot 0.40%
+      const rRobot = rGross - 0.0040;
+      const mRobot = Math.pow(1 + rRobot, 1/12) - 1;
+      const robotTotal = (l * Math.pow(1 + rRobot, y)) + (m > 0 ? m * ((Math.pow(1 + mRobot, months) - 1) / mRobot) : 0);
+      const robotLoss = grossTotal - robotTotal;
+
+      document.getElementById('res-invested').innerText = fmt(principal);
+      document.getElementById('res-index-total').innerText = fmt(indexTotal);
+      document.getElementById('res-index-fee').innerText = "Avgiftsbortfall: –" + fmt(indexLoss);
+      document.getElementById('res-robot-total').innerText = fmt(robotTotal);
+      document.getElementById('res-robot-fee').innerText = "Avgiftsbortfall: –" + fmt(robotLoss);
+    }
+
+    function toggleDetails(id, triggerRow) {
+      const row = document.getElementById(id);
+      if (!row) return;
+      row.classList.toggle('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', recalc);
+  </script>
+</body></html>
