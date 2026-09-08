@@ -1,0 +1,9 @@
+{
+  "name": "investeringar-prototyp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node test-avgifter.mjs",
+    "start": "node server.mjs"
+  }
+}
