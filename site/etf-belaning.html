@@ -38,7 +38,7 @@
     <div><strong>Inte ett nästa steg</strong>Det här är ett annat behov än att välja en billig global fond, inte en högre nivå.</div>
     <div><strong>Hypotetiska exempel</strong>Belåningen räknas på exempelportföljer, aldrig på dina egna innehav.</div>
     <div><strong>Inga kontokopplingar</strong>Ingen inloggning, ingen bankkoppling, inga sparade innehav.</div>
-    <div><strong>Prototyp med demodata</strong>Avgifter och lånevillkor är inte verifierade ännu.</div>
+    <div><strong>Under uppbyggnad</strong>ETF-uppgifterna kommer från justETF och är inte kontrollerade mot emittentens faktablad. Lånevillkoren är inte verifierade alls.</div>
   </div>
 </section>
 
@@ -52,33 +52,14 @@
     <table>
       <thead><tr>
         <th scope="col">ETF</th>
-        <th scope="col">Index och bredd</th>
+        <th scope="col">Index</th>
+        <th scope="col">Marknadstäckning</th>
         <th scope="col">Löpande avgift</th>
+        <th scope="col">Replikering</th>
         <th scope="col">Handelsvaluta</th>
         <th scope="col">Köpbar i svensk ISK</th>
       </tr></thead>
-      <tbody>
-        <tr class="produkt"><td><span class="produktnamn">WEBN</span><span class="produktmeta">Amundi Prime All Country World, exakt andelsklass ej fastställd</span></td>
-          <td class="text liten dampad">Uppgift i kandidatlistan, ej kontrollerad mot faktablad</td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
-        <tr class="produkt"><td><span class="produktnamn">VWCE</span><span class="produktmeta">Vanguard FTSE All-World, ackumulerande</span></td>
-          <td class="text liten dampad">Uppgift i kandidatlistan, ej kontrollerad mot faktablad</td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
-        <tr class="produkt"><td><span class="produktnamn">SPYI</span><span class="produktmeta">SPDR MSCI ACWI IMI, inklusive småbolag</span></td>
-          <td class="text liten dampad">Uppgift i kandidatlistan, ej kontrollerad mot faktablad</td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
-        <tr class="produkt"><td><span class="produktnamn">Global Vanguard-ETF</span><span class="produktmeta">Exakt produkt ej fastställd, bevakningsfynd</span></td>
-          <td class="text liten dampad">Kandidat i urvalet. Lansering och svensk köpbarhet obekräftade</td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
-      </tbody>
+      <tbody id="etfrader"></tbody>
     </table>
   </div>
   <p class="minst" style="color:var(--ink-3);margin-top:16px">Utländsk produktsida bevisar inte köpbarhet på svenskt ISK. Varje rad kräver faktablad, ISIN, andelsklass, handelsplats och leverantörens prislista innan en siffra sätts in.</p>
@@ -204,7 +185,7 @@
       </div>
     </div>
     <div class="fotbotten">
-      <div>Prototyp · demodata · <span id="idag"></span></div>
+      <div>Under uppbyggnad · senast kontrollerat <span data-kontrolldatum>–</span></div>
       <div>kontakt@buildapp.se</div>
     </div>
   </div>
@@ -230,9 +211,33 @@
 import { belaningslage, brytpunkt } from './belaning.js';
 import { kronor, procent } from './avgifter.js';
 import { startaTema, visaDatum } from './gemensamt.js';
+import { ETFER, KALLOR, SENAST_KONTROLLERAD } from './data.js';
 
 startaTema();
 visaDatum('idag');
+for (const el of document.querySelectorAll('[data-kontrolldatum]')) el.textContent = SENAST_KONTROLLERAD;
+
+const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const ejChip = '<span class="status ovsakerhet">Ej verifierat</span>';
+const visa = (u, fmt) => u === null || u === undefined ? ejChip : (fmt ? fmt(u.varde) : esc(u.varde));
+
+/** ETF-raderna. Samtliga uppgifter kommer fran justETF, som ar sekundarkalla. */
+function ritaEtfer() {
+  document.getElementById('etfrader').innerHTML = ETFER.map(e => {
+    const kalla = e.arligAvgift ? KALLOR[e.arligAvgift.kalla] : null;
+    const anm = e.anmarkning ? `<span class="produktmeta">${esc(e.anmarkning)}</span>` : '';
+    return `<tr class="produkt">
+      <td><span class="produktnamn">${esc(e.namn)}</span><span class="produktmeta">${esc(e.ticker)} · ${visa(e.isin)}</span>${anm}</td>
+      <td class="text liten dampad">${visa(e.index)}</td>
+      <td class="text liten dampad">${visa(e.tackning)}</td>
+      <td>${visa(e.arligAvgift, v => procent(v))}${kalla ? `<span class="billigastetikett" style="color:var(--ink-3)">${esc(kalla.namn)} · ${esc(kalla.datum)}</span>` : ''}</td>
+      <td>${visa(e.replikering)}</td>
+      <td>${visa(e.valuta)}</td>
+      <td>${ejChip}</td>
+    </tr>`;
+  }).join('');
+}
+ritaEtfer();
 
 const num = id => Number(document.getElementById(id).value);
 const satt = (id, text) => { document.getElementById(id).textContent = text; };
