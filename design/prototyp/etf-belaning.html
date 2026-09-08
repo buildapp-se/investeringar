@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ETF och belåning · buildapp.se</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Manrope:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="marke" href="index.html">buildapp.se <span class="del">/</span> <span class="sida">investeringar</span></a>
+    <nav>
+      <a href="index.html">Jämförelse</a>
+      <a href="etf-belaning.html" aria-current="page">ETF och belåning</a>
+      <a href="forskning.html">Forskning</a>
+      <span class="navdel" aria-hidden="true"></span>
+      <div class="temaval" role="group" aria-label="Tema">
+        <button type="button" data-tema-val="system">System</button>
+        <button type="button" data-tema-val="ljust">Ljust</button>
+        <button type="button" data-tema-val="morkt">Mörkt</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap hero">
+  <p class="ogonbryn">Fördjupning · Ett annat behov</p>
+  <h1>ETF:er och belåning</h1>
+  <p class="ingress">Lägre förvaltningsavgift betyder inte lägre kostnad. Här räknas friktionen fram: valutaväxling, courtage och den brytpunkt där en ETF hinner ikapp en jämförbar fond. Belåningsdelen visar risk lika tydligt som avkastningsmöjlighet.</p>
+  <div class="fakta">
+    <div><strong>Inte ett nästa steg</strong>Det här är ett annat behov än att välja en billig global fond, inte en högre nivå.</div>
+    <div><strong>Hypotetiska exempel</strong>Belåningen räknas på exempelportföljer, aldrig på dina egna innehav.</div>
+    <div><strong>Inga kontokopplingar</strong>Ingen inloggning, ingen bankkoppling, inga sparade innehav.</div>
+    <div><strong>Prototyp med demodata</strong>Avgifter och lånevillkor är inte verifierade ännu.</div>
+  </div>
+</section>
+
+<div class="band">
+<section class="wrap bred" id="etfer">
+  <p class="ogonbryn">Kandidater</p>
+  <h2 class="rubrik2">Börshandlade fonder i urvalet</h2>
+  <p class="underrubrik">Exponeringen skiljer sig mellan de här produkterna och mellan dem och fonderna på jämförelsesidan. Därför rankas de inte mot varandra på kostnad. Ingen avgift nedan är kontrollerad mot faktablad ännu.</p>
+
+  <div class="tabellhalla">
+    <table>
+      <thead><tr>
+        <th scope="col">ETF</th>
+        <th scope="col">Index och bredd</th>
+        <th scope="col">Löpande avgift</th>
+        <th scope="col">Handelsvaluta</th>
+        <th scope="col">Köpbar i svensk ISK</th>
+      </tr></thead>
+      <tbody>
+        <tr class="produkt"><td><span class="produktnamn">WEBN</span><span class="produktmeta">Amundi Prime All Country World, exakt andelsklass ej fastställd</span></td>
+          <td class="text liten dampad">Uppgift i kandidatlistan, ej kontrollerad mot faktablad</td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
+        <tr class="produkt"><td><span class="produktnamn">VWCE</span><span class="produktmeta">Vanguard FTSE All-World, ackumulerande</span></td>
+          <td class="text liten dampad">Uppgift i kandidatlistan, ej kontrollerad mot faktablad</td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
+        <tr class="produkt"><td><span class="produktnamn">SPYI</span><span class="produktmeta">SPDR MSCI ACWI IMI, inklusive småbolag</span></td>
+          <td class="text liten dampad">Uppgift i kandidatlistan, ej kontrollerad mot faktablad</td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
+        <tr class="produkt"><td><span class="produktnamn">Global Vanguard-ETF</span><span class="produktmeta">Exakt produkt ej fastställd, bevakningsfynd</span></td>
+          <td class="text liten dampad">Kandidat i urvalet. Lansering och svensk köpbarhet obekräftade</td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td>
+          <td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="minst" style="color:var(--ink-3);margin-top:16px">Utländsk produktsida bevisar inte köpbarhet på svenskt ISK. Varje rad kräver faktablad, ISIN, andelsklass, handelsplats och leverantörens prislista innan en siffra sätts in.</p>
+</section>
+</div>
+
+<section class="wrap" id="brytpunkt">
+  <p class="ogonbryn">Verktyg</p>
+  <h2 class="rubrik2">Brytpunkt mellan ETF och jämförbar fond</h2>
+  <p class="underrubrik">En ETF med lägre löpande avgift är inte automatiskt billigare. Valutaväxling och courtage betalas vid varje köp, medan den lägre avgiften tjänas in långsamt. Räkna på det innan du byter.</p>
+
+  <div class="panel">
+    <p class="mening">
+      En ETF på <input id="b-etf" class="kort" type="number" min="0" max="3" step="0.01" value="0.05" aria-label="ETF:ens årliga avgift i procent"> %
+      mot en fond på <input id="b-fond" class="kort" type="number" min="0" max="3" step="0.01" value="0.09" aria-label="Fondens årliga avgift i procent"> %,
+      med <input id="b-friktion" class="kort" type="number" min="0" max="5" step="0.05" value="0.5" aria-label="Friktion per köp i procent"> % i växling och courtage per köp,
+      och <input id="b-kop" class="kort" type="number" min="1" max="52" step="1" value="1" aria-label="Antal köp per år"> köp per år.
+    </p>
+    <div class="scenariorad">
+      <button type="button" class="knapp" id="b-engang">Engångsinsättning</button>
+      <button type="button" class="knapp" id="b-manad">Månadssparande</button>
+      <span class="vaxa"></span>
+      <button type="button" class="infoknapp" popovertarget="pop-brytpunkt">Hur räknas brytpunkten?</button>
+    </div>
+  </div>
+
+  <div class="resultat">
+    <div class="kort">
+      <div class="rubrik">Årlig avgiftsbesparing</div>
+      <div class="tal" id="b-besparing">–</div>
+      <div class="under">Fondens avgift minus ETF:ens</div>
+    </div>
+    <div class="kort">
+      <div class="rubrik">Återkommande friktion</div>
+      <div class="tal" id="b-friktionut">–</div>
+      <div class="under">Växling och courtage utöver första köpet</div>
+    </div>
+    <div class="kort betonad">
+      <div class="rubrik">Brytpunkt</div>
+      <div class="tal" id="b-ar">–</div>
+      <div class="under" id="b-under">–</div>
+    </div>
+  </div>
+  <p class="minst" style="color:var(--ink-3);margin-top:16px">Beräkningen jämför avgifter och friktion, inte exponering. Två produkter med olika index är inte utbytbara även när kostnaden talar för den ena. Förvalda värden är exempel, inte verifierade avgifter.</p>
+</section>
+
+<div class="band">
+<section class="wrap" id="belaning">
+  <p class="ogonbryn">Verktyg</p>
+  <h2 class="rubrik2">Belåning på en exempelportfölj</h2>
+  <p class="underrubrik">Räknar på en hypotetisk portfölj, inte på dina innehav. Belåning förstärker både uppgång och nedgång, och skulden står kvar i kronor när värdet faller.</p>
+
+  <div class="panel">
+    <p class="mening">
+      En exempelportfölj på <input id="l-portfolj" type="number" min="10000" max="50000000" step="50000" value="1000000" aria-label="Portföljvärde i kronor"> kr
+      med <input id="l-lan" type="number" min="0" max="10000000" step="10000" value="100000" aria-label="Lånebelopp i kronor"> kr lånat
+      till <input id="l-ranta" class="kort" type="number" min="0" max="30" step="0.1" value="3.5" aria-label="Låneränta i procent per år"> % ränta.
+    </p>
+    <div class="scenariorad">
+      <span class="liten">Gräns för tvångsförsäljning i exemplet: <strong>85 %</strong> belåningsgrad</span>
+      <span class="vaxa"></span>
+      <button type="button" class="infoknapp" popovertarget="pop-belaning">Vad är belåningsgrad?</button>
+    </div>
+  </div>
+
+  <div class="resultat">
+    <div class="kort">
+      <div class="rubrik">Belåningsgrad</div>
+      <div class="tal" id="l-grad">–</div>
+      <div class="under">Lån delat med portföljvärde</div>
+    </div>
+    <div class="kort">
+      <div class="rubrik">Räntekostnad per år</div>
+      <div class="tal" id="l-ranta-ut">–</div>
+      <div class="under">Betalas oavsett hur börsen går</div>
+    </div>
+    <div class="kort">
+      <div class="rubrik">Marknadsexponering</div>
+      <div class="tal" id="l-exponering">–</div>
+      <div class="under">Per satsad egen krona</div>
+    </div>
+    <div class="kort betonad">
+      <div class="rubrik">Tål börsfall på</div>
+      <div class="tal" id="l-fall">–</div>
+      <div class="under">Innan gränsen för tvångsförsäljning nås</div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:20px">
+    <p class="ogonbryn">Vad siffran om börsfall inte säger</p>
+    <div class="brodtext">
+      <p class="liten">Gränsen på 85 % är ett exempelvärde, inte en verifierad regel hos någon leverantör. Verkliga belåningsvärden sätts per värdepapper, revideras löpande och kan sänkas mitt i en nedgång. Då kan gränsen nås tidigare än beräkningen visar.</p>
+      <p class="liten">Räntekostnaden betalas även när portföljen faller. En ränta som är högre än den avkastning du faktiskt får gör belåningen till en förlust, oavsett hur uträkningen ser ut i en uppgång.</p>
+      <p class="liten"><strong>Den största risken är sällan matematisk.</strong> En belånad portfölj faller djupare i kronor, och en djupare nedgång är svårare att sitta still i. Säljer du på botten blir förlusten permanent, och det är en risk som ingen kalkyl räknar bort.</p>
+    </div>
+  </div>
+
+  <p class="minst" style="color:var(--ink-3);margin-top:16px">Stresstest för högre ränta och sänkta belåningsvärden, samt exakta regelformler per leverantör, är ännu inte fastställda. Se BACKLOG.md.</p>
+</section>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fotgrid">
+      <div>
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">buildapp.se / investeringar</div>
+        <p class="minst dampad" style="max-width:44ch;margin-bottom:12px">Ett oberoende initiativ för transparent granskning av svenska sparformer och fondavgifter. Urval och redaktionellt ansvar: Patrik.</p>
+        <p class="minst dampad" style="max-width:44ch"><strong>Transparens:</strong> tjänsten kan finansieras av affiliatelänkar märkta med asterisk. Urval, beräkningar och markeringar påverkas aldrig av ersättning.</p>
+      </div>
+      <div>
+        <div class="ogonbryn">Sidor</div>
+        <div class="fotlankar">
+          <a href="index.html">Jämförelse av fonder och fondrobotar</a>
+          <a href="etf-belaning.html">ETF och belåning</a>
+          <a href="forskning.html">Forskning och källor</a>
+        </div>
+      </div>
+      <div>
+        <div class="ogonbryn">Riskinformation</div>
+        <p class="minst dampad">Historisk avkastning är ingen garanti för framtida avkastning. Fonder kan både öka och minska i värde och det är inte säkert att du får tillbaka hela det insatta kapitalet. Belåning ökar risken. Innehållet är inte individuell finansiell rådgivning.</p>
+      </div>
+    </div>
+    <div class="fotbotten">
+      <div>Prototyp · demodata · <span id="idag"></span></div>
+      <div>kontakt@buildapp.se</div>
+    </div>
+  </div>
+</footer>
+
+<div popover id="pop-brytpunkt">
+  <h4>Så räknas brytpunkten</h4>
+  <p>Skillnaden i årlig avgift är det du tjänar varje år. Växling och courtage är det du betalar vid varje köp. Brytpunkten är den tidpunkt då det du tjänat överstiger det du betalat.</p>
+  <p>Vid en engångsinsättning betalas friktionen en gång, och besparingen hinner ikapp efter ett antal år. Vid månadssparande betalas den tolv gånger om året, och då kan den springa ifrån besparingen helt. Det är därför resultatet ibland är att brytpunkten saknas.</p>
+  <p>Beräkningen tar inte hänsyn till skillnader i exponering. Två produkter som följer olika index är inte samma sak, hur kostnaden än faller ut.</p>
+  <button type="button" class="knapp" popovertarget="pop-brytpunkt" popovertargetaction="hide">Stäng</button>
+</div>
+
+<div popover id="pop-belaning">
+  <h4>Belåningsgrad och tvångsförsäljning</h4>
+  <p>Belåningsgraden är lånet delat med portföljens värde. När värdet faller står skulden kvar i kronor, så graden stiger utan att du gjort något.</p>
+  <p>När graden passerar leverantörens gräns kan värdepapper säljas för att täcka lånet, oftast i ett läge där kurserna redan är låga. Därför visas hur stort fall portföljen tål innan gränsen nås.</p>
+  <p>Gränsen i exemplet är ett antagande. Verkliga belåningsvärden sätts per värdepapper och kan sänkas under en nedgång.</p>
+  <button type="button" class="knapp" popovertarget="pop-belaning" popovertargetaction="hide">Stäng</button>
+</div>
+
+<script type="module">
+import { belaningslage, brytpunkt } from './belaning.js';
+import { kronor, procent } from './avgifter.js';
+import { startaTema, visaDatum } from './gemensamt.js';
+
+startaTema();
+visaDatum('idag');
+
+const num = id => Number(document.getElementById(id).value);
+const satt = (id, text) => { document.getElementById(id).textContent = text; };
+
+function ritaBrytpunkt() {
+  const r = brytpunkt({
+    etfArlig: num('b-etf') / 100,
+    fondArlig: num('b-fond') / 100,
+    friktionPerKop: num('b-friktion') / 100,
+    kopPerAr: Math.max(1, num('b-kop')),
+  });
+  satt('b-besparing', procent(r.arligBesparing));
+  satt('b-friktionut', procent(r.arligFriktion));
+  if (r.arTillBrytpunkt === null) {
+    satt('b-ar', 'Saknas');
+    satt('b-under', r.arligBesparing <= 0
+      ? 'ETF:en är inte billigare i löpande avgift'
+      : 'Friktionen betalas oftare än besparingen hinner tjänas in');
+  } else {
+    const ar = r.arTillBrytpunkt;
+    satt('b-ar', ar.toFixed(1).replace('.', ',') + ' år');
+    satt('b-under', ar > 20 ? 'Längre än de flesta behåller ett innehav' : 'Därefter är ETF:en billigare');
+  }
+}
+
+function ritaBelaning() {
+  const portfolj = num('l-portfolj');
+  const lan = Math.min(num('l-lan'), Math.max(0, portfolj - 1));
+  try {
+    const r = belaningslage({ portfolj, lan, ranta: num('l-ranta') / 100, gransTvangsforsaljning: 0.85 });
+    satt('l-grad', procent(r.grad, 1));
+    satt('l-ranta-ut', kronor(r.rantekostnadPerAr));
+    satt('l-exponering', r.exponering.toFixed(2).replace('.', ',') + 'x');
+    satt('l-fall', procent(r.falltalighet, 0));
+  } catch (e) {
+    for (const id of ['l-grad', 'l-ranta-ut', 'l-exponering', 'l-fall']) satt(id, '–');
+  }
+}
+
+['b-etf', 'b-fond', 'b-friktion', 'b-kop'].forEach(id => document.getElementById(id).addEventListener('input', ritaBrytpunkt));
+['l-portfolj', 'l-lan', 'l-ranta'].forEach(id => document.getElementById(id).addEventListener('input', ritaBelaning));
+document.getElementById('b-engang').addEventListener('click', () => { document.getElementById('b-kop').value = 1; ritaBrytpunkt(); });
+document.getElementById('b-manad').addEventListener('click', () => { document.getElementById('b-kop').value = 12; ritaBrytpunkt(); });
+
+ritaBrytpunkt();
+ritaBelaning();
+</script>
+</body>
+</html>
