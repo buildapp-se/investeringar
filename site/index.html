@@ -37,8 +37,8 @@
   <div class="fakta">
     <div><strong>Urval och ansvar: Patrik</strong>Handplockat, inte hela marknaden.</div>
     <div><strong>Källa och kontrolldatum</strong>Varje kostnadsuppgift har båda, annars utses ingen vinnare.</div>
-    <div><strong>Affiliatelänkar märks med *</strong>Märket sitter på varje partner och styr aldrig rankningen.</div>
-    <div><strong>Prototyp med demodata</strong>Inga siffror här är verifierade ännu.</div>
+    <div><strong>Inga affiliateavtal ännu</strong>Om sådana tillkommer märks varje partner med * och märket styr aldrig rankningen.</div>
+    <div><strong>Senast kontrollerat <span data-kontrolldatum>–</span></strong>Under uppbyggnad. Leverantörernas prislistor är ännu inte kontrollerade.</div>
   </div>
 </section>
 
@@ -170,8 +170,8 @@
   </div>
 
   <p class="minst" style="color:var(--ink-3);margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between">
-    <span><strong>*</strong> Märkta leverantörer är affiliatepartners. Märket visas vid varje partner oavsett placering, även när partnern är dyrast i raden, så att det aldrig kan förväxlas med skälet till markeringen.</span>
-    <span>Källor och kontrolldatum per uppgift i fördjupningen.</span>
+    <span>Inga affiliateavtal är tecknade. Om sådana tillkommer märks varje partner med <strong>*</strong>, vid varje förekomst och oavsett placering, även när partnern är dyrast i raden.</span>
+    <span>Källa och kontrolldatum per uppgift i fördjupningen. Senast kontrollerat <span data-kontrolldatum>–</span>.</span>
   </p>
 </section>
 </div>
@@ -189,12 +189,7 @@
         <th scope="col">Service</th>
         <th scope="col">Totalavgift</th>
       </tr></thead>
-      <tbody>
-        <tr><td><span class="produktnamn">LYSA</span><span class="produktmeta">Redaktionens utgångspunkt för enkelhet</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
-        <tr><td><span class="produktnamn">Opti</span><span class="produktmeta">Jämförbar fondrobot</span></td>
-          <td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td><td><span class="status ovsakerhet">Ej verifierat</span></td></tr>
-      </tbody>
+      <tbody id="robotrader"></tbody>
     </table>
   </div>
   <p class="minst" style="color:var(--ink-3);margin-top:16px">Räkneantagande för robotar med olika aktieandel är ännu inte beslutat, så ingen totalkostnad räknas ut här. Fondrobotarnas inbyggda ränteandel redovisas under Övriga tillgångar när uppgiften är kontrollerad.</p>
@@ -237,7 +232,7 @@
       </div>
     </div>
     <div class="fotbotten">
-      <div>Prototyp · demodata · <span id="idag"></span></div>
+      <div>Under uppbyggnad · senast kontrollerat <span data-kontrolldatum>–</span></div>
       <div>kontakt@buildapp.se</div>
     </div>
   </div>
@@ -255,79 +250,18 @@
   <p><span class="status verifierad">Verifierad</span> Uppgiften har källa och kontrolldatum.</p>
   <p><span class="status ovsakerhet">Ej verifierat</span> Uppgiften saknas eller är inte kontrollerad. Den kan inte utse billigaste alternativ.</p>
   <p><span class="status inaktuell">Inaktuell</span> Uppgiften är för gammal och rankas inte.</p>
-  <p><span class="status demo">Fiktiv demodata</span> Påhittade siffror som bara finns för att visa hur gränssnittet ser ut när underlaget är komplett.</p>
   <p>Färg används alltid tillsammans med text, så att markeringarna fungerar också för den som inte skiljer färgerna åt.</p>
   <button type="button" class="knapp" popovertarget="pop-status" popovertargetaction="hide">Stäng</button>
 </div>
 
 <script type="module">
-import { avgiftseffekt, totalArligAvgift, kronor, procent } from './avgifter.js';
+import { avgiftseffekt, kronor, procent } from './avgifter.js';
 import { startaTema, visaDatum } from './gemensamt.js';
+import { FONDER, LEVERANTORER, ROBOTAR, KALLOR, SENAST_KONTROLLERAD } from './data.js';
 
 startaTema();
 visaDatum('idag');
-
-/* ---------- Demodata ----------
-   Bara fonder. ETF:er ligger pa etf-belaning.html, eftersom exponering och
-   handelskostnad skiljer sig for mycket for att rankas i samma lista.
-   Verkliga produktnamn star medvetet som Ej verifierat rakt igenom, eftersom
-   ingenting i researchunderlaget ar faktakontrollerat an.
-   partner styr enbart om affiliatemarket visas, aldrig rankningen. */
-const LEVERANTORER = [
-  { id: 'avanza',   namn: 'Avanza',   partner: true },
-  { id: 'nordnet',  namn: 'Nordnet',  partner: false },
-  { id: 'montrose', namn: 'Montrose', partner: true },
-  { id: 'savr',     namn: 'SAVR',     partner: true },
-  { id: 'fondo',    namn: 'Fondo',    partner: false },
-];
-
-const EJ = { status: 'ovsakerhet', text: 'Ej verifierat' };
-const INAKTUELL = { status: 'inaktuell', text: 'Inaktuell · 2024-11-12' };
-const allaEj = () => Object.fromEntries(LEVERANTORER.map(l => [l.id, EJ]));
-
-const PRODUKTER = [
-  {
-    namn: 'Länsförsäkringar Global Index', typ: 'Indexfond · andelsklass ej verifierad',
-    tackning: 'Global, omfång ej verifierat', verifierad: false,
-    kopvagar: allaEj(),
-  },
-  {
-    namn: 'DNB Global Indeks', typ: 'Indexfond · andelsklass ej verifierad',
-    tackning: 'Global, omfång ej verifierat', verifierad: false,
-    anmarkning: 'Uppgift utgått. Inaktuella uppgifter rankas inte.',
-    kopvagar: { ...allaEj(), fondo: INAKTUELL },
-  },
-  {
-    namn: 'Avanza Global', typ: 'Indexfond · kandidat, ej kontrollerad',
-    tackning: 'Global, utvecklade marknader enligt kandidatlistan', verifierad: false,
-    endastAvancerad: true,
-    kopvagar: allaEj(),
-  },
-  {
-    namn: 'Demofond Global A', typ: 'Indexfond · andelsklass A', demo: true,
-    tackning: 'Global, utvecklade marknader', verifierad: true,
-    isin: 'DEMO0000000A', index: 'Demo Global Index', replikering: 'Fysisk, full', valuta: 'SEK', utdelning: 'Ackumulerande',
-    kopvagar: {
-      avanza:   { fondavgift: 0.0020, plattformsavgift: 0,      kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
-      nordnet:  { fondavgift: 0.0020, plattformsavgift: 0,      kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
-      montrose: EJ,
-      savr:     { fondavgift: 0.0011, plattformsavgift: 0.0003, kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
-      fondo:    EJ,
-    },
-  },
-  {
-    namn: 'Demofond Global B', typ: 'Indexfond · visar det oavgjorda läget', demo: true,
-    tackning: 'Global inklusive tillväxtmarknader', verifierad: true,
-    isin: 'DEMO0000000B', index: 'Demo All Country', replikering: 'Fysisk, sampling', valuta: 'SEK', utdelning: 'Ackumulerande',
-    kopvagar: {
-      avanza:   { fondavgift: 0.0016, plattformsavgift: 0, kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
-      nordnet:  { fondavgift: 0.0016, plattformsavgift: 0, kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
-      montrose: { fondavgift: 0.0024, plattformsavgift: 0, kopavgift: 0, kalla: 'demokälla · 2026-09-01' },
-      savr:     EJ,
-      fondo:    EJ,
-    },
-  },
-];
+for (const el of document.querySelectorAll('[data-kontrolldatum]')) el.textContent = SENAST_KONTROLLERAD;
 
 const STANDARD = { manad: 2000, engang: 100000, ar: 10, sats: 7, saljs: false };
 const falt = ['manad', 'engang', 'ar', 'sats'];
@@ -341,118 +275,132 @@ function skrivScenario(s) {
   for (const f of falt) document.getElementById(f).value = s[f];
   document.getElementById('saljs').checked = s.saljs;
 }
-
-const arVerifierad = k => typeof k.fondavgift === 'number';
 const scenarioObj = s => ({ engangsinsattning: s.engang, manadssparande: s.manad, ar: s.ar, raknesats: s.sats / 100 });
 
-/** Totalkostnad for en kopvag. Kastar om kopvagen ar overifierad. */
-function kostnad(kopvag, s) {
-  if (!arVerifierad(kopvag)) throw new TypeError('Overifierad kopvag kan inte kostnadsberaknas');
-  return { arlig: totalArligAvgift(kopvag), ...avgiftseffekt(scenarioObj(s), totalArligAvgift(kopvag)) };
-}
-/** Billigaste verifierade kopvagar. Flera vid oavgjort, tom lista nar inget gar att avgora. */
-function billigaste(produkt, s) {
-  const kandidater = LEVERANTORER
-    .filter(l => arVerifierad(produkt.kopvagar[l.id]))
-    .map(l => ({ id: l.id, total: kostnad(produkt.kopvagar[l.id], s).totalEffekt }));
-  if (kandidater.length === 0) return [];
-  const lagst = Math.min(...kandidater.map(k => k.total));
-  return kandidater.filter(k => Math.abs(k.total - lagst) < 0.5).map(k => k.id);
+/** Kontrollerad OCH aktuell uppgift? Inaktuella uppgifter far inte ligga till grund for berakning. */
+const arAktuell = u => u !== null && u !== undefined && !u.inaktuell;
+
+/* Escaping av textfalt ur data.js. Datan ar forfattad av redaktionen, men filen
+   kommer att redigeras av automatik, sa den behandlas inte som sakrad markup. */
+const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+const chip = (klass, text) => `<span class="status ${klass}">${esc(text)}</span>`;
+const ejChip = () => chip('ovsakerhet', 'Ej verifierat');
+
+/** Visar en uppgift i sitt faktiska lage: varde, inaktuellt varde, eller franvaro. */
+function visa(uppgift, formatera) {
+  if (uppgift === null || uppgift === undefined) return ejChip();
+  if (uppgift.inaktuell) return chip('inaktuell', 'Inaktuell · ' + uppgift.inaktuell);
+  return formatera ? formatera(uppgift.varde) : esc(uppgift.varde);
 }
 
-const statusChip = k => `<span class="status ${k.status}">${k.text}</span>`;
+function kallhanvisning(uppgift) {
+  if (!arAktuell(uppgift)) return '';
+  const k = KALLOR[uppgift.kalla];
+  if (!k) return '';
+  return `<span class="produktmeta">Källa: <a href="${k.url}" rel="noopener">${k.namn}</a> · ${k.datum}</span>`;
+}
 
 function rubriker() {
-  const kolumner = ['<th scope="col">Fond</th>'];
-  if (vy === 'avancerad') kolumner.push('<th scope="col">Marknadstäckning</th>');
-  kolumner.push('<th scope="col">Årlig fondkostnad</th>');
-  if (vy === 'avancerad') for (const l of LEVERANTORER) kolumner.push(`<th scope="col">${l.namn}${l.partner ? ' *' : ''}</th>`);
-  kolumner.push('<th scope="col">Billigaste verifierade köpväg</th>', '<th scope="col">Totalkostnad, valt scenario</th>');
-  document.getElementById('rubrikrad').innerHTML = kolumner.join('');
+  const kol = ['<th scope="col">Fond</th>'];
+  if (vy === 'avancerad') kol.push('<th scope="col">Marknadstäckning</th>');
+  kol.push('<th scope="col">Årlig fondavgift</th>', '<th scope="col">Fondavgiftens effekt, valt scenario</th>');
+  if (vy === 'avancerad') for (const l of LEVERANTORER) kol.push(`<th scope="col">${l.namn}${l.partner ? ' *' : ''}</th>`);
+  kol.push('<th scope="col">Billigaste verifierade köpväg</th>');
+  document.getElementById('rubrikrad').innerHTML = kol.join('');
+}
+
+/**
+ * Billigaste kopvag kraver bade en aktuell fondavgift och minst en kontrollerad
+ * plattformsavgift. Ingen leverantors prislista ar kontrollerad an, sa listan blir tom.
+ */
+function billigaste(p) {
+  if (!arAktuell(p.arligAvgift)) return [];
+  return LEVERANTORER.filter(l => p.kopvagar[l.id] !== null).map(l => l.id);
 }
 
 function radHtml(p, s, i) {
-  const vinnare = billigaste(p, s);
   const detaljId = `detalj-${i}`;
   const celler = [];
 
   celler.push(`<td><button type="button" class="expandera" aria-expanded="false" aria-controls="${detaljId}">
       <span class="pil" aria-hidden="true">›</span>
-      <span><span class="produktnamn">${p.namn}</span>${p.demo ? ' ' + statusChip({ status: 'demo', text: 'Fiktiv demodata' }) : ''}
-      <span class="produktmeta">${p.typ}</span></span></button>
-    ${p.anmarkning ? `<span class="produktmeta">${p.anmarkning}</span>` : ''}</td>`);
+      <span><span class="produktnamn">${esc(p.namn)}</span><span class="produktmeta">${esc(p.typ)}</span></span></button></td>`);
 
-  if (vy === 'avancerad') celler.push(`<td class="text liten dampad">${p.tackning}</td>`);
+  if (vy === 'avancerad') celler.push(`<td class="text liten dampad">${visa(p.tackning)}</td>`);
 
-  // Fondkostnaden kan skilja mellan leverantorer nar en plattform aterfor
-  // distributionsersattning. Ett enda tal skulle dolja just den skillnaden.
-  const avgifter = LEVERANTORER.map(l => p.kopvagar[l.id]).filter(arVerifierad).map(k => k.fondavgift);
-  if (avgifter.length === 0) {
-    celler.push(`<td>${statusChip(EJ)}</td>`);
+  celler.push(`<td>${visa(p.arligAvgift, v => procent(v))}</td>`);
+
+  if (arAktuell(p.arligAvgift)) {
+    const e = avgiftseffekt(scenarioObj(s), p.arligAvgift.varde);
+    celler.push(`<td>${kronor(e.totalEffekt)}<span class="billigastetikett" style="color:var(--ink-3)">varav ${kronor(e.uteblivenTillvaxt)} utebliven tillväxt</span></td>`);
   } else {
-    const lag = Math.min(...avgifter), hog = Math.max(...avgifter);
-    celler.push(`<td>${lag === hog ? procent(lag) : `${procent(lag)}–${procent(hog)}`}${lag === hog ? '' : '<span class="billigastetikett" style="color:var(--ink-3)">skiljer per leverantör</span>'}</td>`);
+    const skal = p.arligAvgift && p.arligAvgift.inaktuell ? 'Inaktuella uppgifter rankas inte' : 'Underlaget räcker inte';
+    celler.push(`<td>${chip('ovsakerhet', 'Beräknas inte')}<span class="produktmeta">${skal}</span></td>`);
   }
 
   if (vy === 'avancerad') for (const l of LEVERANTORER) {
     const k = p.kopvagar[l.id];
-    if (!arVerifierad(k)) { celler.push(`<td>${statusChip(k)}</td>`); continue; }
-    const vann = vinnare.includes(l.id);
-    celler.push(`<td class="${vann ? 'billigast' : ''}">${procent(totalArligAvgift(k))}${vann ? '<span class="billigastetikett">Billigast</span>' : ''}</td>`);
+    celler.push(`<td>${k === null ? ejChip() : procent(k.plattformsavgift)}</td>`);
   }
 
-  if (vinnare.length === 0) {
-    celler.push(`<td>${statusChip({ status: 'ovsakerhet', text: 'Utses inte' })}<span class="produktmeta">Underlaget räcker inte</span></td>`,
-                `<td>${statusChip({ status: 'ovsakerhet', text: 'Beräknas inte' })}</td>`);
-  } else {
-    const namn = vinnare.map(id => LEVERANTORER.find(l => l.id === id));
-    const k = kostnad(p.kopvagar[vinnare[0]], s);
-    celler.push(`<td class="billigast">${namn.map(l => l.namn + (l.partner ? ' *' : '')).join(' och ')}
-      <span class="billigastetikett">${vinnare.length > 1 ? 'Lika billigast' : 'Billigast, valt scenario'}</span></td>`,
-      `<td class="billigast">${kronor(k.totalEffekt)}<span class="billigastetikett" style="color:var(--ink-3)">exkl. försäljning</span></td>`);
-  }
+  const vinnare = billigaste(p);
+  celler.push(vinnare.length === 0
+    ? `<td>${chip('ovsakerhet', 'Utses inte')}<span class="produktmeta">Ingen prislista kontrollerad</span></td>`
+    : `<td class="billigast">${vinnare.map(id => LEVERANTORER.find(l => l.id === id).namn).join(' och ')}</td>`);
 
-  // colspan raknas fran de faktiska cellerna, sa den inte glider isar.
   return `<tr class="produkt">${celler.join('')}</tr>
-    <tr class="detalj" id="${detaljId}" hidden><td class="text" colspan="${celler.length}">${detaljHtml(p, s, vinnare)}</td></tr>`;
+    <tr class="detalj" id="${detaljId}" hidden><td class="text" colspan="${celler.length}">${detaljHtml(p, s)}</td></tr>`;
 }
 
-function detaljHtml(p, s, vinnare) {
+function detaljHtml(p, s) {
+  const rad = (etikett, uppgift, fmt) => `<div>${etikett}</div><div>${visa(uppgift, fmt)}</div>`;
+
   const kort = LEVERANTORER.map(l => {
-    const k = p.kopvagar[l.id];
     const marke = l.partner ? ' <span class="partner" title="Affiliatepartner">*</span>' : '';
-    if (!arVerifierad(k)) return `<div class="kopvag"><div class="namn"><span>${l.namn}${marke}</span></div><div class="minst" style="margin-top:8px">${statusChip(k)}</div></div>`;
-    const vann = vinnare.includes(l.id);
-    return `<div class="kopvag ${vann ? 'vinnare' : ''}"><div class="namn"><span>${l.namn}${marke}</span>${vann ? '<span class="billigastetikett" style="margin:0">Billigast</span>' : ''}</div>
-      <div class="minst dampad" style="margin-top:8px">${procent(k.kopavgift)} köp · ${procent(k.fondavgift)} fond${k.plattformsavgift ? ' · ' + procent(k.plattformsavgift) + ' plattform' : ''}</div>
-      <div class="minst" style="color:var(--ink-3);margin-top:4px">Källa: ${k.kalla}</div></div>`;
+    return `<div class="kopvag"><div class="namn"><span>${l.namn}${marke}</span></div>
+      <div class="minst" style="margin-top:8px">${ejChip()}</div></div>`;
   }).join('');
 
   let uppdelning = '';
-  if (vinnare.length > 0) {
-    const l = LEVERANTORER.find(x => x.id === vinnare[0]);
-    const k = kostnad(p.kopvagar[vinnare[0]], s);
-    uppdelning = `<p class="ogonbryn" style="margin-top:22px">Kostnad över ${s.ar} år hos ${l.namn}</p>
+  if (arAktuell(p.arligAvgift)) {
+    const e = avgiftseffekt(scenarioObj(s), p.arligAvgift.varde);
+    uppdelning = `<p class="ogonbryn" style="margin-top:22px">Fondavgiften över ${s.ar} år</p>
       <div class="uppdelning">
-        <div>Summa avgifter</div><div>${kronor(k.dragnaAvgifter)}</div>
-        <div>Utebliven tillväxt</div><div>${kronor(k.uteblivenTillvaxt)}</div>
-        <div class="summa">Avgifternas totala effekt</div><div class="summa">${kronor(k.totalEffekt)}</div>
-        ${s.saljs ? `<div>Beräknad säljkostnad</div><div>${statusChip(EJ)}</div>` : ''}
+        <div>Summa avgifter</div><div>${kronor(e.dragnaAvgifter)}</div>
+        <div>Utebliven tillväxt</div><div>${kronor(e.uteblivenTillvaxt)}</div>
+        <div class="summa">Avgifternas totala effekt</div><div class="summa">${kronor(e.totalEffekt)}</div>
       </div>
-      <p class="minst" style="color:var(--ink-3)">Förväntat slutkapital visas inte. Ordinarie avgifter gäller; tillfälliga erbjudanden redovisas separat med villkor och giltighet.</p>`;
+      <p class="minst" style="color:var(--ink-3)">Räknat på fondens egen avgift. Leverantörens eventuella plattformsavgift och köpavgift tillkommer och är inte kontrollerad. Förväntat slutkapital visas inte.</p>`;
   }
 
-  const fordjupning = (vy === 'avancerad' && p.isin) ? `<p class="ogonbryn" style="margin-top:22px">Fördjupning</p>
-    <div class="uppdelning"><div>ISIN och andelsklass</div><div>${p.isin}</div>
-      <div>Index</div><div>${p.index}</div>
-      <div>Replikering</div><div>${p.replikering}</div>
-      <div>Handelsvaluta</div><div>${p.valuta}</div>
-      <div>Utdelning</div><div>${p.utdelning}</div></div>` : '';
+  const anm = p.anmarkning ? `<p class="liten" style="margin-top:12px;max-width:76ch">${esc(p.anmarkning)}</p>` : '';
 
-  return `<p class="ogonbryn">Köpvägar för samma andelsklass</p><div class="kopvagar">${kort}</div>
-    ${uppdelning}${fordjupning}
-    ${p.demo ? '<p class="minst" style="color:var(--demo);margin-top:10px">Samtliga siffror i den här raden är fiktiv demodata och hör inte till någon verklig produkt eller leverantör.</p>' : ''}
+  return `<p class="ogonbryn">Uppgifter om fonden</p>
+    <div class="uppdelning">
+      ${rad('ISIN', p.isin)}
+      ${rad('Förvaltningsavgift', p.forvaltningsavgift, v => procent(v))}
+      ${rad('Årlig avgift', p.arligAvgift, v => procent(v))}
+      ${rad('Index', p.index)}
+      ${rad('Replikering', p.replikering)}
+      ${rad('Handelsvaluta', p.valuta)}
+      ${rad('Utdelning', p.utdelning)}
+      ${rad('Belåningsgrad', p.belaningsgrad, v => procent(v, 0))}
+    </div>
+    ${kallhanvisning(p.arligAvgift) || kallhanvisning(p.index)}
+    ${anm}
+    ${uppdelning}
+    <p class="ogonbryn" style="margin-top:22px">Köpvägar hos leverantörerna</p>
+    <div class="kopvagar">${kort}</div>
+    <p class="minst" style="color:var(--ink-3)">Ingen leverantörs prislista är kontrollerad ännu, därför kan ingen billigaste köpväg utses.</p>
     <p style="margin-top:14px"><a class="minst" href="mailto:kontakt@buildapp.se?subject=Fel i raden ${encodeURIComponent(p.namn)}">Rapportera fel i raden</a></p>`;
+}
+
+function ritaRobotar() {
+  const rader = ROBOTAR.map(r => `<tr>
+    <td><span class="produktnamn">${esc(r.namn)}</span><span class="produktmeta">${esc(r.typ)}</span></td>
+    <td>${visa(r.aktieandel)}</td><td>${visa(r.ovrigt)}</td><td>${visa(r.service)}</td><td>${visa(r.totalavgift)}</td></tr>`).join('');
+  document.getElementById('robotrader').innerHTML = rader;
 }
 
 function rita() {
@@ -467,8 +415,7 @@ function rita() {
 
   rubriker();
   const baraVerifierad = document.getElementById('f-verifierad').checked;
-  const synliga = PRODUKTER.filter(p =>
-    (!p.endastAvancerad || vy === 'avancerad') && (!baraVerifierad || p.verifierad));
+  const synliga = FONDER.filter(p => !baraVerifierad || arAktuell(p.arligAvgift));
 
   document.getElementById('rader').innerHTML = synliga.map((p, i) => radHtml(p, s, i)).join('');
   document.getElementById('tabell').hidden = synliga.length === 0;
@@ -499,6 +446,7 @@ document.getElementById('rensafilter').addEventListener('click', () => {
 let start = STANDARD;
 try { start = { ...STANDARD, ...JSON.parse(localStorage.getItem('scenario') || '{}') }; } catch {}
 skrivScenario(start);
+ritaRobotar();
 rita();
 </script>
 </body>
