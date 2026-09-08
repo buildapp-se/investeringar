@@ -1,0 +1,15 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 2760, "title": "Jämförelse" },
+    { "file": "ETF.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 2600, "title": "ETF och belåning" },
+    { "file": "Forskning.dc.html", "x": 3120, "y": 0, "w": 1440, "h": 2380, "title": "Forskning" },
+    { "file": "Mobil.dc.html", "x": 4680, "y": 0, "w": 390, "h": 1560, "title": "Jämförelse, mobil" }
+  ],
+  "annotations": [
+    { "id": "note-hero", "x": 0, "y": -170, "w": 460, "text": "Nytt: siffran bär hero:t.\n10 414 kr och de 3 622 kr som är utebliven tillväxt säger på en rad vad tjänsten handlar om, utan att lova något slutkapital." },
+    { "id": "note-status", "x": 1560, "y": -170, "w": 460, "text": "Ej verifierat är nu streckad kontur utan fyllning.\nDet är det vanligaste läget dag ett och ska inte läsa som ett fel." },
+    { "id": "note-billigast", "x": 3120, "y": -170, "w": 460, "text": "Grön markering sitter i raden, inte mellan produkter.\nAffiliateasterisken visas vid varje partner, även den dyraste, så den aldrig läses som skälet till markeringen." },
+    { "id": "note-mobil", "x": 4680, "y": -170, "w": 390, "text": "Mobilens enkla vy blir kort i stället för tabell.\nLöser sidledsscrollen som ligger som P2 i backloggen." }
+  ],
+  "launch": { "view": "canvas" }
+}
