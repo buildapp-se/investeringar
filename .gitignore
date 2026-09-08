@@ -4,3 +4,5 @@ Thumbs.db
 *.log
 .playwright-mcp/
 prototyp-*.png
+design/canvas/*.html
+!design/canvas/*.dc.html
