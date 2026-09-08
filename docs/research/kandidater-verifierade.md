@@ -13,7 +13,9 @@ Ingenting här är ännu godkänt för publicering. Faktabladen (KID) för respe
 3. **justETF**, för UCITS-ETF:er. Sekundär men datumstämplad och konsekvent.
 4. **Placera** och **Börskollen** som referat av Avanzas och Nordnets egen statistik. Sekundära, används bara för popularitet, aldrig för avgifter.
 
-Avanzas och Nordnets egna fondsidor renderas med JavaScript och gick inte att läsa maskinellt. Uppgifter därifrån måste kontrolleras manuellt.
+Avanzas och Nordnets egna fondsidor renderas med JavaScript. En enkel hämtare som bara läser råmarkupen ser en tom sida. **Med en styrd webbläsare som kör sidans JavaScript går de däremot att läsa**, och uppgifterna nedan märkta med Avanzas eller Nordnets egen sida är hämtade den vägen 2026-09-08.
+
+Nordnets fondsidor har läsbara adresser och gick att läsa direkt. Avanzas lista gick att filtrera och läsa, medan deras detaljsida ligger bakom en klickväg i ett Angular-gränssnitt som inte gav vika i den här omgången. ISIN för Avanza Global står därför fortfarande som obelagt.
 
 ## Vad svenska sparare faktiskt äger och köper
 
@@ -80,6 +82,12 @@ Källa: [Länsförsäkringars egen fondlista](https://lansforsakringar.dev.fundl
 
 **Korrigering:** `rikatillsammans-indexfonder-och-etfer.md` anger indexet som ”Morningstar DM Target Market Exposure Paris Aligned”. Det stämmer inte. Fonden följer ett MSCI-index med klimaturval, inte ett Morningstar-index. Uppgiften ska bort ur det dokumentet.
 
+Avläst från [Nordnets egen fondsida](https://www.nordnet.se/fonder/lista/lansforsakringar-global-index-sek-7ef0089f) 2026-09-08: årlig avgift **0,20 %**, kategori Global mix bolag, basvaluta SEK, **belåningsgrad 85 %**, och samma jämförelseindex som fondbolaget anger.
+
+**Här finns en märkningsskillnad värd att notera.** Länsförsäkringars egen fondlista skiljer på förvaltningsavgift 0,20 % och årlig avgift 0,21 %. Nordnet visar 0,20 % under rubriken *årlig avgift*. Samma fond, samma dag, två olika tal under samma etikett. Vilket som är rätt avgörs av vad som räknas in, och tabellen måste därför ange vilken definition varje siffra följer, inte bara siffran.
+
+Belåningsgraden 85 % är dessutom en riktig uppgift till belåningsverktyget, som hittills räknat med 85 % som ett påhittat exempelvärde. Den bör hämtas per värdepapper och leverantör, eftersom den varierar och revideras.
+
 Att förvaltningsavgift och årlig avgift skiljer sig med en hundradel är inte en avrundning. Det är exakt den uppdelning jämförelsetabellen ska visa i separata fält.
 
 ### 2. DNB Global Indeks S
@@ -111,14 +119,19 @@ Källa: [Avanzas egen informationsbroschyr, 2026-03-09](https://investors.avanza
 | Högsta förvaltningsavgift enligt fondbestämmelserna | 0,08 % | Verifierad |
 | Index | Morningstar Developed Markets TME Paris Aligned Benchmark Sustainability Select Index | Verifierad |
 | Utdelning | Lämnar ingen utdelning | Verifierad |
+| Total avgift | 0,10 % | Verifierad, [Avanzas egen fondlista](https://www.avanza.se/fonder/handla-fonder.html/list), avläst 2026-09-08 |
+| Antal ägare | 750 389 | Verifierad, samma källa och datum |
 | ISIN | Obelagt | **Ej verifierat** |
-| Årlig avgift inklusive övriga kostnader | Obelagt, uppges till 0,10 % i sekundära källor | **Ej verifierat** |
 
 **Tre korrigeringar mot befintligt underlag:**
 
 - `lagsta-avgifter-och-kostnadsoptimering.md` och `rikatillsammans-indexfonder-och-etfer.md` anger 0,09 %. Avanzas eget dokument säger 0,08 % i förvaltningsavgift.
 - Samma dokument anger indexet som ”Morningstar DM World Index”. Det korrekta namnet innehåller Paris Aligned och ett hållbarhetsurval, vilket betyder att fonden medvetet avviker från bred marknadsvikt. Det ska synas i marknadstäckningskolumnen.
 - [Småspararguiden](https://www.smaspararguiden.se/blogg/sa-hittar-du-den-basta-globala-indexfonden/), uppdaterad 2026-04-21, anger 0,20 % för Avanza Global. Den uppgiften är inaktuell. Det illustrerar varför även en ansedd sekundärkälla behöver kontrolldatum.
+
+Uppdelningen bekräftas därmed på båda hållen: 0,08 % i förvaltningsavgift enligt fondbolagets eget dokument, 0,10 % i total avgift enligt Avanzas fondlista. Mellanskillnaden är övriga kostnader, och det är precis de två fält jämförelsetabellen ska hålla isär.
+
+Ägarantalet 750 389 avlästes 2026-09-08 och är högre än de 718 795 som Placera rapporterade 2026-07-31. Siffran rör sig, så den behöver eget kontrolldatum om den publiceras.
 
 **Att utreda:** broschyren beskriver användning av OTC-derivat i förvaltningen. Fonden har tidigare varit matarfond. Vad det innebär för replikering och motpartsrisk måste läsas noggrant innan raden publiceras, eftersom det inte är samma sak som fysisk replikering.
 
