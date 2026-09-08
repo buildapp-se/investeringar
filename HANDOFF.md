@@ -1,8 +1,8 @@
 ---
 schemaVersion: 1
 status: active
-currentGoal: Slutföra produktgrillningen och förbereda en konkret designbrief för investeringstjänsten.
-nextAction: Läs CONTEXT.md och BACKLOG.md, utred kvarvarande faktafrågor och återuppta bara materiella öppna produktbeslut efter Q56.
+currentGoal: Faktakontrollera underlaget så att prototypens demodata kan bytas mot verifierade uppgifter.
+nextAction: Kör design/prototyp (node server.mjs), stäm av den mot CONTEXT.md och börja på P1-faktakontrollen, med Fondos prislista först.
 blockers: []
 reviewedAt: 2026-09-08
 ---
@@ -13,7 +13,7 @@ reviewedAt: 2026-09-08
 
 Produktintervjun har nått Q56, godkänd: Patriks egna produkt- och leverantörskopplingar redovisas utan belopp. Den samlade, korrigerade kravbilden finns i CONTEXT.md. Fortsätt inte att fråga om redan godkända val. Användaren har blivit frustrerad över att agenten tappat fortsättningen och upprepat enkla bekräftelsefrågor.
 
-Projektmappen innehåller dokument och research. Ingen webbapp, git-initiering, deployment, mejlkonfiguration eller design har utförts av denna session. Fyndens externa fakta är inte generellt verifierade. Antigravity har arbetat parallellt i researchmappen; läs aktuell fil före ändring.
+Projektmappen är nu ett git-repo med tre commits. En designprototyp finns i `design/prototyp/`: Stitch Förslag E som ytskikt på designriktning 07:s produktlogik, med enbart demodata. Avgiftsberäkningen i `avgifter.js` är kontrollerad mot räkneexemplet i `docs/research/kostnadsmetod.md` och testet körs med `node test-avgifter.mjs`. Ingen deployment, hosting eller mejlkonfiguration har utförts, och inget samlat bygggodkännande för själva tjänsten har getts. Fyndens externa fakta är inte generellt verifierade. Antigravity har arbetat parallellt i researchmappen; läs aktuell fil före ändring.
 
 ## Nästa steg
 
