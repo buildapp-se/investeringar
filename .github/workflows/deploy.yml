@@ -29,6 +29,13 @@ jobs:
       - run: node site/test-avgifter.mjs
       - run: node site/test-belaning.mjs
       - run: python verktyg/fi-fondinnehav.py --test
+      # GitHub Pages serverar data.js med max-age=14400, alltsa fyra timmar,
+      # medan index.html far tio minuter. En besokare kan darfor se en ny sida
+      # med gamla siffror, och siffror med kalla och kontrolldatum ar hela
+      # tjansten. Versionsmarkningen med commitens sha gor varje publicering
+      # till en ny URL for modulerna och stilmallen.
+      - name: Versionsmärk moduler och stilmall
+        run: sed -i -E "s|(from '\./[a-z-]+\.js)'|\1?v=${GITHUB_SHA}'|g; s|(href=\"stil\.css)\"|\1?v=${GITHUB_SHA}\"|g" site/*.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
