@@ -202,14 +202,19 @@ De hör inte hemma i jämförelsetabellen, eftersom tjänsten jämför kostnad f
 
 ## Kvar att verifiera innan publicering
 
-1. ISIN för Avanza Global, DNB Global Indeks S, Storebrand Global All Countries och Swedbank Robur Access Global.
-2. Aktuell KID för DNB Global Indeks S, inklusive handelsvaluta för just den andelsklassen.
-3. Gällande, inte högsta, förvaltningsavgift för Storebrand Global All Countries.
-4. Total årlig avgift, inte bara förvaltningsavgift, för samtliga fem fonder.
-5. Amundis eget faktablad för WEBN, för att avgöra frågan om småbolag ingår.
-6. Avanza Globals användning av OTC-derivat och vad den innebär för replikering och motpartsrisk.
-7. Samtliga ETF-rader mot emittentens faktablad, inte bara justETF.
-8. Köpbarhet och prislista per leverantör: Avanza, Nordnet, Montrose, SAVR och Fondo. Ingen av dessa är kontrollerad i den här omgången, och köpvägskolumnerna kan därför inte fyllas i.
+Uppdaterad 2026-09-09 efter kontroll mot FI:s fondinnehavsregister och mot
+leverantörernas egna prislistor. Se `fi-fondinnehav.md` och `kopvagar.md`.
+
+1. ~~ISIN för Avanza Global, Storebrand Global All Countries och Swedbank Robur Access Global.~~ **Klart**, ur FI:s register: SE0011527613, SE0000671919 och SE0007074059. Kvar: **ISIN för DNB Global Indeks S**, som är norsk och därför inte finns i registret.
+2. Aktuell KID för DNB Global Indeks S, inklusive handelsvaluta för just den andelsklassen. Kvar, och viktigare än det såg ut: handlas fonden i NOK kostar den 0,25 % i automatisk valutaväxling per riktning hos Avanza, som inte tillåter manuell växling på fonder.
+3. ~~Gällande, inte högsta, förvaltningsavgift för Storebrand Global All Countries.~~ **Klart**: 0,30 % för klass A SEK enligt fondbolagets egen rapport till FI, alltså samma som fondbestämmelsernas tak. Ny fråga i stället: C-klassen ligger på 0,15 % och bör utredas, C-klasser har normalt villkor en privatsparare inte uppfyller.
+4. Total årlig avgift, inte bara förvaltningsavgift, för samtliga fem fonder. Kvar. FI redovisar förvaltningsavgift, inte årlig avgift inklusive transaktionskostnader, så den skillnaden måste fortfarande hämtas ur faktablad.
+5. Amundis eget faktablad för WEBN, för att avgöra frågan om småbolag ingår. Kvar.
+6. Avanza Globals användning av OTC-derivat och vad den innebär för replikering och motpartsrisk. Kvar.
+7. Samtliga ETF-rader mot emittentens faktablad, inte bara justETF. Kvar.
+8. ~~Prislista per leverantör.~~ **Klart** för Avanza, Nordnet, Montrose och SAVR, lästa hos var och en 2026-09-09. Fondo är avfört: bolaget säljer inte längre till privatpersoner. **Köpbarhet per fond och leverantör är däremot inte kontrollerad**, och det är nu det som blockerar den gröna markeringen: tjänsten utser ingen billigaste köpväg förrän det är belagt att fonden faktiskt går att köpa där.
+9. Ny punkt: fondens avgift **hos SAVR och Montrose** per fond. Båda betalar tillbaka fondprovisionen och tar en egen avgift i stället, så listpriset är inte vad kunden betalar där.
+10. Ny punkt: Länsförsäkringars jämförelseindex. Fondbolagets fondlista och fondbolagets egen rapport till FI anger två olika index för samma ISIN. Måste avgöras mot informationsbroschyren.
 
 ## Anmärkning om det tidigare underlaget
 
