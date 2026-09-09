@@ -41,7 +41,7 @@
     <div><strong>Inte ett nästa steg</strong>Det här är ett annat behov än att välja en billig global fond, inte en högre nivå.</div>
     <div><strong>Hypotetiska exempel</strong>Belåningen räknas på exempelportföljer, aldrig på dina egna innehav.</div>
     <div><strong>Inga kontokopplingar</strong>Ingen inloggning, ingen bankkoppling, inga sparade innehav.</div>
-    <div><strong>Under uppbyggnad</strong>ETF-uppgifterna kommer från justETF och är inte kontrollerade mot emittentens faktablad. Lånevillkoren är inte verifierade alls.</div>
+    <div><strong>Under uppbyggnad</strong>ETF-uppgifterna är kontrollerade mot emittentens egen dokumentation. Lånevillkoren är inte verifierade alls.</div>
   </div>
 </section>
 
@@ -49,23 +49,37 @@
 <section class="wrap bred" id="etfer">
   <p class="ogonbryn">Kandidater</p>
   <h2 class="rubrik2">Börshandlade fonder i urvalet</h2>
-  <p class="underrubrik">Exponeringen skiljer sig mellan de här produkterna och mellan dem och fonderna på jämförelsesidan. Därför rankas de inte mot varandra på kostnad. Ingen avgift nedan är kontrollerad mot faktablad ännu.</p>
+  <p class="underrubrik">Exponeringen skiljer sig mellan de här produkterna och mellan dem och fonderna på jämförelsesidan. Därför rankas de inte mot varandra på kostnad. Uppgifterna kommer från emittentens egen dokumentation, kontrollerad <span data-kontrolldatum>–</span>.</p>
+
+  <div class="panel" style="margin-bottom:22px">
+    <p class="mening">
+      Ett köp på <input id="e-belopp" type="number" min="100" max="10000000" step="500" value="2000" aria-label="Köpbelopp i kronor"> kr,
+      med <input id="e-sats" class="kort" type="number" min="0" max="20" step="0.5" value="7" aria-label="Räknad avkastning i procent per år"> % räknad avkastning per år.
+    </p>
+    <div class="scenariorad">
+      <div class="flikgrupp" role="group" aria-label="Sparform">
+        <button type="button" class="flik" data-lage="manad" aria-pressed="true">Varje månad</button>
+        <button type="button" class="flik" data-lage="engang" aria-pressed="false">En enda gång</button>
+      </div>
+      <span class="vaxa"></span>
+      <button type="button" class="infoknapp" popovertarget="pop-kopkostnad">Hur räknas kostnaden per köp?</button>
+    </div>
+  </div>
 
   <div class="tabellhalla">
     <table>
       <thead><tr>
         <th scope="col">ETF</th>
-        <th scope="col">Index</th>
         <th scope="col">Marknadstäckning</th>
         <th scope="col">Löpande avgift</th>
-        <th scope="col">Replikering</th>
-        <th scope="col">Handelsvaluta</th>
-        <th scope="col">Köpbar i svensk ISK</th>
+        <th scope="col">Handelsplats</th>
+        <th scope="col">Kostnad per köp, billigaste verifierade</th>
+        <th scope="col">Brytpunkt mot jämförbar fond</th>
       </tr></thead>
       <tbody id="etfrader"></tbody>
     </table>
   </div>
-  <p class="minst" style="color:var(--ink-3);margin-top:16px">Utländsk produktsida bevisar inte köpbarhet på svenskt ISK. Varje rad kräver faktablad, ISIN, andelsklass, handelsplats och leverantörens prislista innan en siffra sätts in.</p>
+  <p class="minst" style="color:var(--ink-3);margin-top:16px">Alla fyra handlas på Xetra i euro, inte i sin egen basvaluta. Handelsplatsen avgör courtaget: minimicourtaget varierar från 1 krona till 39 kronor beroende på börs, och på ett litet månadsköp är det golvet hela kostnaden. Montrose och SAVR säljer båda ETF:er men har inget publikt utbud att söka i, så där är köpbarheten okänd och de kan inte utses till billigaste köpväg.</p>
 </section>
 </div>
 
@@ -194,6 +208,15 @@
   </div>
 </footer>
 
+<div popover id="pop-kopkostnad">
+  <h4>Kostnaden för ett ETF-köp</h4>
+  <p>Två poster tas ut varje gång du köper: courtage till leverantören och valutaväxling, eftersom ETF:en handlas i euro medan pengarna står i kronor. Ingen av dem tas ut på en vanlig fond i kronor.</p>
+  <p><strong>Courtaget har ett golv.</strong> 0,25 % av 2 000 kronor är fem kronor, men lägsta courtage kan vara nitton. Då är det golvet som gäller, och att jämföra leverantörer på procentsatsen ensam ger fel svar. Golvet sätts per börs, så handelsplatsen avgör priset.</p>
+  <p>Avanza tar sitt golv i euro. För att kunna jämföras med de svenska golven räknas det om till kronor med Riksbankens dagskurs, som rör sig från dag till dag. Det är ett räkneantagande, inte en egenskap hos produkten.</p>
+  <p>Manuell växling är billigare hos både Avanza och Nordnet, men kräver att du växlar själv i förväg. Beräkningen använder den automatiska växlingen, alltså det som händer om du bara lägger en order.</p>
+  <button type="button" class="knapp" popovertarget="pop-kopkostnad" popovertargetaction="hide">Stäng</button>
+</div>
+
 <div popover id="pop-brytpunkt">
   <h4>Så räknas brytpunkten</h4>
   <p>Skillnaden i årlig avgift är det du tjänar varje år. Växling och courtage är det du betalar vid varje köp. Brytpunkten är den tidpunkt då det du tjänat överstiger det du betalat.</p>
@@ -211,11 +234,11 @@
 </div>
 
 <script type="module">
-import { belaningslage, brytpunkt } from './belaning.js';
+import { belaningslage, brytpunkt, brytpunktScenario, kopkostnad } from './belaning.js';
 import { kronor, procent } from './avgifter.js';
 import { startaTema, visaDatum } from './gemensamt.js';
 import { startaGrind } from './grind.js';
-import { ETFER, KALLOR, SENAST_KONTROLLERAD } from './data.js';
+import { COURTAGE, ETFER, FONDER, KALLOR, LEVERANTORER, SENAST_KONTROLLERAD, VAXELKURS, VAXLING } from './data.js';
 
 startaGrind();
 startaTema();
@@ -223,29 +246,218 @@ visaDatum('idag');
 for (const el of document.querySelectorAll('[data-kontrolldatum]')) el.textContent = SENAST_KONTROLLERAD;
 
 const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-const ejChip = '<span class="status ovsakerhet">Ej verifierat</span>';
+const chip = (klass, text) => `<span class="status ${klass}">${esc(text)}</span>`;
+const ejChip = chip('ovsakerhet', 'Ej verifierat');
 const visa = (u, fmt) => u === null || u === undefined ? ejChip : (fmt ? fmt(u.varde) : esc(u.varde));
+const antal = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+const rada = namn => namn.length < 2 ? (namn[0] ?? '') : namn.slice(0, -1).join(', ') + ' och ' + namn.at(-1);
 
-/** ETF-raderna. Samtliga uppgifter kommer fran justETF, som ar sekundarkalla. */
-function ritaEtfer() {
-  document.getElementById('etfrader').innerHTML = ETFER.map(e => {
-    const kalla = e.arligAvgift ? KALLOR[e.arligAvgift.kalla] : null;
-    const anm = e.anmarkning ? `<span class="produktmeta">${esc(e.anmarkning)}</span>` : '';
-    return `<tr class="produkt">
-      <td><span class="produktnamn">${esc(e.namn)}</span><span class="produktmeta">${esc(e.ticker)} · ${visa(e.isin)}</span>${anm}</td>
-      <td class="text liten dampad">${visa(e.index)}</td>
-      <td class="text liten dampad">${visa(e.tackning)}</td>
-      <td>${visa(e.arligAvgift, v => procent(v))}${kalla ? `<span class="billigastetikett" style="color:var(--ink-3)">${esc(kalla.namn)} · ${esc(kalla.datum)}</span>` : ''}</td>
-      <td>${visa(e.replikering)}</td>
-      <td>${visa(e.valuta)}</td>
-      <td>${ejChip}</td>
-    </tr>`;
-  }).join('');
+function kallhanvisning(uppgift) {
+  const k = uppgift && KALLOR[uppgift.kalla];
+  return k ? `<span class="produktmeta">Källa: <a href="${k.url}" rel="noopener">${esc(k.namn)}</a> · ${esc(k.datum)}</span>` : '';
 }
-ritaEtfer();
 
 const num = id => Number(document.getElementById(id).value);
 const satt = (id, text) => { document.getElementById(id).textContent = text; };
+
+/* Kopscenariot for ETF-tabellen. Lage 'manad' betyder tolv kop om aret av
+   samma belopp, 'engang' ett enda kop. Det ar den skillnaden som avgor om
+   friktionen ar en engangskostnad eller nagot som betalas om och om igen. */
+const STANDARDBELOPP = { manad: 2000, engang: 100000 };
+let lage = 'manad';
+
+const lasKopscenario = () => ({
+  belopp: Math.max(1, num('e-belopp')),
+  raknesats: num('e-sats') / 100,
+  lage,
+});
+
+/**
+ * Vad ett kop kostar hos en leverantor, i kronor och som andel av kopbeloppet.
+ * Avanzas courtagegolv star i euro och rakans om med Riksbankens dagskurs, sa
+ * att golven gar att jamfora med varandra alls.
+ */
+function friktion(leverantorId, belopp) {
+  const c = COURTAGE[leverantorId];
+  const v = VAXLING[leverantorId];
+  if (!c || !v) return null;
+  const kurs = c.lagstaValuta === 'EUR' ? VAXELKURS.EUR.varde : 1;
+  return kopkostnad({
+    belopp,
+    rorligt: c.rorligt.varde,
+    lagsta: c.lagsta.varde * kurs,
+    vaxling: v.automatisk.varde,
+  });
+}
+
+/**
+ * Billigaste kopvag for en ETF. Samma regel som pa fondsidan: en kontrollerad
+ * prislista hos nagon som inte bevisligen saljer produkten ar inget erbjudande,
+ * sa Montrose och SAVR kan inte vinna sa lange deras utbud ar okant.
+ */
+function billigaste(e, belopp) {
+  const kopbara = LEVERANTORER.filter(l => e.kopvagar[l.id] && e.kopvagar[l.id].tillganglig === true && friktion(l.id, belopp));
+  if (kopbara.length === 0) return { vinnare: [], kostnad: null };
+  const kostnader = kopbara.map(l => friktion(l.id, belopp).total);
+  const lagsta = Math.min(...kostnader);
+  return { vinnare: kopbara.filter((l, i) => kostnader[i] === lagsta).map(l => l.id), kostnad: lagsta };
+}
+
+/** Fonden som ETF:ens brytpunkt raknas mot, utpekad per rad i data.js. */
+const jamforbar = e => FONDER.find(f => f.namn === e.jamforbarFond) ?? null;
+
+/**
+ * Brytpunkten for en ETF i det valda kopscenariot, mot den utpekade fonden.
+ * Manadssparande simuleras som tolv kop om aret, engangskop som ett enda.
+ */
+function radBrytpunkt(e, s) {
+  const fond = jamforbar(e);
+  if (!fond || !fond.arligAvgift || !e.arligAvgift) return null;
+  const { vinnare } = billigaste(e, s.belopp);
+  if (vinnare.length === 0) return null;
+  const f = friktion(vinnare[0], s.belopp);
+  const scenario = s.lage === 'manad'
+    ? { engangsinsattning: 0, manadssparande: s.belopp, raknesats: s.raknesats }
+    : { engangsinsattning: s.belopp, manadssparande: 0, raknesats: s.raknesats };
+  return {
+    fond,
+    leverantor: LEVERANTORER.find(l => l.id === vinnare[0]).namn,
+    friktion: f,
+    ...brytpunktScenario({
+      etfArlig: e.arligAvgift.varde,
+      fondArlig: fond.arligAvgift.varde,
+      friktionAndel: f.andel,
+      scenario,
+    }),
+  };
+}
+
+const arText = ar => ar.toFixed(1).replace('.', ',') + ' år';
+
+function etfRadHtml(e, s, i) {
+  const detaljId = `etfdetalj-${i}`;
+  const { vinnare, kostnad } = billigaste(e, s.belopp);
+  const b = radBrytpunkt(e, s);
+
+  const kostnadCell = vinnare.length === 0
+    ? `<td>${chip('ovsakerhet', 'Utses inte')}<span class="produktmeta">Ingen leverantör där ETF:en bevisligen går att köpa</span></td>`
+    : `<td class="billigast">${kronor(kostnad)}<span class="billigastetikett">${esc(rada(vinnare.map(id => LEVERANTORER.find(l => l.id === id).namn)))}</span></td>`;
+
+  let brytCell;
+  if (b === null) {
+    brytCell = `<td>${chip('ovsakerhet', 'Beräknas inte')}<span class="produktmeta">Underlaget räcker inte</span></td>`;
+  } else if (b.arTillBrytpunkt === null) {
+    brytCell = `<td>${chip('ovsakerhet', 'Saknas')}<span class="produktmeta">Friktionen hinner inte tjänas in inom ${b.maxAr} år mot ${esc(b.fond.namn)}</span></td>`;
+  } else {
+    const lang = b.arTillBrytpunkt > 20;
+    brytCell = `<td>${arText(b.arTillBrytpunkt)}<span class="produktmeta">${lang ? 'Längre än de flesta behåller ett innehav. ' : ''}Mot ${esc(b.fond.namn)}</span></td>`;
+  }
+
+  return `<tr class="produkt">
+    <td><button type="button" class="expandera" aria-expanded="false" aria-controls="${detaljId}">
+      <span class="pil" aria-hidden="true">›</span>
+      <span><span class="produktnamn">${esc(e.namn)}</span><span class="produktmeta">${esc(e.ticker)} · ${visa(e.isin)}</span></span></button></td>
+    <td class="text liten dampad">${visa(e.tackning)}${e.innehav ? `<span class="produktmeta">${antal(e.innehav.varde)} innehav</span>` : ''}</td>
+    <td>${visa(e.arligAvgift, v => procent(v))}</td>
+    <td>${visa(e.handelsplats)}<span class="produktmeta">Handlas i ${visa(e.handelsvaluta)}</span></td>
+    ${kostnadCell}
+    ${brytCell}
+  </tr>
+  <tr class="detalj" id="${detaljId}" hidden><td class="text" colspan="6">${etfDetaljHtml(e, s)}</td></tr>`;
+}
+
+function etfDetaljHtml(e, s) {
+  const rad = (etikett, uppgift, fmt) => `<div>${etikett}</div><div>${visa(uppgift, fmt)}</div>`;
+  const { vinnare } = billigaste(e, s.belopp);
+
+  const kort = LEVERANTORER.map(l => {
+    const k = e.kopvagar[l.id];
+    const f = friktion(l.id, s.belopp);
+    let innehall;
+    if (k === null || f === null) {
+      innehall = `${ejChip}${l.status ? `<span class="produktmeta">${esc(l.status)}</span>` : ''}`;
+    } else {
+      const c = COURTAGE[l.id];
+      const utbudKalla = k.utbudKalla && KALLOR[k.utbudKalla] ? ` enligt ${esc(KALLOR[k.utbudKalla].namn)}` : '';
+      const utbud = k.tillganglig === true
+        ? `<span class="produktmeta">Finns i utbudet${utbudKalla}</span>`
+        : k.tillganglig === false
+          ? `${chip('ovsakerhet', 'Säljs inte här')}<span class="produktmeta">Ingen träff${utbudKalla}</span>`
+          : `<span class="produktmeta">Utbudet ej kontrollerat, så köpvägen kan inte utses till billigast</span>`;
+      const golv = c.lagstaValuta === 'EUR'
+        ? `${antal(c.lagsta.varde)} EUR, cirka ${kronor(c.lagsta.varde * VAXELKURS.EUR.varde)}`
+        : kronor(c.lagsta.varde);
+      innehall = `<div>${kronor(f.total)} per köp</div>
+        <span class="produktmeta">Courtage ${kronor(f.courtage)}, växling ${kronor(f.vaxlingskostnad)}</span>
+        <span class="produktmeta">${procent(c.rorligt.varde)} i courtage, lägst ${esc(golv)}${c.klass ? `, klass ${esc(c.klass)}` : ''}</span>
+        <span class="produktmeta">Växling ${procent(VAXLING[l.id].automatisk.varde)} automatiskt</span>
+        ${utbud}${c.anmarkning ? `<span class="produktmeta">${esc(c.anmarkning)}</span>` : ''}${kallhanvisning(c.rorligt)}`;
+    }
+    const markerad = vinnare.includes(l.id) ? ' vinnare billigast' : '';
+    return `<div class="kopvag${markerad}"><div class="namn"><span>${esc(l.namn)}</span></div>
+      <div class="minst" style="margin-top:8px">${innehall}</div></div>`;
+  }).join('');
+
+  const b = radBrytpunkt(e, s);
+  let brytpunktText = '';
+  if (b !== null) {
+    const kop = s.lage === 'manad' ? 'tolv gånger om året' : 'en enda gång';
+    const utfall = b.arTillBrytpunkt === null
+      ? `<p class="liten"><strong>Ingen brytpunkt inom ${b.maxAr} år.</strong> ${procent(b.friktion.andel)} av varje köp går till courtage och växling, och den kostnaden betalas ${kop}. Avgiftsskillnaden på ${procent(Math.abs(b.arligBesparing))} per år hinner inte ikapp.</p>`
+      : `<p class="liten"><strong>Brytpunkt efter ${arText(b.arTillBrytpunkt)}.</strong> Fram till dess är ${esc(b.fond.namn)} billigare totalt, trots sin högre löpande avgift. ${procent(b.friktion.andel)} av varje köp går till courtage och växling, betalt ${kop}, mot en avgiftsskillnad på ${procent(b.arligBesparing)} per år.</p>`;
+    brytpunktText = `<p class="ogonbryn" style="margin-top:22px">Brytpunkt mot ${esc(b.fond.namn)}</p>
+      ${utfall}
+      <p class="minst" style="color:var(--ink-3)">Räknat hos ${esc(b.leverantor)}, den billigaste köpväg vi kunnat verifiera för den här ETF:en, med ${procent(s.raknesats, 1)} räknad avkastning per år. Fonden jämförs på sin egen årliga avgift; hos Avanza och Nordnet tillkommer ingen plattformsavgift. Jämförelsen gäller kostnad, inte exponering: ${esc(e.namn)} och ${esc(b.fond.namn)} följer olika index och är inte utbytbara.</p>`;
+  }
+
+  const anm = e.anmarkning ? `<p class="liten" style="margin-top:12px;max-width:76ch">${esc(e.anmarkning)}</p>` : '';
+
+  return `<p class="ogonbryn">Uppgifter om ETF:en</p>
+    <div class="uppdelning">
+      ${rad('ISIN', e.isin)}
+      ${rad('Index', e.index)}
+      ${rad('Löpande avgift', e.arligAvgift, v => procent(v))}
+      ${rad('Innehav enligt emittenten', e.innehav, v => `${antal(v)} bolag`)}
+      ${rad('Replikering', e.replikering)}
+      ${rad('Handelsplats', e.handelsplats)}
+      ${rad('Handelsvaluta', e.handelsvaluta)}
+      ${rad('Fondens basvaluta', e.basvaluta)}
+      ${rad('Hemvist', e.hemvist)}
+      ${rad('Utdelning', e.utdelning)}
+    </div>
+    ${kallhanvisning(e.arligAvgift)}
+    ${anm}
+    <p class="ogonbryn" style="margin-top:22px">Kostnad per köp hos leverantörerna</p>
+    <div class="kopvagar">${kort}</div>
+    <p class="minst" style="color:var(--ink-3)">Till skillnad från fonderna finns ingen årlig plattformsavgift att jämföra här. Kostnaden tas ut vid varje köp, som courtage och valutaväxling, och den beror på hur stort köpet är. Montrose och SAVR betalar tillbaka fondprovision på fondsidan, vilket inte påverkar en ETF.</p>
+    ${brytpunktText}
+    <p style="margin-top:14px"><a class="minst" href="mailto:kontakt@buildapp.se?subject=Fel i raden ${encodeURIComponent(e.namn)}">Rapportera fel i raden</a></p>`;
+}
+
+function ritaEtfer() {
+  const s = lasKopscenario();
+  document.getElementById('etfrader').innerHTML = ETFER.map((e, i) => etfRadHtml(e, s, i)).join('');
+  for (const knapp of document.querySelectorAll('#etfrader .expandera')) {
+    knapp.addEventListener('click', () => {
+      const rad = document.getElementById(knapp.getAttribute('aria-controls'));
+      const oppen = knapp.getAttribute('aria-expanded') === 'true';
+      knapp.setAttribute('aria-expanded', String(!oppen));
+      rad.hidden = oppen;
+    });
+  }
+}
+
+for (const knapp of document.querySelectorAll('[data-lage]')) {
+  knapp.addEventListener('click', () => {
+    lage = knapp.dataset.lage;
+    document.getElementById('e-belopp').value = STANDARDBELOPP[lage];
+    for (const b of document.querySelectorAll('[data-lage]')) b.setAttribute('aria-pressed', String(b.dataset.lage === lage));
+    ritaEtfer();
+  });
+}
+for (const id of ['e-belopp', 'e-sats']) document.getElementById(id).addEventListener('input', ritaEtfer);
+
+ritaEtfer();
 
 function ritaBrytpunkt() {
   const r = brytpunkt({

@@ -450,7 +450,9 @@ function detaljHtml(p, s) {
         : '';
       innehall = `<div>${procent(k.plattformsavgift)} plattformsavgift</div>${total}${utbud}${rabatt}${kallhanvisning(k)}`;
     }
-    const markerad = vinnare.includes(l.id) ? ' billigast' : '';
+    // Bade vinnare och billigast: den forsta ger kortets ram och markering,
+    // den andra fargar texten. Utan vinnare syntes markeringen inte alls.
+    const markerad = vinnare.includes(l.id) ? ' vinnare billigast' : '';
     return `<div class="kopvag${markerad}"><div class="namn"><span>${l.namn}${marke}</span></div>
       <div class="minst" style="margin-top:8px">${innehall}</div></div>`;
   }).join('');
