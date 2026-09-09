@@ -6,3 +6,4 @@ Thumbs.db
 prototyp-*.png
 design/canvas/*.html
 !design/canvas/*.dc.html
+verktyg/.cache/
