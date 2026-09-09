@@ -13,7 +13,7 @@ och avför den femte.
 | Avanza | 0 % | 0,25 % per riktning | 0,125 % per riktning, gäller ej fonder | Enligt courtageklass, 0,25 % Start/Mini |
 | Nordnet | 0 % | 0,25 % | 0,075 % via valutakonto | Enligt courtageklass, 0,25 % Mini |
 | Montrose Access | 0,05 % vid fondavgift ≤ 0,20 %, annars 0,10 % | 0,12 %, men 0,3 % på utländska fonder | Ingår | 0,15 % |
-| SAVR | 0,06 % för indexfonder, inbakad i priset | 0,19 % | Uppgift saknas | Ej kontrollerat |
+| SAVR | 0,06 % för indexfonder, inbakad i priset | 0,19 % | Uppgift saknas | 0,20 % i spannet 501–20 000 kr, trappa |
 | Fondo | Ingen konsumenttjänst | Ingår ej | Ingår ej | Ingår ej |
 
 Plattformsavgiften är inte hela bilden. Montrose och SAVR betalar tillbaka
@@ -175,6 +175,57 @@ faktablad, och ska bytas mot faktabladets när det kontrollerats.
 i SEK hos Avanza. Den automatiska växlingen på 0,25 % per riktning slår alltså
 inte till, vilket var den enskilt största okända posten i jämförelsen.
 
+## ETF: handelsplats, courtage och utbud, kontrollerat 2026-09-09
+
+Handelsplatsen är avgjord, och den är densamma för alla fyra: **Xetra, i euro**.
+Ingen av dem handlas i sin egen basvaluta, som är USD för samtliga.
+
+| ETF | Ticker på Xetra | Handelsvaluta | Avanza | Nordnet |
+| --- | --- | --- | --- | --- |
+| Amundi Prime All Country World Acc | WEBN | EUR | Ja | Ja |
+| Vanguard FTSE All-World Acc | VWCE | EUR | Ja | Ja |
+| SPDR MSCI ACWI IMI Acc | SPYI | EUR | Ja | Ja |
+| iShares Core MSCI World Acc | EUNL | EUR | Ja | Ja |
+
+Belagt genom sökning på ISIN i Avanzas egen värdepapperssökning, som svarar med
+marknadsplats Xetra och pris i EUR för var och en, och i Nordnets ETF-lista, vars
+egna instrumentsidor heter `...-webn-xeta`, `...-vwce-xeta`, `...-spyi-xeta` och
+`...-eunl-xeta`. Emittenternas egna dokument bekräftar Xetra-noteringen: Amundis
+månadsrapport listar WEBN GY i EUR, Vanguards faktablad VWCE på Deutsche Börse i
+EUR, och SSGA anger Deutsche Börse som primär handelsplats för SPYI.
+
+Samma ETF:er handlas under andra tickrar i andra valutor på andra börser, till
+exempel VWRA i USD och VWRP i pund i London. **Det är inte samma courtage.** Den
+som jämför en ETF måste jämföra den notering leverantören faktiskt handlar.
+
+### Courtage på Xetra, per leverantör
+
+| Leverantör | Klass | Rörligt | Lägsta | Växling |
+| --- | --- | ---: | ---: | ---: |
+| Avanza | Start och Mini | 0,25 % | 1 EUR | 0,25 % |
+| Nordnet | Mini | 0,25 % | 9 SEK | 0,25 % |
+| Montrose | Access | 0,15 % | 19 SEK | 0,12 % |
+| SAVR | – | 0,20 % | 1 SEK | 0,19 % |
+
+Avanzas siffra för Tyskland gäller uttryckligen "Aktier, ETF:er och certifikat"
+och är läst i prislistan för utlandshandel. SAVR:s courtage är en trappa som är
+samma oavsett marknad: 1 kr upp till 500 kr, 0,20 % till 20 000 kr, 0,15 % till
+50 000 kr, 0,10 % till 100 000 kr och 0,05 % däröver, som mest 99 kr. Källa:
+[Priser aktier](https://www.savr.com/sv/priser-aktier), läst 2026-09-09.
+
+**Golvet är hela poängen.** 0,25 % av ett månadsköp på 2 000 kr är fem kronor,
+men golvet är nio hos Nordnet, elva hos Avanza omräknat från euro och nitton hos
+Montrose. Den som jämför leverantörer på procentsatsen får därför fel svar för
+just den kund tjänsten vänder sig till. Med EUR/SEK 11,1520 enligt Riksbanken
+2026-09-08 blir kostnaden för ett köp på 2 000 kr: Nordnet 14 kr, Avanza 16 kr,
+Montrose 21 kr och SAVR 8 kr. Vid 100 000 kr slår den rörliga satsen igenom i
+stället, och Avanza och Nordnet landar båda på 500 kr.
+
+Montrose och SAVR säljer båda ETF:er, men har inget publikt utbud att söka i, så
+det är okänt om de fyra går att köpa där. De kan därför inte utses till billigaste
+köpväg, precis som på fondsidan. SAVR:s låga siffra är alltså ett pris utan
+belagt erbjudande.
+
 ## Kvar att kontrollera
 
 1. Fondens avgift **hos SAVR** per fond i urvalet. Kräver inloggning; deras publika
@@ -182,7 +233,12 @@ inte till, vilket var den enskilt största okända posten i jämförelsen.
    Länsförsäkringar som inte stämmer mot FI:s register.
 2. Fondens avgift **hos Montrose** per fond, samt om fondprovisionsåterbetalningen
    sänker den redovisade avgiften eller betalas ut separat.
-3. Utbudet hos Montrose och SAVR. Så länge det är okänt kan de inte vinna en
-   köpvägsjämförelse, och deras totaler räknas dessutom på listpris och är för höga.
-4. Handelsplats per ETF, eftersom Montrose minimicourtage varierar från 1 SEK till
-   39 SEK beroende på börs.
+3. Utbudet hos Montrose och SAVR, för både fonder och ETF:er. Så länge det är okänt
+   kan de inte vinna en köpvägsjämförelse, och deras fondtotaler räknas dessutom på
+   listpris och är för höga.
+4. ~~Handelsplats per ETF.~~ Klart, se avsnittet ovan: Xetra i euro för alla fyra.
+5. Nytt: courtagefritt månadssparande. Både Avanza och Nordnet erbjuder någon form
+   av automatiskt månadssparande i ETF:er, och forumtrådar påstår att köpcourtaget
+   då faller bort medan växlingen står kvar. Om det stämmer flyttar det brytpunkten
+   påtagligt. Villkoren är inte lästa hos någon av dem och siffrorna ovan förutsätter
+   en vanlig order.
