@@ -1,7 +1,7 @@
 // Kontroll av belanings- och brytpunktsberakningen. Kors med: node test-belaning.mjs
 
 import { strict as assert } from 'node:assert';
-import { belaningslage, brytpunkt } from './belaning.js';
+import { belaningslage, brytpunkt, brytpunktScenario, kopkostnad } from './belaning.js';
 
 let fel = 0;
 function provar(namn, fn) {
@@ -84,6 +84,73 @@ provar('storre avgiftsskillnad ger tidigare brytpunkt', () => {
 provar('ogiltiga varden kastar RangeError', () => {
   assert.throws(() => brytpunkt({ etfArlig: -0.001, fondArlig: 0.002, friktionPerKop: 0.005, kopPerAr: 1 }), RangeError);
   assert.throws(() => brytpunkt({ etfArlig: 0.001, fondArlig: 0.002, friktionPerKop: 0.005, kopPerAr: 0 }), RangeError);
+});
+
+console.log('\nKopkostnad');
+
+provar('golvet slar igenom pa ett litet kop', () => {
+  // 0,25 procent av 2 000 kr ar 5 kr, men Montrose golv i Tyskland ar 19 kr.
+  const r = kopkostnad({ belopp: 2000, rorligt: 0.0025, lagsta: 19, vaxling: 0 });
+  assert.equal(r.courtage, 19);
+});
+
+provar('den rorliga satsen tar over nar kopet ar stort nog', () => {
+  const r = kopkostnad({ belopp: 100000, rorligt: 0.0025, lagsta: 19, vaxling: 0 });
+  assert.equal(r.courtage, 250);
+});
+
+provar('vaxlingen laggs till courtaget och andelen speglar totalen', () => {
+  const r = kopkostnad({ belopp: 10000, rorligt: 0.0025, lagsta: 9, vaxling: 0.0025 });
+  assert.equal(r.total, 50);
+  assert.equal(r.andel, 0.005);
+});
+
+provar('ogiltiga varden kastar RangeError', () => {
+  assert.throws(() => kopkostnad({ belopp: 0, rorligt: 0.0025, lagsta: 9, vaxling: 0.0025 }), RangeError);
+  assert.throws(() => kopkostnad({ belopp: 1000, rorligt: -0.01, lagsta: 9, vaxling: 0.0025 }), RangeError);
+});
+
+console.log('\nBrytpunkt for ett helt scenario');
+
+const engang = { engangsinsattning: 100000, manadssparande: 0, raknesats: 0.07 };
+const manad = { engangsinsattning: 0, manadssparande: 2000, raknesats: 0.07 };
+
+provar('utan friktion gar den billigare ETF:en om direkt', () => {
+  const r = brytpunktScenario({ etfArlig: 0.0007, fondArlig: 0.0032, friktionAndel: 0, scenario: engang });
+  assert.ok(r.arTillBrytpunkt !== null && r.arTillBrytpunkt <= 1 / 12 + 1e-9);
+});
+
+provar('engangsinsattning: friktionen tjanas in efter ett antal ar', () => {
+  const r = brytpunktScenario({ etfArlig: 0.0007, fondArlig: 0.0032, friktionAndel: 0.008, scenario: engang });
+  assert.ok(r.arTillBrytpunkt > 2 && r.arTillBrytpunkt < 5);
+});
+
+provar('dyrare ETF hinner aldrig ikapp', () => {
+  const r = brytpunktScenario({ etfArlig: 0.0020, fondArlig: 0.0010, friktionAndel: 0.005, scenario: engang });
+  assert.equal(r.arTillBrytpunkt, null);
+});
+
+provar('manadssparande: friktionen skjuter upp brytpunkten men tar inte bort den', () => {
+  // Varje ny insattning betalar friktion, men gamla andelar gor det inte, sa
+  // avgiftsskillnaden hinner ikapp till slut. Det ar skillnaden mot brytpunkt().
+  const r = brytpunktScenario({ etfArlig: 0.0007, fondArlig: 0.0032, friktionAndel: 0.008, scenario: manad });
+  const engangsvar = brytpunktScenario({ etfArlig: 0.0007, fondArlig: 0.0032, friktionAndel: 0.008, scenario: engang });
+  assert.ok(r.arTillBrytpunkt !== null);
+  assert.ok(r.arTillBrytpunkt > engangsvar.arTillBrytpunkt);
+});
+
+provar('hog friktion vid manadssparande ger ingen brytpunkt inom horisonten', () => {
+  const r = brytpunktScenario({ etfArlig: 0.0007, fondArlig: 0.0010, friktionAndel: 0.02, scenario: manad, maxAr: 20 });
+  assert.equal(r.arTillBrytpunkt, null);
+});
+
+provar('ogiltiga varden kastar RangeError', () => {
+  assert.throws(() => brytpunktScenario({ etfArlig: 0.0007, fondArlig: 0.0032, friktionAndel: 1, scenario: engang }), RangeError);
+  assert.throws(() => brytpunktScenario({ etfArlig: -0.001, fondArlig: 0.0032, friktionAndel: 0, scenario: engang }), RangeError);
+  assert.throws(() => brytpunktScenario({
+    etfArlig: 0.0007, fondArlig: 0.0032, friktionAndel: 0,
+    scenario: { engangsinsattning: 0, manadssparande: 0, raknesats: 0.07 },
+  }), RangeError);
 });
 
 console.log(fel === 0 ? '\nAlla kontroller gick igenom.' : `\n${fel} kontroll(er) misslyckades.`);
