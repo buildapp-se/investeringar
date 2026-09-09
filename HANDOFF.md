@@ -1,8 +1,8 @@
 ---
 schemaVersion: 1
 status: active
-currentGoal: Kontrollera köpbarhet per fond och leverantör, så att den gröna markeringen kan börja utses, och avgör de kvarvarande faktafrågorna om DNB, WEBN och ETF-raderna.
-nextAction: Kontrollera vilka av fonderna som faktiskt finns i utbudet hos Avanza, Nordnet, Montrose och SAVR, och sätt tillganglig i site/data.js. Priserna är redan lästa. Kör site/ med node server.mjs.
+currentGoal: Kontrollera fondavgiften hos SAVR och Montrose per fond, och avgör de kvarvarande ETF-frågorna mot emittentens faktablad.
+nextAction: Ta reda på vad fonderna faktiskt kostar hos SAVR och Montrose, som båda betalar tillbaka fondprovisionen. Tills dess räknas deras totaler på listpris och är för höga. Kör site/ med node server.mjs, port 4173.
 blockers: []
 reviewedAt: 2026-09-09
 ---
@@ -25,13 +25,13 @@ Tjänsten ligger i `site/`, tre sidor, och körs med `node server.mjs` på port 
 
 ## Nästa steg
 
-1. **Köpbarhet per fond och leverantör.** Detta blockerar allt annat i tabellen. Priserna är kända, men `tillganglig` står null nästan överallt, och tjänsten utser medvetet ingen billigaste köpväg förrän det är belagt att fonden går att köpa där. Ett pris hos någon som inte säljer fonden är inget erbjudande. Avanzas och Nordnets fondsidor renderas med JavaScript och kräver styrd webbläsare.
+1. ~~Köpbarhet per fond och leverantör.~~ Klart för Avanza och Nordnet senare samma dag, se sessionsavsnittet nedan. Kvar: Montrose och SAVR, som inte går att kontrollera utifrån.
 2. **Fondens avgift hos SAVR och Montrose per fond.** Båda betalar tillbaka fondprovisionen och tar en egen avgift i stället, så listpriset är inte vad kunden betalar där. Utan detta är totalen i köpvägskorten för hög för dem.
-3. **DNB Global Indeks S.** ISIN, aktuell KID och framför allt handelsvaluta. Handlas den i NOK kostar den 0,25 % i automatisk valutaväxling per riktning hos Avanza, som inte tillåter manuell växling på fonder. Det är större än hela avgiftsskillnaden mot konkurrenterna.
+3. **DNB Global Indeks S.** ISIN och handelsvaluta är klara: NO0010827280, handlas i SEK. Kvar är fondbolagets egen aktuella KID, eftersom avgifterna i dag kommer från Avanzas fondlista och inte från faktabladet.
 4. **Länsförsäkringars jämförelseindex.** Fondbolagets fondlista och fondbolagets egen rapport till FI anger olika index för samma ISIN. Avgörs mot informationsbroschyren.
 5. **ETF-raderna mot emittentens faktablad**, inklusive frågan om WEBN innehåller småbolag.
 
-Övriga öppna punkter står i `BACKLOG.md`. Ingen ny tjänst, kostnad, hemlighet eller extern publicering är godkänd genom denna överlämning. Ingen hosting är vald och ingenting är publicerat.
+Övriga öppna punkter står i `BACKLOG.md`. Ingen ny tjänst, kostnad eller hemlighet är godkänd genom denna överlämning. Sidan **är** publicerad, bakom grind och märkt som prototyp, se sessionsavsnittet nedan.
 
 ## Val tagna åt Patrik i chunk-läge
 
@@ -40,6 +40,39 @@ Tjänsten ligger i `site/`, tre sidor, och körs med `node server.mjs` på port 
 - **Fondo behålls som rad** med en förklaring i stället för att tas bort tyst, eftersom svenska guider fortfarande pekar dit.
 - **Länken till RikaTillsammans ligger både högt och lågt.** En rad i ingressen, och hela källförteckningen i avsnittet "Vill du läsa mer" efter tabellen. Patrik bad om länken högst upp; invändningen var att en utgående länk som första element skickar bort just den besökare som inte orkar läsa. Detta är kompromissen. Säg till om den ska flyttas.
 - **Metodavsnittet säger nu rakt ut att deklarerad avgift inte är hela kostnaden.** Källskatt beroende på replikering och skillnaden mellan avgift och faktisk indexavvikelse ingår inte i beräkningen, och kan vara större än avståndet mellan två fonder i tabellen. Alternativet var att tiga om det.
+
+## Session 2 samma dag: publicerat bakom grind, och utbudet kontrollerat
+
+Repot ligger nu på `buildapp-se/investeringar`, publikt, och sidan är live på
+**buildapp.se/investeringar** via GitHub Pages. Deploy sker automatiskt vid push
+till `master` och kör testerna först.
+
+Sidan ligger bakom en klientsidesgrind och är märkt som prototyp. **Grinden är
+ingen säkerhet**: sidan är statisk i ett publikt repo, så innehållet går att läsa
+förbi den. Den finns för att en halvfärdig jämförelse av finansiella produkter
+inte ska möta någon som tror att uppgifterna är klara. Ordet ligger som SHA-256 i
+`site/grind.js`, inte i klartext, och står inte i något dokument. Alla tre sidorna
+har `noindex`, eftersom en prototyp inte ska ligga i sökindex när den riktiga
+sidan sedan ska ranka.
+
+Utbudet är kontrollerat genom sökning på ISIN i Avanzas och Nordnets egna
+fondlistor. Alla fem finns hos Avanza. Hos Nordnet finns fyra, och Avanza Global
+saknas, vilket är ett belagt nej. Montrose har ingen publik fondlista och SAVR:s
+fulla utbud kräver inloggning, så där står utbudet fortsatt okänt. Tabellen utser
+därför vinnare på fyra rader, alla oavgjorda mellan Avanza och Nordnet på noll i
+plattformsavgift.
+
+Tre kontrollpunkter föll på köpet: DNB Global Indeks S har ISIN NO0010827280 och
+handlas i SEK trots norsk hemvist, total årlig avgift finns nu för alla fem, och
+Storebrands gällande avgift var redan klar sedan FI-passet.
+
+**Kvar att göra som är känt fel just nu:** Montrose och SAVR betalar tillbaka
+fondprovisionen, så våra totaler för dem är räknade på listpris och är för höga.
+Det står utskrivet i köpvägskorten och under tabellen, men en grön markering kan
+flytta när de siffrorna kommer in.
+
+Repot ligger på branchen `master`, medan övriga repon i orgen använder `main`.
+Bytet blockerades av klassificeraren och är inte gjort.
 
 ## Arbetsyta
 

@@ -143,14 +143,46 @@ Fondo kan inte vara en köpväg i jämförelsen så länge tjänsten inte säljs
 privatpersoner. Raden behålls med förklaring i stället för att tas bort tyst,
 eftersom flera svenska källor fortfarande pekar dit.
 
+## Utbudet per fond, kontrollerat 2026-09-09
+
+Sökt på ISIN i Avanzas och Nordnets egna fondlistor.
+
+| Fond | Avanza | Nordnet | Montrose | SAVR |
+| --- | --- | --- | --- | --- |
+| Länsförsäkringar Global Index | Ja | Ja | Okänt | Ja |
+| DNB Global Indeks S | Ja, handlas i SEK | Ja | Okänt | Okänt |
+| Avanza Global | Ja | **Nej** | Okänt | Okänt |
+| Storebrand Global All Countries A SEK | Ja | Ja | Okänt | Okänt |
+| Swedbank Robur Access Global A | Ja | Ja | Okänt | Okänt |
+
+Nej-et för Avanza Global är belagt: sökning på SE0011527613 i Nordnets fondlista
+ger "Filtreringen gav inga resultat". Det är en annan sak än okänt, och tabellen
+skiljer på de två.
+
+**Montrose och SAVR går inte att kontrollera utifrån.** Montrose har ingen publik
+fondlista, bara en beskrivning av ett urval efter "vad investerare faktiskt
+efterfrågar", vilket betyder att utbudet inte kan antas innehålla våra fonder.
+SAVR visar sex exempelfonder publikt och hänvisar resten till inloggning; att
+Länsförsäkringar Global Index finns hos dem framgår av deras egen prissida.
+
+Avanzas fondlista gav samtidigt **total årlig avgift** för alla fem, alltså inte
+bara förvaltningsavgiften: Länsförsäkringar 0,21 %, DNB Global Indeks S 0,21 %,
+Avanza Global 0,10 %, Storebrand Global All Countries A SEK 0,32 % och Swedbank
+Robur Access Global A 0,24 %. Det är distributörens siffra, inte fondbolagets
+faktablad, och ska bytas mot faktabladets när det kontrollerats.
+
+**DNB-frågan är avgjord.** Andelsklass S har norsk ISIN, NO0010827280, men handlas
+i SEK hos Avanza. Den automatiska växlingen på 0,25 % per riktning slår alltså
+inte till, vilket var den enskilt största okända posten i jämförelsen.
+
 ## Kvar att kontrollera
 
-1. Fondens avgift **hos SAVR** per fond i urvalet, ur SAVR:s fondlista.
+1. Fondens avgift **hos SAVR** per fond i urvalet. Kräver inloggning; deras publika
+   exempel är daterade 2025-04-08 och anger dessutom en ordinarie avgift för
+   Länsförsäkringar som inte stämmer mot FI:s register.
 2. Fondens avgift **hos Montrose** per fond, samt om fondprovisionsåterbetalningen
    sänker den redovisade avgiften eller betalas ut separat.
-3. Köpbarhet per fond och leverantör. Att en leverantör har låga avgifter hjälper
-   inte om fonden inte finns i utbudet.
+3. Utbudet hos Montrose och SAVR. Så länge det är okänt kan de inte vinna en
+   köpvägsjämförelse, och deras totaler räknas dessutom på listpris och är för höga.
 4. Handelsplats per ETF, eftersom Montrose minimicourtage varierar från 1 SEK till
    39 SEK beroende på börs.
-5. Nordnets och Avanzas fondutbud för DNB Global Indeks S, inklusive handelsvaluta,
-   eftersom en fond i NOK utlöser 0,25 % automatisk växling per riktning hos Avanza.
