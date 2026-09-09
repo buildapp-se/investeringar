@@ -435,8 +435,20 @@ function detaljHtml(p, s) {
       innehall = `${ejChip()}${l.status ? `<span class="produktmeta">${esc(l.status)}</span>` : ''}`;
     } else {
       const total = arAktuell(p.arligAvgift) ? `<span class="produktmeta">Totalt ${procent(kopvagTotal(p, k))} med fondavgiften</span>` : '';
-      const utbud = k.tillganglig === true ? '' : `<span class="produktmeta">Utbudet ej kontrollerat</span>`;
-      innehall = `<div>${procent(k.plattformsavgift)} plattformsavgift</div>${total}${utbud}${kallhanvisning(k)}`;
+      const utbudKalla = k.utbudKalla && KALLOR[k.utbudKalla] ? ` enligt ${esc(KALLOR[k.utbudKalla].namn)}` : '';
+      const utbud = k.tillganglig === true
+        ? `<span class="produktmeta">Finns i utbudet${utbudKalla}</span>`
+        : k.tillganglig === false
+          ? `${chip('ovsakerhet', 'Säljs inte här')}<span class="produktmeta">Ingen träff${utbudKalla}</span>`
+          : `<span class="produktmeta">Utbudet ej kontrollerat</span>`;
+      // Montrose och SAVR betalar tillbaka fondprovisionen och tar en egen
+      // avgift i stallet. Fondens avgift dar ar alltsa lagre an listpriset, och
+      // sa lange den inte ar kontrollerad per fond ar var total for hog. Det
+      // maste sta dar siffran star, inte bara i metodtexten.
+      const rabatt = l.aterbetalar
+        ? `<span class="produktmeta">Totalen är räknad på fondens listpris. ${esc(l.namn)} betalar tillbaka fondprovisionen, så den verkliga kostnaden här är sannolikt lägre.</span>`
+        : '';
+      innehall = `<div>${procent(k.plattformsavgift)} plattformsavgift</div>${total}${utbud}${rabatt}${kallhanvisning(k)}`;
     }
     const markerad = vinnare.includes(l.id) ? ' billigast' : '';
     return `<div class="kopvag${markerad}"><div class="namn"><span>${l.namn}${marke}</span></div>
@@ -474,7 +486,7 @@ function detaljHtml(p, s) {
     ${uppdelning}
     <p class="ogonbryn" style="margin-top:22px">Köpvägar hos leverantörerna</p>
     <div class="kopvagar">${kort}</div>
-    <p class="minst" style="color:var(--ink-3)">Prislistorna är lästa hos leverantörerna. Vilka fonder var och en faktiskt säljer är inte kontrollerat, och därför utses ingen billigaste köpväg ännu.</p>
+    <p class="minst" style="color:var(--ink-3)">Billigaste köpväg jämför fondavgift plus plattformsavgift, och bara bland leverantörer där fonden bevisligen finns i utbudet. Montrose och SAVR betalar tillbaka fondprovisionen, vilket sänker fondavgiften hos dem på ett sätt vi ännu inte kontrollerat per fond. Deras totaler är därför för höga, och en markering kan komma att flytta.</p>
     <p style="margin-top:14px"><a class="minst" href="mailto:kontakt@buildapp.se?subject=Fel i raden ${encodeURIComponent(p.namn)}">Rapportera fel i raden</a></p>`;
 }
 
