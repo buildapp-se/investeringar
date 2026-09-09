@@ -26,6 +26,8 @@ export const KALLOR = {
   nordnetPris: { id: 'nordnetPris', namn: 'Nordnets prislista', url: 'https://www.nordnet.se/kundservice/prislista', datum: '2026-09-09', typ: 'primar' },
   montrosePris: { id: 'montrosePris', namn: 'Montrose prislista', url: 'https://www.montrose.io/priser', datum: '2026-09-09', typ: 'primar' },
   savrPris: { id: 'savrPris', namn: 'SAVR, priser fonder', url: 'https://www.savr.com/sv/priser-fonder', datum: '2026-09-09', typ: 'primar' },
+  avanzaUtbud: { id: 'avanzaUtbud', namn: 'Avanzas fondlista, sökning på ISIN', url: 'https://www.avanza.se/fonder/lista.html', datum: '2026-09-09', typ: 'primar' },
+  nordnetUtbud: { id: 'nordnetUtbud', namn: 'Nordnets fondlista, sökning på ISIN', url: 'https://www.nordnet.se/fonder/lista', datum: '2026-09-09', typ: 'primar' },
 };
 
 /** Kontrollerad uppgift. @param {number|string} varde @param {string} kallaId */
@@ -50,13 +52,24 @@ const montroseAvgift = forvaltningsavgift =>
  * leverantorens utbud; en verifierad avgift hos en leverantor som inte saljer
  * fonden far aldrig utse en vinnare.
  */
-const KOPVAG = (plattformsavgift, tillganglig = null) => ({ plattformsavgift: plattformsavgift.varde, kalla: plattformsavgift.kalla, tillganglig });
+const KOPVAG = (plattformsavgift, tillganglig = null, utbudKalla = null) => ({
+  plattformsavgift: plattformsavgift.varde,
+  kalla: plattformsavgift.kalla,
+  tillganglig,
+  utbudKalla,
+});
+
+/** Fonden ar sokt fram i leverantorens egen fondlista pa ISIN och finns dar. */
+const FINNS = (plattformsavgift, utbudKalla) => KOPVAG(plattformsavgift, true, utbudKalla);
+
+/** Sokning pa ISIN i leverantorens egen fondlista gav noll traffar. */
+const SAKNAS = (plattformsavgift, utbudKalla) => KOPVAG(plattformsavgift, false, utbudKalla);
 
 export const LEVERANTORER = [
   { id: 'avanza', namn: 'Avanza', partner: false, status: null },
   { id: 'nordnet', namn: 'Nordnet', partner: false, status: null },
-  { id: 'montrose', namn: 'Montrose', partner: false, status: null },
-  { id: 'savr', namn: 'SAVR', partner: false, status: null },
+  { id: 'montrose', namn: 'Montrose', partner: false, status: null, aterbetalar: true },
+  { id: 'savr', namn: 'SAVR', partner: false, status: null, aterbetalar: true },
   { id: 'fondo', namn: 'Fondo', partner: false, status: 'Säljs inte till privatpersoner. Fondo levererar i dag fondsparande till andra företag via API och tar 0,15 % årlig avgift ur slutkundens depå. Raden står kvar därför att flera svenska guider fortfarande listar Fondo som en köpväg.' },
 ];
 
@@ -79,8 +92,9 @@ export const VAXLING = {
 /**
  * Fonder. `forvaltningsavgift` och `arligAvgift` ar fondens egna avgifter.
  * `kopvagar` ar leverantorens pafyllnad, som ar oberoende av fondavgiften.
- * Prislistorna ar lasta 2026-09-09, men vilka fonder varje leverantor faktiskt
- * saljer ar inte kontrollerat, sa `tillganglig` ar null nastan overallt.
+ * Prislistorna ar lasta 2026-09-09. Utbudet ar sokt pa ISIN i Avanzas och
+ * Nordnets egna fondlistor samma dag. Montrose har ingen publik fondlista och
+ * SAVR:s fulla utbud ligger bakom inloggning, sa dar star `tillganglig` null.
  */
 export const FONDER = [
   {
@@ -98,30 +112,30 @@ export const FONDER = [
     belaningsgrad: K(0.85, 'nordnetLf'),
     anmarkning: 'Fondbolaget anger 0,20 % förvaltningsavgift och 0,21 % årlig avgift. Nordnet visar 0,20 % under etiketten årlig avgift. Samma fond, olika definition. Indexet är omtvistat mellan två förstahandskällor: fondbolagets fondlista anger MSCI World ex Select Securities Climate Action, medan fondbolagets egen rapport till FI anger Morningstar Developed Markets Top value.',
     kopvagar: {
-      avanza: KOPVAG(K(0, 'avanzaPris')),
-      nordnet: KOPVAG(K(0, 'nordnetPris')),
+      avanza: FINNS(K(0, 'avanzaPris'), 'avanzaUtbud'),
+      nordnet: FINNS(K(0, 'nordnetPris'), 'nordnetUtbud'),
       montrose: KOPVAG(montroseAvgift(0.0020)),
-      savr: KOPVAG(K(0.0006, 'savrPris')),
+      savr: FINNS(K(0.0006, 'savrPris'), 'savrPris'),
       fondo: null,
     },
   },
   {
     namn: 'DNB Global Indeks S',
     typ: 'Indexfond · andelsklass S',
-    isin: null,
-    forvaltningsavgift: INAKTUELL(0.0020, 'dnbKid2019', '2019'),
-    arligAvgift: INAKTUELL(0.0021, 'dnbKid2019', '2019'),
+    isin: K('NO0010827280', 'avanzaUtbud'),
+    forvaltningsavgift: K(0.0020, 'avanzaUtbud'),
+    arligAvgift: K(0.0021, 'avanzaUtbud'),
     index: K('MSCI World Index', 'dnbKid2019'),
     tackning: K('Globala utvecklade marknader', 'dnbKid2019'),
     bredd: null,
     replikering: null,
-    valuta: null,
+    valuta: K('SEK', 'avanzaUtbud'),
     utdelning: K('Ackumulerande', 'dnbKid2019'),
     belaningsgrad: null,
-    anmarkning: 'Enda faktablad vi hittat avser andelsklass A och redovisar avgift för 2018. För gammalt för att ligga till grund för en kostnadsjämförelse. A-klassen handlas i NOK; om S handlas i SEK är obekräftat, och det avgör saken: hos Avanza växlas en fond i utländsk valuta alltid automatiskt till 0,25 % per riktning. Fonden är norsk och saknas därför i FI:s register.',
+    anmarkning: 'Norsk fond, och saknas därför i FI:s register. Växlingsfrågan är avgjord: trots norsk ISIN handlas andelsklass S i SEK hos Avanza, så den automatiska växlingen på 0,25 % per riktning slår inte till. Avgifterna kommer från Avanzas fondlista, inte från fondbolagets eget faktablad; det enda faktablad vi hittat avser andelsklass A och redovisar avgift för 2018.',
     kopvagar: {
-      avanza: KOPVAG(K(0, 'avanzaPris')),
-      nordnet: KOPVAG(K(0, 'nordnetPris')),
+      avanza: FINNS(K(0, 'avanzaPris'), 'avanzaUtbud'),
+      nordnet: FINNS(K(0, 'nordnetPris'), 'nordnetUtbud'),
       montrose: null,
       savr: KOPVAG(K(0.0006, 'savrPris')),
       fondo: null,
@@ -142,8 +156,8 @@ export const FONDER = [
     belaningsgrad: null,
     anmarkning: 'Indexet har ett hållbarhetsurval och avviker därför medvetet från bred marknadsvikt. Broschyren beskriver användning av OTC-derivat, vilket inte är samma sak som fysisk replikering och återstår att utreda. Fonden säljs bara hos Avanza, så köpvägsjämförelsen har inget att jämföra.',
     kopvagar: {
-      avanza: KOPVAG(K(0, 'avanzaPris'), true),
-      nordnet: null,
+      avanza: FINNS(K(0, 'avanzaPris'), 'avanzaUtbud'),
+      nordnet: SAKNAS(K(0, 'nordnetPris'), 'nordnetUtbud'),
       montrose: null,
       savr: null,
       fondo: null,
@@ -154,7 +168,7 @@ export const FONDER = [
     typ: 'Indexfond · andelsklass A SEK',
     isin: K('SE0000671919', 'fi'),
     forvaltningsavgift: K(0.0030, 'fi'),
-    arligAvgift: null,
+    arligAvgift: K(0.0032, 'avanzaUtbud'),
     index: K('MSCI All Countries World Index, net return', 'storebrand'),
     tackning: K('Globalt inklusive tillväxtmarknader', 'storebrand'),
     bredd: K({ innehav: 1748, lander: 49 }, 'fi'),
@@ -164,8 +178,8 @@ export const FONDER = [
     belaningsgrad: null,
     anmarkning: 'Gällande avgift för klass A SEK är 0,30 %, alltså samma som fondbestämmelsernas tak. Bredast i urvalet med 1 748 innehav i 49 länder, och den enda där Kina, Indien och Sydkorea hör till de största emittentländerna. Den högre avgiften är alltså delvis betalning för mer marknad. Registret redovisar en C-klass på 0,15 %, som bör utredas separat: C-klasser har normalt villkor en privatsparare inte uppfyller.',
     kopvagar: {
-      avanza: KOPVAG(K(0, 'avanzaPris')),
-      nordnet: KOPVAG(K(0, 'nordnetPris')),
+      avanza: FINNS(K(0, 'avanzaPris'), 'avanzaUtbud'),
+      nordnet: FINNS(K(0, 'nordnetPris'), 'nordnetUtbud'),
       montrose: KOPVAG(montroseAvgift(0.0030)),
       savr: KOPVAG(K(0.0006, 'savrPris')),
       fondo: null,
@@ -176,7 +190,7 @@ export const FONDER = [
     typ: 'Indexfond · andelsklass A',
     isin: K('SE0007074059', 'fi'),
     forvaltningsavgift: K(0.0020, 'fi'),
-    arligAvgift: null,
+    arligAvgift: K(0.0024, 'avanzaUtbud'),
     index: K('MSCI World Net', 'fi'),
     tackning: K('Globala utvecklade marknader', 'fi'),
     bredd: K({ innehav: 826, lander: 29 }, 'fi'),
@@ -186,8 +200,8 @@ export const FONDER = [
     belaningsgrad: null,
     anmarkning: 'Med i urvalet som standardval för den som har Swedbank eller en sparbank. Minst antal innehav i urvalet, 826 mot Storebrands 1 748.',
     kopvagar: {
-      avanza: KOPVAG(K(0, 'avanzaPris')),
-      nordnet: KOPVAG(K(0, 'nordnetPris')),
+      avanza: FINNS(K(0, 'avanzaPris'), 'avanzaUtbud'),
+      nordnet: FINNS(K(0, 'nordnetPris'), 'nordnetUtbud'),
       montrose: KOPVAG(montroseAvgift(0.0020)),
       savr: KOPVAG(K(0.0006, 'savrPris')),
       fondo: null,
