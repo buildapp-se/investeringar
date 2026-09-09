@@ -232,6 +232,20 @@ footer { border-top: 1px solid var(--divider); padding: 60px 0 44px; background:
 .lanklista a:hover { color: var(--accent); }
 .lanklista span { display: block; margin-top: 4px; font-size: 13.5px; color: var(--ink-3); }
 
+/* Prototypband och grind. Bandet star kvar aven efter att grinden passerats:
+   den som lamnat fliken oppen ska inte gloemma vad sidan ar. */
+.prototypband { background: var(--varning-soft); color: var(--varning); border-bottom: 1px solid var(--divider); font-size: 12.5px; text-align: center; padding: 8px 18px; }
+
+.grind { position: fixed; inset: 0; z-index: 100; background: var(--paper); display: grid; place-items: center; padding: 24px; overflow-y: auto; }
+.grindruta { width: 100%; max-width: 46ch; display: grid; gap: 14px; }
+.grindruta h1 { font-family: Newsreader, Georgia, serif; font-size: clamp(26px, 4vw, 36px); font-weight: 400; line-height: 1.2; }
+.grindruta p { color: var(--ink-2); font-size: 15px; }
+.grindruta label { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); }
+.grindruta input { font: inherit; padding: 11px 13px; border: 1px solid var(--divider); border-radius: 4px; background: var(--surface); color: var(--ink); }
+.grindruta input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.grindruta .knapp { justify-self: start; }
+.grindfel { color: var(--varning); font-size: 13.5px; }
+
 @media (min-width: 1200px) {
   /* Jamforelsen far bryta ut ur textbredden pa stora skarmar. Densitet varierar
      med skarm, inte med antagen kunskapsniva. Se CONTEXT.md. */

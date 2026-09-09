@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>ETF och belåning · buildapp.se</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +11,8 @@
 <link rel="stylesheet" href="stil.css">
 </head>
 <body>
+
+<p class="prototypband">Prototyp under uppbyggnad. Uppgifterna är delvis okontrollerade och sidan är inget underlag för att placera pengar.</p>
 
 <header>
   <div class="wrap">
@@ -211,8 +214,10 @@
 import { belaningslage, brytpunkt } from './belaning.js';
 import { kronor, procent } from './avgifter.js';
 import { startaTema, visaDatum } from './gemensamt.js';
+import { startaGrind } from './grind.js';
 import { ETFER, KALLOR, SENAST_KONTROLLERAD } from './data.js';
 
+startaGrind();
 startaTema();
 visaDatum('idag');
 for (const el of document.querySelectorAll('[data-kontrolldatum]')) el.textContent = SENAST_KONTROLLERAD;
