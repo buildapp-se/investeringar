@@ -167,21 +167,23 @@ Med i urvalet därför att [Småspararguiden](https://www.smaspararguiden.se/blo
 
 ## ETF:er
 
-Alla uppgifter nedan från [justETF](https://www.justetf.com), med det datum tjänsten själv anger. justETF är sekundärkälla; faktablad från emittenten krävs innan publicering.
+Kontrollerat 2026-09-09 mot **emittentens egen dokumentation**, inte mot justETF. Varje rad har lästs i utgivarens eget faktablad, månadsrapport eller produktsida.
 
-| ETF | ISIN | Ticker | Avgift | Index | Replikering | Valuta | Datum |
-| --- | --- | --- | ---: | --- | --- | --- | --- |
-| Amundi Prime All Country World Acc | IE0003XJA0J9 | WEBN | 0,07 % | Solactive GBS Global Markets Large & Mid Cap | Fysisk, full | USD | 2026-07-23 |
-| Vanguard FTSE All-World Acc | IE00BK5BQT80 | VWCE | 0,14 % | FTSE All-World | Fysisk, sampling | USD | 2026-07-31 |
-| SPDR MSCI ACWI IMI Acc | IE00B3YLTY66 | SPYI | 0,17 % | MSCI ACWI IMI | Fysisk, sampling | USD | 2026-07-31 |
-| iShares Core MSCI World Acc | IE00B4L5Y983 | EUNL, IWDA, SWDA | 0,20 % | MSCI World | Fysisk, sampling | USD | 2026-07-30 |
+| ETF | ISIN | Avgift | Index | Replikering | Innehav | Basvaluta | Källa |
+| --- | --- | ---: | --- | --- | ---: | --- | --- |
+| Amundi Prime All Country World Acc | IE0003XJA0J9 | 0,07 % | Solactive GBS Global Markets Large & Mid Cap Index | Fysisk, full | 3 651 | USD | Amundis månadsrapport 2026-07-31 |
+| Vanguard FTSE All-World Acc | IE00BK5BQT80 | 0,14 % | FTSE All-World Index | Fysisk, sampling | 3 782 | USD | Vanguards faktablad 2026-07-31 |
+| SPDR MSCI ACWI IMI Acc | IE00B3YLTY66 | 0,17 % | MSCI ACWI IMI | Fysisk, optimerad sampling | 5 999 | USD | SSGA:s produktsida 2026-09-09 |
+| iShares Core MSCI World Acc | IE00B4L5Y983 | 0,20 % | MSCI World Index (Net) | Fysisk, optimerad sampling | 1 279 | USD | iShares faktablad 2026-08-31 |
 
-Samtliga fyra har hemvist i Irland och är ackumulerande.
+Samtliga fyra har hemvist i Irland och är ackumulerande. Handelsplats och handelsvaluta står i `kopvagar.md`: alla fyra handlas på Xetra i euro hos svenska leverantörer, alltså inte i sin egen basvaluta.
 
-**Två korrigeringar mot befintligt underlag:**
+**Två korrigeringar mot befintligt underlag, båda nu avgjorda:**
 
-- `bogleheads-och-internationell-indexforskning.md` och `rikatillsammans-indexfonder-och-etfer.md` anger VWCE till 0,22 %. Rätt siffra per 2026-07-31 är **0,14 %**. Vanguard har sänkt avgiften, och slutsatsen att WEBN är dramatiskt billigare än VWCE håller inte längre i samma utsträckning.
-- Samma dokument anger WEBN:s index som ”Solactive GBS Global Markets **All Cap**” och skriver att fonden inkluderar småbolag. justETF anger ”Solactive GBS Global Markets **Large & Mid Cap**”. Om det stämmer innehåller WEBN inte småbolag, och skillnaden mot SPYI, som följer ett IMI-index med småbolag, är då större än underlaget påstår. Detta måste avgöras mot Amundis eget faktablad innan någon jämförelse publiceras.
+- `bogleheads-och-internationell-indexforskning.md` och `rikatillsammans-indexfonder-och-etfer.md` anger VWCE till 0,22 %. Rätt siffra enligt Vanguards eget faktablad är **0,14 %**. Vanguard har sänkt avgiften, och slutsatsen att WEBN är dramatiskt billigare än VWCE håller inte längre i samma utsträckning.
+- Samma dokument anger WEBN:s index som ”Solactive GBS Global Markets **All Cap**” och skriver att fonden inkluderar småbolag. **Det stämmer inte.** Amundis egen månadsrapport skriver ut att indexet följer ”the large and mid cap segment covering approximately the largest 85% of the free-float market capitalization in the global markets”, och fondens fullständiga indexnamn är Solactive GBS Global Markets **Large & Mid Cap** Index. WEBN innehåller alltså inga småbolag. justETF hade rätt och researchunderlaget fel, och skillnaden mot SPYI är därmed större än underlaget påstår.
+
+**En tredje sak som faktabladen visade och justETF inte:** ingen av de fyra äger hela sitt index. Vanguard äger 3 782 bolag av indexets 4 264, SPYI äger 5 999 av indexets omkring 9 000, och iShares kallar sin metod optimerad. Bara WEBN beskriver direkt replikering av hela indexet. Det är en skillnad i hur nära produkten faktiskt följer marknaden, och den syns inte i avgiften.
 
 ### Vad som skiljer dem åt, utöver avgiften
 
@@ -189,7 +191,7 @@ Bredden går inte att läsa ur avgiften, och de fyra är inte utbytbara:
 
 - **EUNL** följer MSCI World: enbart utvecklade marknader, inga tillväxtmarknader, inga småbolag.
 - **VWCE** följer FTSE All-World: utvecklade marknader plus tillväxtmarknader, stora och medelstora bolag.
-- **WEBN** följer ett Solactive-index med utvecklade marknader plus tillväxtmarknader, enligt justETF utan småbolag.
+- **WEBN** följer ett Solactive-index med utvecklade marknader plus tillväxtmarknader, stora och medelstora bolag, utan småbolag. Avgjort mot Amundis egen månadsrapport.
 - **SPYI** följer MSCI ACWI IMI: utvecklade plus tillväxtmarknader **plus** småbolag. Bredast av de fyra, och dyrast.
 
 Att SPYI kostar 0,17 % mot WEBN:s 0,07 % är alltså delvis betalning för mer marknad, inte enbart en dyrare förpackning.
@@ -202,22 +204,24 @@ De hör inte hemma i jämförelsetabellen, eftersom tjänsten jämför kostnad f
 
 ## Kvar att verifiera innan publicering
 
-Uppdaterad 2026-09-09 efter kontroll mot FI:s fondinnehavsregister och mot
-leverantörernas egna prislistor. Se `fi-fondinnehav.md` och `kopvagar.md`.
+Uppdaterad 2026-09-09 efter kontroll mot FI:s fondinnehavsregister, mot
+leverantörernas egna prislistor och mot emittenternas egna faktablad. Se
+`fi-fondinnehav.md` och `kopvagar.md`.
 
-1. ~~ISIN för Avanza Global, Storebrand Global All Countries och Swedbank Robur Access Global.~~ **Klart**, ur FI:s register: SE0011527613, SE0000671919 och SE0007074059. Kvar: **ISIN för DNB Global Indeks S**, som är norsk och därför inte finns i registret.
-2. Aktuell KID för DNB Global Indeks S, inklusive handelsvaluta för just den andelsklassen. Kvar, och viktigare än det såg ut: handlas fonden i NOK kostar den 0,25 % i automatisk valutaväxling per riktning hos Avanza, som inte tillåter manuell växling på fonder.
+1. ~~ISIN för Avanza Global, Storebrand Global All Countries och Swedbank Robur Access Global.~~ **Klart**, ur FI:s register: SE0011527613, SE0000671919 och SE0007074059. ~~ISIN för DNB Global Indeks S.~~ **Klart**: NO0010827280, bekräftat i fondbolagets eget faktablad.
+2. ~~Aktuell KID för DNB Global Indeks S, inklusive handelsvaluta.~~ **Klart.** DNB Asset Managements faktablad, upprättat 2026-04-14, anger 0,20 % i förvaltning och administration plus 0,01 % i transaktionskostnader, alltså 0,21 % totalt, jämförelseindex MSCI World Index Net, full replikering och ingen utdelning. Minsta teckningsbelopp anges i SEK och avkastningen redovisas i SEK, så andelsklassen är en kronklass trots norsk ISIN. Växlingsfrågan faller därmed helt.
 3. ~~Gällande, inte högsta, förvaltningsavgift för Storebrand Global All Countries.~~ **Klart**: 0,30 % för klass A SEK enligt fondbolagets egen rapport till FI, alltså samma som fondbestämmelsernas tak. Ny fråga i stället: C-klassen ligger på 0,15 % och bör utredas, C-klasser har normalt villkor en privatsparare inte uppfyller.
-4. Total årlig avgift, inte bara förvaltningsavgift, för samtliga fem fonder. Kvar. FI redovisar förvaltningsavgift, inte årlig avgift inklusive transaktionskostnader, så den skillnaden måste fortfarande hämtas ur faktablad.
-5. Amundis eget faktablad för WEBN, för att avgöra frågan om småbolag ingår. Kvar.
-6. Avanza Globals användning av OTC-derivat och vad den innebär för replikering och motpartsrisk. Kvar.
-7. Samtliga ETF-rader mot emittentens faktablad, inte bara justETF. Kvar.
-8. ~~Prislista per leverantör.~~ **Klart** för Avanza, Nordnet, Montrose och SAVR, lästa hos var och en 2026-09-09. Fondo är avfört: bolaget säljer inte längre till privatpersoner. **Köpbarhet per fond och leverantör är däremot inte kontrollerad**, och det är nu det som blockerar den gröna markeringen: tjänsten utser ingen billigaste köpväg förrän det är belagt att fonden faktiskt går att köpa där.
-9. Ny punkt: fondens avgift **hos SAVR och Montrose** per fond. Båda betalar tillbaka fondprovisionen och tar en egen avgift i stället, så listpriset är inte vad kunden betalar där.
-10. Ny punkt: Länsförsäkringars jämförelseindex. Fondbolagets fondlista och fondbolagets egen rapport till FI anger två olika index för samma ISIN. Måste avgöras mot informationsbroschyren.
+4. Total årlig avgift, inte bara förvaltningsavgift, för samtliga fem fonder. **Delvis klart.** DNB är klar ur faktabladet och Länsförsäkringar ur informationsbroschyren. Kvar: Avanza Global, Storebrand och Swedbank Robur, där siffran fortfarande kommer från Avanzas fondlista, alltså distributören.
+5. ~~Amundis eget faktablad för WEBN, för att avgöra frågan om småbolag.~~ **Klart, och svaret är nej.** Se ETF-avsnittet ovan.
+6. ~~Avanza Globals användning av OTC-derivat.~~ **Klart.** Informationsbroschyren, daterad 2026-03-09, säger att fonden placerar direkt i överlåtbara värdepapper för att följa indexet men får använda derivat som ett led i placeringsinriktningen, inklusive OTC-derivat enligt 5 kap. 12 § andra stycket LVF. Den skriver också ut att det ger en begränsad motpartsrisk, att derivaten bara används i begränsad omfattning och därför inte väntas påverka riskprofilen. Alltså ingen syntetisk fond som byter bort hela indexavkastningen mot en motparts löfte. Broschyren gav samtidigt gällande förvaltningsavgift 0,08 % mot tak 0,08 %, och att fonden var matarfond fram till september 2024, vilket gör äldre avkastningshistorik svårjämförbar.
+7. ~~Samtliga ETF-rader mot emittentens faktablad.~~ **Klart** för alla fyra, se ETF-avsnittet ovan.
+8. ~~Prislista per leverantör.~~ **Klart** för Avanza, Nordnet, Montrose och SAVR, lästa hos var och en 2026-09-09. Fondo är avfört: bolaget säljer inte längre till privatpersoner. Köpbarhet per fond är klar för Avanza och Nordnet, och köpbarhet per ETF likaså. Montrose och SAVR står kvar som okända, eftersom deras utbud inte går att söka i utifrån.
+9. Fondens avgift **hos SAVR och Montrose** per fond. Kvar. Båda betalar tillbaka fondprovisionen och tar en egen avgift i stället, så listpriset är inte vad kunden betalar där. Kräver inloggning.
+10. ~~Länsförsäkringars jämförelseindex.~~ **Klart.** Informationsbroschyren, daterad 2026-07-01, säger att fonden följer MSCI World ex Select Securities Climate Action 75% Custom Index och att indexet replikeras med full fysisk replikering. Uppgiften Morningstar Developed Markets Top value i fondbolagets rapport till FI stämmer alltså inte med fondens eget prospekt och används inte. Broschyren anger gällande förvaltningsavgift 0,20 % mot ett tak på 0,50 %.
+11. Ny punkt: Storebrands och Swedbank Roburs egna faktablad, för total årlig avgift och för replikeringsmetod, som fortfarande saknas för båda.
 
 ## Anmärkning om det tidigare underlaget
 
-Den här genomgången hittade fyra sakfel i de befintliga researchdokumenten på de få uppgifter som gick att kontrollera mot primärkälla: fel index för Länsförsäkringar Global Index, fel index och fel avgift för Avanza Global, och en avgift för VWCE som är omkring 60 procent för hög.
+Den här genomgången hittade fem sakfel i de befintliga researchdokumenten på de få uppgifter som gick att kontrollera mot primärkälla: fel index för Länsförsäkringar Global Index, fel index och fel avgift för Avanza Global, en avgift för VWCE som är omkring 60 procent för hög, och påståendet att WEBN följer ett All Cap-index och innehåller småbolag, vilket Amundis egen månadsrapport motsäger.
 
 Det säger ingenting om skribentens ambition, men det säger något om felfrekvensen. Dokumenten ska behandlas som uppslag att kontrollera, aldrig som uppgifter att publicera. Punkten om detta i `BACKLOG.md` står kvar.
