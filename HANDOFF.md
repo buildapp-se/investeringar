@@ -4,7 +4,7 @@ status: active
 currentGoal: Kontrollera fondavgiften hos SAVR och Montrose per fond, och läs villkoren för courtagefritt månadssparande i ETF hos Avanza och Nordnet.
 nextAction: Ta reda på vad fonderna faktiskt kostar hos SAVR och Montrose, som båda betalar tillbaka fondprovisionen. Tills dess räknas deras totaler på listpris och är för höga. Båda kräver inloggning och är Patriks att göra. Kör site/ med node server.mjs, port 4173.
 blockers: []
-reviewedAt: 2026-09-09
+reviewedAt: 2026-09-16
 ---
 
 # Överlämning
@@ -176,3 +176,7 @@ Chrome DevTools-MCP användes i stället för Playwright-MCP, som vägrade start
 "Browser is already in use" mot en låst profil. Grinden passeras lokalt genom att
 sätta `localStorage['grind-oppen']` till hashen i `site/grind.js`, utan att kunna
 ordet.
+
+## Granskning 2026-09-16
+
+Cross-project audit run from elwyn-dash (session 5 in the daily note). Results written to `## Audits` in CONTEXT.md, findings appended to BACKLOG.md under `## Granskning 2026-09-16`. Headers on buildapp.se and the TLS grade are zone-level and are fixed once in Cloudflare, not here.

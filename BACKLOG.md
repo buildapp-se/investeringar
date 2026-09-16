@@ -34,3 +34,12 @@ Lägg nya forumtrådar, fondnamn, ETF:er och korta kommentarer här. Fynd bearbe
 ## P3 · Senare innehåll
 
 - [ ] **[P3] Löpande blogg.** Första versionen prioriterar jämförelsetjänsten och forskningsguiderna.
+
+## Granskning 2026-09-16
+
+Fynd från cockpitens granskningskolumner (Lighthouse mobil, W3C, UX-skript, headers, TLS, OWASP). Mätvärdena står under `## Audits` i CONTEXT.md.
+
+- [ ] `[P2]` W3C: `<thead>` med en tom rad (`rubrikrad`) och `<h4>Räkneantaganden` direkt efter h2. Byt till h3 och ge thead riktiga celler eller ta bort raden.
+- [ ] `[P2]` Lighthouse: färgkontrast under 4,5:1 (a11y 97).
+- [ ] `[P3]` UX, Fitts: temaknapparna System, Ljust, Mörkt är 27 px, plus 13 tryckytor under 44 px. Postel: fyra sifferfält ej testade med `--interact`.
+- [ ] `[P3]` Meta description saknas (SEO 50 ihop med noindex, som är avsiktlig).
