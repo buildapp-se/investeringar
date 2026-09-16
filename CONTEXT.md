@@ -112,10 +112,9 @@ Tillgången till Claude Design är ännu inte verifierad och ingen design har im
 Google Search Console och Cloudflare Web Analytics är valda för mätning. Google Business Profile är bortvalt efter kontroll av Googles villkor för rena webbtjänster. Ingen analytics är konfigurerad. Mätningen ska hållas inom nollbudgeten.
 
 ## Audits
-
 Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; conventions in elwyn-dash `docs/security.md`.
-- Headers: 2026-09-16, fail, 0 of 6 on buildapp.se (GitHub Pages), one hostname-scoped Transform Rule on the zone fixes every buildapp.se path
-- TLS: 2026-09-16, warn, SSL Labs B on buildapp.se, TLS 1.0 and 1.1 still enabled on the zone, no HSTS
+- Headers: 2026-09-16, pass, 6 of 6 on buildapp.se via a host-scoped Transform Rule on the zone, measured after the change
+- TLS: 2026-09-16, pass, SSL Labs A+ on buildapp.se, TLS 1.2 minimum and HSTS since today
 - Lighthouse: 2026-09-16, warn, a11y 97 (colour contrast), best practices 100, SEO 50 (noindex by design, meta description missing) (mobile, no perf)
 - Markup: 2026-09-16, fail, W3C 2 errors: empty thead row, h4 after h2; 0 broken links
 - UX: 2026-09-16, warn, 4 of 6 script checks pass, theme buttons 27 px plus 13 targets under 44 px, number fields not interact-tested
