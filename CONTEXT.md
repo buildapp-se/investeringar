@@ -115,6 +115,6 @@ Google Search Console och Cloudflare Web Analytics är valda för mätning. Goog
 Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; conventions in elwyn-dash `docs/security.md`.
 - Headers: 2026-09-16, pass, 6 of 6 on buildapp.se via a host-scoped Transform Rule on the zone, measured after the change
 - TLS: 2026-09-16, pass, SSL Labs A+ on buildapp.se, TLS 1.2 minimum and HSTS since today
-- Lighthouse: 2026-09-16, warn, a11y 97 (colour contrast), best practices 100, SEO 50 (noindex by design, meta description missing) (mobile, no perf)
-- Markup: 2026-09-16, fail, W3C 2 errors: empty thead row, h4 after h2; 0 broken links
-- UX: 2026-09-16, warn, 4 of 6 script checks pass, theme buttons 27 px plus 13 targets under 44 px, number fields not interact-tested
+- Lighthouse: 2026-09-16, pass, a11y 100 after the contrast fix, best practices 100, SEO 60 (noindex by design, meta description added) (mobile, no perf)
+- Markup: 2026-09-16, pass, W3C 0 errors after the fix; 0 broken links
+- UX: 2026-09-16, warn, 2 targets under 44 px left after the fix (two 13 px checkboxes, the label is the target), number fields not interact-tested
