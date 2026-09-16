@@ -198,7 +198,7 @@ tbody td.text { white-space: normal; text-align: left; }
 .infoknapp { background: none; border: 0; color: var(--ink-2); cursor: pointer; font: inherit; font-size: 12.5px; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; padding: 0; }
 .infoknapp:hover { color: var(--accent-2); }
 [popover] { max-width: 440px; padding: 26px; border: 1px solid var(--divider); background: var(--surface); color: var(--ink); box-shadow: var(--skugga-lyft); border-radius: 8px; }
-[popover] h4 { font-family: Newsreader, Georgia, serif; font-size: 19px; margin-bottom: 10px; }
+[popover] h3, [popover] h4 { font-family: Newsreader, Georgia, serif; font-size: 19px; margin-bottom: 10px; }
 [popover] p { font-size: 13.5px; color: var(--ink-2); margin-bottom: 10px; }
 [popover]::backdrop { background: rgba(16,16,10,.34); backdrop-filter: blur(2px); }
 
@@ -270,3 +270,9 @@ footer { border-top: 1px solid var(--divider); padding: 60px 0 44px; background:
   .kalla .block { grid-template-columns: 1fr; gap: 2px; }
   .kalla .block dt { padding-top: 10px; }
 }
+
+/* 44 px tryckytor på telefon (Fitts, granskningen 2026-09-16). Kryssrutorna lämnas:
+   etiketten är ytan, och en 44 px kryssruta ser trasig ut. */
+header nav a, .temaval button, .knapp, .flik, .infoknapp, .fotlankar a { min-height: 44px; display: inline-flex; align-items: center; }
+.marke { display: inline-block; padding: 11px 0; }
+.mening input, .grindruta input { min-height: 44px; }

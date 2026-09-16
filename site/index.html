@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Vad fonder och fondrobotar faktiskt kostar hos svenska nätmäklare, räknat som avgifternas effekt på sparandet över tid.">
 <title>Jämför fondkostnader · buildapp.se</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -162,7 +163,7 @@
 
   <div class="tabellhalla">
     <table id="tabell">
-      <thead><tr id="rubrikrad"></tr></thead>
+      <thead id="rubrikrad"></thead>
       <tbody id="rader"></tbody>
     </table>
   </div>
@@ -261,14 +262,14 @@
 </footer>
 
 <div popover id="pop-metod">
-  <h4>Räkneantagandet</h4>
+  <h3>Räkneantagandet</h3>
   <p>Ett gemensamt, ändringsbart antagande om avkastning <em>före</em> avgifter, som gäller lika för alla jämförbara aktiealternativ. Syftet är att isolera vad kostnaderna gör, inte att förutsäga avkastning.</p>
   <p>Finansinspektionen använder samma nivå i sin kostnadsillustration för fondavgifter. Det betyder inte att någon fond förväntas ge just den avkastningen, och antagandet passar inte fondrobotar med annan aktieandel.</p>
   <button type="button" class="knapp" popovertarget="pop-metod" popovertargetaction="hide">Stäng</button>
 </div>
 
 <div popover id="pop-status">
-  <h4>Statusmarkeringar</h4>
+  <h3>Statusmarkeringar</h3>
   <p><span class="status verifierad">Verifierad</span> Uppgiften har källa och kontrolldatum.</p>
   <p><span class="status ovsakerhet">Ej verifierat</span> Uppgiften saknas eller är inte kontrollerad. Den kan inte utse billigaste alternativ.</p>
   <p><span class="status inaktuell">Inaktuell</span> Uppgiften är för gammal och rankas inte.</p>
@@ -331,7 +332,7 @@ function rubriker() {
   kol.push('<th scope="col">Årlig fondavgift</th>', '<th scope="col">Fondavgiftens effekt, valt scenario</th>');
   if (vy === 'avancerad') for (const l of LEVERANTORER) kol.push(`<th scope="col">${l.namn}${l.partner ? ' *' : ''}</th>`);
   kol.push('<th scope="col">Billigaste verifierade köpväg</th>');
-  document.getElementById('rubrikrad').innerHTML = kol.join('');
+  document.getElementById('rubrikrad').innerHTML = '<tr>' + kol.join('') + '</tr>';
 }
 
 /** Total arlig avgift for en kopvag: fondens egen avgift plus leverantorens pafyllnad. */
