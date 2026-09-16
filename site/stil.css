@@ -8,7 +8,7 @@
   --surface: #ffffff;
   --ink: #16160f;
   --ink-2: #5c5c56;
-  --ink-3: #8f8f88;
+  --ink-3: #6f6f68; /* 4,5:1 mot papperet (Lighthouse, granskningen 2026-09-16), var #8f8f88 */
   --divider: #e6e3dc;
   --divider-light: #efece5;
   --accent: #22382c;
