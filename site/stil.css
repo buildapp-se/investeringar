@@ -274,5 +274,6 @@ footer { border-top: 1px solid var(--divider); padding: 60px 0 44px; background:
 /* 44 px tryckytor på telefon (Fitts, granskningen 2026-09-16). Kryssrutorna lämnas:
    etiketten är ytan, och en 44 px kryssruta ser trasig ut. */
 header nav a, .temaval button, .knapp, .flik, .infoknapp, .fotlankar a { min-height: 44px; display: inline-flex; align-items: center; }
+.temaval button { min-width: 44px; justify-content: center; }
 .marke { display: inline-block; padding: 11px 0; }
 .mening input, .grindruta input { min-height: 44px; }
