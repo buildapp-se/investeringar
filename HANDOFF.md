@@ -9,6 +9,13 @@ reviewedAt: 2026-09-16
 
 # Överlämning
 
+## 2026-09-16: granskningsbatchen
+
+W3C (thead utan tom rad, h3 i popovers), 44 px tryckytor, meta description på
+tre sidor, `--ink-3` mörkare för kontrasten. Fyra commits `ded0fc8` till
+`f8239e4`, båda testskripten gröna, CI-deployat, mätt live: W3C 0 fel,
+Lighthouse a11y 100, 2 ytor under 44 px kvar (kryssrutorna).
+
 ## Läget
 
 Kravbilden i CONTEXT.md står fast och är bekräftad på nytt 2026-09-09: **kostnadsjämförelsen är motorn**, den kurerade listan är ytan. Patrik formulerade det som att sidan ska vara en enkel sammanställning för den som inte orkar plöja fyrtio forumtrådar, med länkar vidare för den som vill läsa hela resonemanget. Frågan ställdes uttryckligen om detta innebar att räkningen skulle bort. Det gjorde det inte. Bygg inte om tjänsten till en ren lista.

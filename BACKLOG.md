@@ -39,7 +39,7 @@ Lägg nya forumtrådar, fondnamn, ETF:er och korta kommentarer här. Fynd bearbe
 
 Fynd från cockpitens granskningskolumner (Lighthouse mobil, W3C, UX-skript, headers, TLS, OWASP). Mätvärdena står under `## Audits` i CONTEXT.md.
 
-- [ ] `[P2]` W3C: `<thead>` med en tom rad (`rubrikrad`) och `<h4>Räkneantaganden` direkt efter h2. Byt till h3 och ge thead riktiga celler eller ta bort raden.
-- [ ] `[P2]` Lighthouse: färgkontrast under 4,5:1 (a11y 97).
-- [ ] `[P3]` UX, Fitts: temaknapparna System, Ljust, Mörkt är 27 px, plus 13 tryckytor under 44 px. Postel: fyra sifferfält ej testade med `--interact`.
-- [ ] `[P3]` Meta description saknas (SEO 50 ihop med noindex, som är avsiktlig).
+- [x] `[P2]` (rättad 2026-09-16, `thead` fylls av skriptet med hela raden, h3 i popovers; W3C 0 fel live) W3C: `<thead>` med en tom rad (`rubrikrad`) och `<h4>Räkneantaganden` direkt efter h2. Byt till h3 och ge thead riktiga celler eller ta bort raden.
+- [x] `[P2]` (rättad 2026-09-16, `--ink-3` #8f8f88 till #6f6f68 i ljust läge; a11y 100 live) Lighthouse: färgkontrast under 4,5:1 (a11y 97).
+- [x] `[P3]` (rättad 2026-09-16: 44 px på nav, tema, knappar, flikar, infoknappar, fält och sidfot; kvar två kryssrutor på 13 px där etiketten är ytan. Postel ej körd) UX, Fitts: temaknapparna System, Ljust, Mörkt är 27 px, plus 13 tryckytor under 44 px. Postel: fyra sifferfält ej testade med `--interact`.
+- [x] `[P3]` (rättad 2026-09-16, alla tre sidor; SEO 60 kvar av noindex) Meta description saknas (SEO 50 ihop med noindex, som är avsiktlig).
