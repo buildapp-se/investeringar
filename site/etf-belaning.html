@@ -50,6 +50,17 @@
   <p class="minst dampad" style="margin-top:12px">Alla finns hos Avanza och Nordnet, handlas på Xetra i euro och återinvesterar utdelningen. Namnet länkar till faktabladet. Kontrollerat <span data-kontrolldatum>–</span>.</p>
 </section>
 
+<section class="wrap bred tat" id="havstang">
+  <h2 class="rubrik2">Fonder med inbyggd belåning</h2>
+  <div class="tabellhalla">
+    <table>
+      <thead><tr><th scope="col">Fond</th><th scope="col">Avgift</th><th scope="col" class="vanster">Lånekostnad</th><th scope="col" class="vanster">Index</th><th scope="col" class="vanster">Var</th></tr></thead>
+      <tbody id="havstangrader"></tbody>
+    </table>
+  </div>
+  <p class="minst dampad" style="margin-top:12px">Fonden lånar åt dig och håller 125 % exponering, så uppgång och nedgång blir ungefär 1,25 gånger större. Du kan inte bli överbelånad.</p>
+</section>
+
 <div class="band">
 <section class="wrap bred" id="belaning">
   <h2 class="rubrik2">Belåning: så får du lägsta räntan</h2>
@@ -95,7 +106,7 @@ import { maxLan } from './belaning.js';
 import { kronor, procent } from './avgifter.js';
 import { startaTema } from './gemensamt.js';
 import { startaGrind } from './grind.js';
-import { BELANING, BELANINGSVARDE, ETFER, SENAST_KONTROLLERAD } from './data.js';
+import { BELANING, BELANINGSVARDE, ETFER, HAVSTANG, SENAST_KONTROLLERAD } from './data.js';
 
 startaGrind();
 startaTema();
@@ -119,6 +130,11 @@ document.getElementById('etfrader').innerHTML = ETFER.map(e => {
     <td>${esc(e.storlek)}</td>
     <td>${e.start}</td></tr>`;
 }).join('');
+
+document.getElementById('havstangrader').innerHTML = HAVSTANG.map(h => `<tr>
+  <td><span class="produktnamn"><a href="${esc(h.url)}" rel="noopener">${esc(h.namn)}</a></span></td>
+  <td>${esc(h.avgift)}</td>
+  <td class="text liten">${h.lan ? esc(h.lan) : streck}</td><td class="text liten">${esc(h.index)}</td><td class="text liten">${esc(h.finns)}</td></tr>`).join('');
 
 document.getElementById('plattformar').innerHTML = BELANING.map(p => `<div class="plattform">
   <h3>${esc(p.namn)}</h3>

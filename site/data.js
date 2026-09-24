@@ -96,6 +96,12 @@ export const ETFER = [
   { grupp: 'Småbolag och faktorer', ticker: 'AVWS', namn: 'Avantis Global Small Cap Value', isin: 'IE0003R87OG3', avgift: 0.0039, innehav: 1812, lander: null, index: 'Aktivt förvaltad, utvecklade marknader', replikering: 'Fysisk, aktiv', hemvist: 'Irland', storlek: '1,6 mdr USD', start: 2024, url: 'https://res.americancentury.com/docs/avantis-global-small-cap-value-ucits-etf-fact-sheet.pdf' },
 ];
 
+/** Fonder med inbyggd belaning (1,25x), lasta pa bolagens egna sidor 2026-09-24. */
+export const HAVSTANG = [
+  { namn: 'Nordnet Global Index 125', url: 'https://www.nordnet.se/academy/nordnet-global-index-125', avgift: '0,40 %', lan: null, index: 'MSCI World Climate Change', finns: 'Nordnet' },
+  { namn: 'Montrose Global Leverage 125', url: 'https://www.montrose.io/montrose-global-leverage-125-etf', avgift: '0,41 %', lan: 'Stibor 3 mån + 0,60 % på lånade delen', index: 'MSCI World', finns: 'ETF, Stockholmsbörsen i SEK. Courtagefri hos Montrose' },
+];
+
 /**
  * Belaning per plattform, last utloggad 2026-09-24. `basta` ar regeln for
  * lagsta rantan i den form maxLan() i belaning.js tar: `grans` som andel,

@@ -180,7 +180,7 @@ footer { border-top: 1px solid var(--divider); padding: 60px 0 44px; background:
 
 /* 44 px tryckytor på telefon (Fitts, granskningen 2026-09-16). Kryssrutorna lämnas:
    etiketten är ytan, och en 44 px kryssruta ser trasig ut. */
-header nav a, .temaval button, .knapp, details.avancerat summary { min-height: 44px; display: inline-flex; align-items: center; }
+header nav a, .temaval button, .knapp { min-height: 44px; display: inline-flex; align-items: center; }
 .temaval button { min-width: 44px; justify-content: center; }
 .marke { display: inline-block; padding: 11px 0; }
 .mening input, .grindruta input { min-height: 44px; }
@@ -197,10 +197,13 @@ a.kort.lank { text-decoration: none; border-left-color: var(--accent-2); transit
 a.kort.lank:hover { box-shadow: var(--skugga-lyft); }
 .lanktext { font-family: Newsreader, Georgia, serif; font-size: 20px; line-height: 1.25; color: var(--accent-2); }
 
-/* Avancerad vy: native details, ingen JavaScript. */
-details.avancerat > summary { cursor: pointer; font-weight: 600; font-size: 15px; padding: 10px 16px; border: 1px solid var(--divider); background: var(--surface); border-radius: 5px; }
-details.avancerat > summary:hover { border-color: var(--accent-2); }
-details.avancerat[open] > summary { margin-bottom: 32px; }
+/* Tre ingangar under raknaren: fondrobot, egna fonder, ETF och belaning. */
+.ingangar { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.ingang { display: flex; flex-direction: column; text-decoration: none; background: var(--surface); border: 1px solid var(--divider); padding: 22px; transition: border-color .14s, box-shadow .14s; }
+.ingang:hover, .ingang:focus-visible { border-color: var(--accent-2); box-shadow: var(--skugga-lyft); }
+.ingang h2 { font-size: 21px; margin-bottom: 6px; }
+.ingang p { font-size: 13.5px; color: var(--ink-2); flex: 1; margin-bottom: 14px; }
+.gatill { font-size: 13px; font-weight: 600; color: var(--accent-2); }
 
 th.vanster { text-align: left; }
 tr.grupp th { text-align: left; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-2); font-weight: 700; padding: 22px 12px 6px; background: var(--paper-subtle); }
