@@ -92,32 +92,6 @@ nav a[aria-current="page"] { color: var(--ink); font-weight: 600; background: va
 .temaval button:hover { color: var(--ink); }
 .temaval button[aria-pressed="true"] { color: var(--ink); font-weight: 700; background: var(--accent-soft); }
 
-/* Hero */
-.hero h1 { font-size: clamp(33px, 5.4vw, 56px); line-height: 1.12; margin-bottom: 26px; max-width: 19ch; }
-.ingress { font-size: clamp(16.5px, 2vw, 20px); color: var(--ink-2); font-weight: 300; max-width: 60ch; margin-bottom: 34px; }
-.fakta { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0; border: 1px solid var(--divider); background: var(--surface); }
-.fakta > div { padding: 16px 20px; border-right: 1px solid var(--divider-light); font-size: 12.5px; color: var(--ink-2); }
-.fakta > div:last-child { border-right: 0; }
-.fakta strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 2px; }
-
-/* Klickbara ingangskort */
-.ingangar { display: grid; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); gap: 20px; }
-.ingang {
-  display: flex; flex-direction: column; text-decoration: none;
-  background: var(--surface); border: 1px solid var(--divider); padding: 26px 24px 22px;
-  transition: border-color .14s, box-shadow .14s, transform .14s;
-}
-.ingang:hover, .ingang:focus-visible { border-color: var(--accent-2); box-shadow: var(--skugga-lyft); transform: translateY(-2px); }
-.ingang .etikett { font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 13px; color: var(--ink-3); margin-bottom: 12px; }
-.ingang h3 { font-size: 21px; margin-bottom: 10px; }
-.ingang p { font-size: 13.5px; color: var(--ink-2); font-weight: 300; margin-bottom: 20px; flex: 1; }
-.ingang dl { border-top: 1px solid var(--divider-light); padding-top: 14px; font-size: 12px; display: grid; grid-template-columns: 1fr auto; gap: 7px 12px; }
-.ingang dt { color: var(--ink-3); }
-.ingang dd { text-align: right; }
-.gatill { margin-top: 16px; font-size: 12.5px; font-weight: 600; color: var(--accent-2); display: flex; align-items: center; gap: 6px; }
-.ingang:hover .gatill .pil { transform: translateX(3px); }
-.gatill .pil { transition: transform .14s; }
-
 /* Paneler och kort */
 .panel { background: var(--surface); border: 1px solid var(--divider); padding: 30px; box-shadow: var(--skugga); }
 .mening { font-size: clamp(17px, 2.3vw, 22px); line-height: 2; font-family: Newsreader, Georgia, serif; }
@@ -128,25 +102,12 @@ nav a[aria-current="page"] { color: var(--ink); font-weight: 600; background: va
 }
 .mening input.kort { width: 3.6em; }
 .mening input:hover { background: color-mix(in srgb, var(--accent-soft) 70%, var(--accent-2) 12%); }
-.scenariorad { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--divider-light); font-size: 13px; color: var(--ink-2); }
-label.kryss { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-label.kryss input { accent-color: var(--accent-2); }
-
 .resultat { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 18px; margin-top: 22px; }
 .kort { background: var(--surface); border: 1px solid var(--divider); border-left: 3px solid var(--divider); padding: 22px 24px; }
 .kort .rubrik { font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-3); font-weight: 600; margin-bottom: 10px; }
 .kort .tal { font-family: Newsreader, Georgia, serif; font-size: 30px; line-height: 1.1; }
 .kort .under { font-size: 12px; color: var(--ink-2); margin-top: 8px; }
 .kort.betonad { border-left-color: var(--accent-2); }
-
-/* Knappar och verktygsrad */
-.verktyg { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 20px; }
-.knapp, .flik { font: inherit; font-size: 13px; font-weight: 500; background: var(--surface); color: var(--ink); border: 1px solid var(--divider); padding: 8px 15px; cursor: pointer; border-radius: 5px; }
-.knapp:hover, .flik:hover { border-color: var(--accent-2); }
-.flikgrupp { display: inline-flex; border: 1px solid var(--divider); border-radius: 5px; overflow: hidden; background: var(--surface); }
-.flikgrupp .flik { border: 0; border-radius: 0; color: var(--ink-2); }
-.flikgrupp .flik[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); font-weight: 700; }
-.vaxa { flex: 1; }
 
 /* Tabell */
 .tabellhalla { overflow-x: auto; border: 1px solid var(--divider); background: var(--surface); }
@@ -168,73 +129,22 @@ tbody td:not(:first-child) { white-space: nowrap; }
 tbody td.text { white-space: normal; text-align: left; }
 .produktnamn { font-family: Newsreader, Georgia, serif; font-size: 17px; }
 .produktmeta { display: block; font-size: 12px; color: var(--ink-3); margin-top: 3px; }
-.expandera { display: flex; gap: 9px; align-items: baseline; background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
-.expandera .pil { color: var(--ink-3); transition: transform .12s; display: inline-block; }
-.expandera[aria-expanded="true"] .pil { transform: rotate(90deg); }
-.expandera:hover .produktnamn { color: var(--accent-2); }
-
-/* Statusmarkeringar. Farg anvands alltid tillsammans med text.
-   Overifierat halls medvetet lagmalt: det ar det vanligaste lagets dag ett och
-   far inte lasas som ett fel. */
-.status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 2px 8px; border-radius: 3px; white-space: nowrap; font-weight: 500; }
-.status.verifierad { background: var(--accent-soft); color: var(--accent); }
-.status.ovsakerhet { background: none; color: var(--ink-3); border: 1px dashed var(--divider); }
-.status.inaktuell { background: var(--varning-soft); color: var(--varning); }
-.status.demo { background: var(--demo-soft); color: var(--demo); }
 .billigast { color: var(--accent-2); font-weight: 700; }
-.billigastetikett { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent-2); margin-top: 3px; font-weight: 600; }
-.partner { color: var(--ink-3); cursor: help; }
-
-.detalj td { background: var(--paper-subtle); font-size: 13px; color: var(--ink-2); }
-.kopvagar { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 12px; margin: 12px 0 4px; }
-.kopvag { background: var(--surface); border: 1px solid var(--divider); padding: 13px; text-align: left; }
-.kopvag .namn { font-weight: 600; font-size: 13px; color: var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 6px; }
-.kopvag.vinnare { border-color: var(--accent-2); box-shadow: inset 3px 0 0 var(--accent-2); }
-.uppdelning { display: grid; grid-template-columns: 1fr auto; gap: 7px 18px; max-width: 470px; margin: 12px 0; text-align: left; }
-.uppdelning .summa { border-top: 1px solid var(--divider); padding-top: 8px; font-weight: 700; color: var(--ink); }
-
-/* Informationsknappar. Native popover ger tangentbord och Escape utan
-   JavaScript. Hover ensamt vore otillgangligt pa touch. */
-.infoknapp { background: none; border: 0; color: var(--ink-2); cursor: pointer; font: inherit; font-size: 12.5px; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; padding: 0; }
-.infoknapp:hover { color: var(--accent-2); }
-[popover] { max-width: 440px; padding: 26px; border: 1px solid var(--divider); background: var(--surface); color: var(--ink); box-shadow: var(--skugga-lyft); border-radius: 8px; }
-[popover] h3, [popover] h4 { font-family: Newsreader, Georgia, serif; font-size: 19px; margin-bottom: 10px; }
-[popover] p { font-size: 13.5px; color: var(--ink-2); margin-bottom: 10px; }
-[popover]::backdrop { background: rgba(16,16,10,.34); backdrop-filter: blur(2px); }
-
-.tomt { padding: 52px 24px; text-align: center; }
-.tomt p { color: var(--ink-2); font-size: 14px; max-width: 48ch; margin: 10px auto 18px; }
 
 /* Redaktionell brodtext */
 .brodtext { max-width: 66ch; display: grid; gap: 16px; color: var(--ink-2); }
 .brodtext p { font-size: 16px; }
 .brodtext strong { color: var(--ink); }
 
-/* Kallor och papers */
-.kalla { border-left: 2px solid var(--divider); padding: 0 0 0 22px; margin-bottom: 34px; }
-.kalla h3 { font-size: 19px; margin-bottom: 6px; }
-.kalla .referens { font-size: 12.5px; color: var(--ink-3); margin-bottom: 12px; }
-.kalla .block { display: grid; grid-template-columns: 92px 1fr; gap: 6px 16px; font-size: 13.5px; color: var(--ink-2); }
-.kalla .block dt { font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); font-weight: 600; padding-top: 3px; }
-
 footer { border-top: 1px solid var(--divider); padding: 60px 0 44px; background: var(--paper-subtle); }
-.fotgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 36px; margin-bottom: 38px; }
-.fotlankar { display: grid; gap: 8px; font-size: 13px; }
-.fotlankar a { color: var(--ink-2); text-decoration: none; }
-.fotlankar a:hover { color: var(--ink); text-decoration: underline; }
-.fotbotten { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 26px; border-top: 1px solid var(--divider); font-size: 12px; color: var(--ink-3); }
+.fotbotten { margin-top: 26px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 26px; border-top: 1px solid var(--divider); font-size: 12px; color: var(--ink-3); }
 
-/* Vidare lasning: en kalla per rad, namnet forst och nyttan under. Listan ar
-   avsiktligt textig, det ar en lasanvisning och inte en knappsamling. */
+/* Lanklista: en lank per rad, rubriken forst och kallan under. */
 .lanklista { list-style: none; margin: 26px 0 0; padding: 0; max-width: 72ch; display: grid; gap: 0; border-top: 1px solid var(--divider-light); }
 .lanklista li { padding: 16px 0; border-bottom: 1px solid var(--divider-light); }
 .lanklista a { font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
 .lanklista a:hover { color: var(--accent); }
 .lanklista span { display: block; margin-top: 4px; font-size: 13.5px; color: var(--ink-3); }
-
-/* Prototypband och grind. Bandet star kvar aven efter att grinden passerats:
-   den som lamnat fliken oppen ska inte gloemma vad sidan ar. */
-.prototypband { background: var(--varning-soft); color: var(--varning); border-bottom: 1px solid var(--divider); font-size: 12.5px; text-align: center; padding: 8px 18px; }
 
 .grind { position: fixed; inset: 0; z-index: 100; background: var(--paper); display: grid; place-items: center; padding: 24px; overflow-y: auto; }
 .grindruta { width: 100%; max-width: 46ch; display: grid; gap: 14px; }
@@ -266,14 +176,46 @@ footer { border-top: 1px solid var(--divider); padding: 60px 0 44px; background:
   tbody td { padding: 14px 8px; }
   thead th:first-child, tbody td:first-child { min-width: 150px; }
   .panel { padding: 20px; }
-  .fakta > div { border-right: 0; border-bottom: 1px solid var(--divider-light); }
-  .kalla .block { grid-template-columns: 1fr; gap: 2px; }
-  .kalla .block dt { padding-top: 10px; }
 }
 
 /* 44 px tryckytor på telefon (Fitts, granskningen 2026-09-16). Kryssrutorna lämnas:
    etiketten är ytan, och en 44 px kryssruta ser trasig ut. */
-header nav a, .temaval button, .knapp, .flik, .infoknapp, .fotlankar a { min-height: 44px; display: inline-flex; align-items: center; }
+header nav a, .temaval button, .knapp, details.avancerat summary { min-height: 44px; display: inline-flex; align-items: center; }
 .temaval button { min-width: 44px; justify-content: center; }
 .marke { display: inline-block; padding: 11px 0; }
 .mening input, .grindruta input { min-height: 44px; }
+
+/* Inforutan hogst upp pa varje sida, ersatter prototypbandet. */
+.inforuta { margin-top: 20px; padding: 12px 16px; background: var(--varning-soft); color: var(--ink-2); border-left: 3px solid var(--varning); font-size: 13px; line-height: 1.5; }
+.inforuta strong { color: var(--ink); }
+section.wrap.forst { padding-top: 36px; }
+h1 { font-size: clamp(30px, 4.6vw, 46px); line-height: 1.12; margin-bottom: 24px; max-width: 22ch; }
+.rubrik3 { font-family: Newsreader, Georgia, serif; font-size: 21px; margin: 44px 0 12px; }
+
+/* Fjarde rutan ar en lank till forskningen, inte ett tal. */
+a.kort.lank { text-decoration: none; border-left-color: var(--accent-2); transition: box-shadow .14s; }
+a.kort.lank:hover { box-shadow: var(--skugga-lyft); }
+.lanktext { font-family: Newsreader, Georgia, serif; font-size: 20px; line-height: 1.25; color: var(--accent-2); }
+
+/* Avancerad vy: native details, ingen JavaScript. */
+details.avancerat > summary { cursor: pointer; font-weight: 600; font-size: 15px; padding: 10px 16px; border: 1px solid var(--divider); background: var(--surface); border-radius: 5px; }
+details.avancerat > summary:hover { border-color: var(--accent-2); }
+details.avancerat[open] > summary { margin-bottom: 32px; }
+
+th.vanster { text-align: left; }
+tr.grupp th { text-align: left; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-2); font-weight: 700; padding: 22px 12px 6px; background: var(--paper-subtle); }
+.tabellhalla.smal { max-width: 560px; }
+.tabellhalla.smal td:first-child, .tabellhalla.smal th:first-child { min-width: 0; }
+
+/* Belaningsregler per plattform */
+.plattformar { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; margin-top: 28px; }
+.plattform { background: var(--surface); border: 1px solid var(--divider); padding: 22px; }
+.plattform h3 { font-size: 21px; margin-bottom: 10px; }
+.plattform ul { margin: 14px 0 12px 18px; font-size: 13px; color: var(--ink-2); display: grid; gap: 5px; }
+table.nivaer td { padding: 5px 0; font-size: 13px; border-top: 1px solid var(--divider-light); text-align: left; white-space: normal; }
+table.nivaer td:last-child { text-align: right; font-weight: 600; white-space: nowrap; padding-left: 12px; }
+table.nivaer tr:first-child td { border-top: 0; color: var(--accent-2); }
+table.nivaer td:first-child { min-width: 0; }
+section.wrap.tat { padding-top: 0; }
+.mening input.lang { width: 7.5em; }
+@media (max-width: 700px) { .resultat { grid-template-columns: 1fr 1fr; gap: 10px; } .kort { padding: 14px; } .kort .tal { font-size: 21px; } .lanktext { font-size: 16px; } }
