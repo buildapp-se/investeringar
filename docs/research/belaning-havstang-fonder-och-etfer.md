@@ -1,3 +1,5 @@
+> **Inaktuellt om plattformar.** Räntor och villkor för Avanza och Nordnet i det här dokumentet är fel. Kontrollerade uppgifter finns i [belaning-plattformar.md](belaning-plattformar.md), 2026-09-24.
+
 # Research: Belåning och Hävstång i Fonder och ETF:er
 
 Status: Sammanställning av akademisk forskning (*Lifecycle Investing*, Fama-French, Merton), internationella Bogleheads-strategier (*Hedgefundie/HFEA*), samt svenska fonder med inbyggd hävstång och portföljbelåning på RikaTillsammans-forumet.

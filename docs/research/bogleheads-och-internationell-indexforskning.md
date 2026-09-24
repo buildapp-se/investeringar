@@ -202,7 +202,7 @@ Europeiska investerare hade länge svårt att hitta bra faktor-ETF:er. Standardv
 
 #### Det stora genombrottet: Avantis UCITS-lansering (Hösten 2024 / 2026)
 Den 25 september 2024 lanserade Avantis officiellt sina första UCITS-ETF:er i Europa:
-*   **AVWS** (*Avantis Global Small Cap Value UCITS ETF*, TER 0,39 %, ISIN IE00034YBzg4): En global Small Cap Value ETF för utvecklade marknader med systematiskt lönsamhetsfilter. Har blivit den nya referenspunkten för europeiska faktorinvesterare.
+*   **AVWS** (*Avantis Global Small Cap Value UCITS ETF*, TER 0,39 %, ISIN IE0003R87OG3): En global Small Cap Value ETF för utvecklade marknader med systematiskt lönsamhetsfilter. Har blivit den nya referenspunkten för europeiska faktorinvesterare.
 *   **AVWC** (*Avantis Global Equity UCITS ETF*, TER 0,22 %): En bred global aktiefond med inbyggd tilt mot värde och hög lönsamhet.
 
 > **Ben Felix varning om "Tracking Error Regret":**
