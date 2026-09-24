@@ -1,4 +1,4 @@
-// Delat mellan sidorna: temavaljaren och datumstampeln.
+// Delat mellan sidorna: temavaljaren.
 
 /** Kopplar temaknapparna och aterstaller sparat val. Systemtema ar standard. */
 export function startaTema() {
@@ -15,8 +15,3 @@ export function startaTema() {
   satt(sparat);
 }
 
-/** Skriver dagens datum i elementet med angivet id, om det finns. */
-export function visaDatum(id) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = new Date().toLocaleDateString('sv-SE');
-}
