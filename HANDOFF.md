@@ -7,6 +7,8 @@ blockers: []
 reviewedAt: 2026-09-24
 ---
 
+**2026-09-24, audits från aifabriken (`tools/audit-run.mjs`).** Actions: `persist-credentials: false` på checkout i deploy.yml (zizmor artipacked). Nya auditrader Secrets och Actions, båda pass.
+
 # Överlämning
 
 ## 2026-09-24: omläggningen

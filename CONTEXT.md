@@ -56,3 +56,6 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - Lighthouse: 2026-09-16, pass, a11y 100 after the contrast fix, best practices 100, SEO 60 (noindex by design, meta description added) (mobile, no perf)
 - Markup: 2026-09-16, pass, W3C 0 errors after the fix; 0 broken links
 - UX: 2026-09-16, warn, 2 targets under 44 px left after the fix (two 13 px checkboxes, the label is the target), number fields not interact-tested
+- npm audit: 2026-09-24, n/a, no package.json
+- Secrets: 2026-09-24, pass, gitleaks 0 findings in 31 commits
+- Actions: 2026-09-24, pass, zizmor 0 high, 0 medium, 0 low
