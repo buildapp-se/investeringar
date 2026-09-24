@@ -59,3 +59,4 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - npm audit: 2026-09-24, n/a, no package.json
 - Secrets: 2026-09-24, pass, gitleaks 0 findings in 31 commits
 - Actions: 2026-09-24, pass, zizmor 0 high, 0 medium, 0 low
+- WCAG 2.2 AA: 2026-09-24, warn, axe 4.13.0 0 violations on buildapp.se/investeringar (mobile, one page); manual keyboard pass not done
