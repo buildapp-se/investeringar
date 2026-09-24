@@ -77,7 +77,7 @@ ETF:er har under 2024–2026 fått ett kraftigt uppsving i diskussionerna på Ri
 | **SPYI** | SPDR MSCI ACWI IMI UCITS ETF (Acc) | MSCI ACWI IMI | 0,17 % | **Mest rekommenderade "all-in-one" ETF.** Inkluderar Large, Mid OCH Small Cap i både utvecklade marknader och tillväxtmarknader (~99 % av den globala investerbara aktiemarknaden). |
 | **WEBN** | Amundi Prime All Country World UCITS ETF (Acc) | Solactive GBS Global Markets All Cap | 0,07 % | **Lågprisrevolutionären.** Väldigt populär på forumet bland kostnadsoptimerare. Extremt låg avgift (0,07 %), dock med Solactive-index och något kortare historik. |
 | **VWCE** | Vanguard FTSE All-World UCITS ETF (Acc) | FTSE All-World | 0,22 % | **Veteranen och "guldstandarden".** Enorm likviditet, mycket stor fondförmögenhet (AUM). Täcker Large & Mid Cap globalt inkl. tillväxtmarknader. |
-| **Vanguard FTSE Global All-Cap (kommande/bevakad)** | Vanguard FTSE Global All-Cap UCITS ETF | FTSE Global All Cap | 0,07 % (enl. prospekt) | Mycket uppmärksammad i forumets bevakningstrådar. Ses som den potentiellt ultimata ETF:en om den kombinerar SPYI:s bredd (inkl. småbolag) med WEBN:s låga avgift. |
+| **Vanguard FTSE Global All-Cap (lanserad 2026-08-18, VGLA)** | Vanguard FTSE Global All-Cap UCITS ETF | FTSE Global All Cap | 0,07 % (enl. prospekt) | Mycket uppmärksammad i forumets bevakningstrådar. Ses som den potentiellt ultimata ETF:en om den kombinerar SPYI:s bredd (inkl. småbolag) med WEBN:s låga avgift. |
 | **SAVR Global by Vanguard** | Vanguard FTSE Developed World UCITS ETF (VGVF) | FTSE Developed | 0,15 % totalkostnad | Speciallösning via SAVR som erbjuder Vanguard-ETF utan courtage eller valutaväxling till 0,15 % årlig avgift. |
 
 ---

@@ -8,7 +8,7 @@ Status: researchunderlag inför fortsatt produktintervju. Ingen färdig rekommen
 - Samma källa tar upp SPDR MSCI ACWI IMI UCITS ETF (SPYI), Amundi Prime All-Country World (WEBN) och SAVR Global by Vanguard. Exakt produkt, andelsklass, börs och köpbarhet måste kontrolleras före jämförelse.
 - [Småspararguidens globalfondsartikel](https://www.smaspararguiden.se/blogg/sa-hittar-du-den-basta-globala-indexfonden/) påpekar själv att SEB Global Indexnära och PLUS Global Index inte arbetats in i den äldre jämförelsen. Dessa är ytterligare kandidater. Äldre tabeller och innehavsuppgifter får inte återanvändas som aktuella fakta.
 - [Forumtråden om plattform för globalfonder](https://rikatillsammans.se/forum/t/vilken-plattform-ar-bast-for-globalfonder/118256) tar upp SAVR och Fondo utöver traditionella plattformar. Deras aktuella tillgänglighet och prislistor är inte verifierade här.
-- [Forumtråden om Vanguard FTSE Global All-Cap](https://rikatillsammans.se/forum/t/vanguard-ftse-global-all-cap-ucits-etf-0-07-i-avgift/125345) är ett bevakningsfynd. Lansering, pris och svensk köpbarhet är inte verifierade mot Vanguard i denna genomgång.
+- [Forumtråden om Vanguard FTSE Global All-Cap](https://rikatillsammans.se/forum/t/vanguard-ftse-global-all-cap-ucits-etf-0-07-i-avgift/125345) ledde till VGLA, lanserad 2026-08-18, 0,07 %, köpbar hos Avanza och Nordnet. Se etf-kandidater.md.
 - **Ultralågpriskandidater (kartlagda i research):**
   - *SPDR S&P 500 UCITS ETF (SPYL)*: 0,03 % TER (Europas lägsta avgift för aktie-ETF).
   - *Amundi Prime Global UCITS ETF (PRIW / PABW)*: 0,05 % TER (lägsta globala Developed Markets ETF).
