@@ -39,7 +39,7 @@ Patrik står som namngiven avsändare och ansvarig för urvalet. Affiliate får 
 
 Q56 godkänd: redovisa om Patrik själv äger lyfta produkter eller använder leverantörer, utan belopp, tillsammans med affiliatesamarbeten på ”Om jämförelsen”. Faktiska innehav har inte uppgetts och får inte hittas på.
 
-Kontaktadress: `kontakt@buildapp.se`, tänkt vidarebefordran till `patz.lofgren@gmail.com` via ImprovMX, samma lösning som för kontakt@orgutveckling.se. Inställningen är inte gjord eller verifierad. Kontroll visade MX till Strato för buildapp.se och ImprovMX för orgutveckling.se.
+Kontaktadress: `kontakt@buildapp.se`, vidarebefordras till `patz.lofgren@gmail.com` via Cloudflare Email Routing (påslaget 2026-09-25, Strato-MX på apex borttagen; regeln skapad, inget provmejl skickat än).
 
 En begriplig friskrivning och information om risk, ansvar, reklam och integritet behövs. Juridiskt underlag och slutlig text är inte granskade; en friskrivning får inte antas undanröja tillämpliga krav.
 
