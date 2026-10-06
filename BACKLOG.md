@@ -44,3 +44,10 @@ Fynd från cockpitens granskningskolumner (Lighthouse mobil, W3C, UX-skript, hea
 - [x] `[P2]` (rättad 2026-09-16, `--ink-3` #8f8f88 till #6f6f68 i ljust läge; a11y 100 live) Lighthouse: färgkontrast under 4,5:1 (a11y 97).
 - [x] `[P3]` (rättad 2026-09-16: 44 px på nav, tema, knappar, flikar, infoknappar, fält och sidfot; kvar två kryssrutor på 13 px där etiketten är ytan. Postel ej körd) UX, Fitts: temaknapparna System, Ljust, Mörkt är 27 px, plus 13 tryckytor under 44 px. Postel: fyra sifferfält ej testade med `--interact`.
 - [x] `[P3]` (rättad 2026-09-16, alla tre sidor; SEO 60 kvar av noindex) Meta description saknas (SEO 50 ihop med noindex, som är avsiktlig).
+
+## Granskning 2026-10-06
+
+Fynd från den automatiska sviten (aifabriken `tools/audit-suite.ts`: headers, npm audit, secrets, Actions, markup, axe). Mätvärdena står som `(automated)`-rader under `## Audits` i CONTEXT.md.
+
+- [ ] `[P3]` npm audit kan inte köras: `site/` saknar `package-lock.json`. Checka in en låsfil.
+- [ ] `[P3]` WCAG: bara inloggningsskärmen mäts (axe 0 fel, 6 element med oavgjord kontrast). Sidorna bakom lösenordet kräver ett inloggat tillstånd i svitens inventarie.
