@@ -109,23 +109,38 @@ Lysa: "genomsnittskund betalar ca 0,40 %" (https://www.lysa.se/help-center/170-v
 | > 50 MSEK | 0,25 % | samma |
 | Underliggande fonder | "genomsnittlig avgift på 0,11–0,16 %" (premiumsidan); "fondavgifterna endast mellan 0,06–0,37 %" efter återbetald provision (portföljsidan) | https://www.opti.se/premium, https://www.opti.se/portfolj |
 | Total kostnad | "cirka 0,7 %", "inkluderar förvaltningen, kostnaderna för samtliga fonder och allt annat väsentligt"; Opti 9 "cirka 0,70 %" | https://www.opti.se/faq |
-| Moms, depåavgift | Nämns som tillkommande i uppskattningen ("t.ex. moms ... avgifterna för depån/kontot"); belopp UNVERIFIED | https://www.opti.se/avgifter |
+| Moms, depåavgift | 0,50 % är inklusive moms (se nedan). Depåavgift tillkommer, belopp UNVERIFIED | https://www.opti.se/portfolj, https://www.opti.se/avgifter |
 | Fondprovisioner | Betalas tillbaka till kunden | https://www.opti.se/faq |
 | Aktieandel | Nivåer Opti 1–9 plus "Opti 100 % aktier"; "högsta risknivå ... enbart aktiefonder". Aktieandel per nivå: UNVERIFIED | https://www.opti.se/faq |
 | Resten | Räntefonder (global valutasäkrad: nominella, real, high yield, tillväxtmarknad; gröna obligationer i hållbar variant) och en råvarufond (råvaruterminer) | https://www.opti.se/faq |
 | Minsta insättning | 200 kr per tillfälle | https://www.opti.se/faq |
 | Övrigt | Pengarna-tillbaka-garanti på förvaltningsarvodet 3–12 mån; KF via Futur +0,2 %/år (företag) | https://www.opti.se/faq |
 
-Siffran 0,50 % är inte uttalat inkl. eller exkl. moms på Opti:s egna sidor. isk-guiden.se påstår "inkl. moms", men det är sekundärkälla: UNVERIFIED.
+**Moms, avgjort 2026-10-06:** 0,50 % är inklusive moms. https://www.opti.se/portfolj skriver under "Vad kostar det?": "Månadskostnaden är beräknad från vår årliga avgift på 0,5 % inklusive moms samt vår leverantörs årliga avgift för depåhantering." Fondernas avgifter är uttryckligen inte medräknade där. Depåavgiftens storlek anges inte.
+
+**Aktieandel per nivå, fortfarande okänd 2026-10-06:** opti.se/faq, /portfolj, /premium, /avgifter, /metod, /historisk-avkastning och /fondrobot lästa i sin helhet. Ingen av dem anger aktieandel för Opti 1–9. Metodsidan säger bara att portföljerna viktas över fem tillgångsslag (aktier, nominella statsobligationer, krediter, reala statsobligationer, råvaror). Uppgiften finns sannolikt bara i appen.
 
 ### Övriga svenska alternativ
 
 | Tjänst | Konstruktion | Avgift | Aktieandel | Källa |
 | --- | --- | ---: | --- | --- |
 | Nordnet One | Tre allokeringsfonder | 0,35 % årlig avgift, "samtliga underliggande fondkostnader" ingår | Försiktig 30 %, Balanserad 60 %, Offensiv 100 % (resten räntefonder) | https://www.nordnet.se/faq/handel-vardepapper/fonder-etfer/nordnet-one/vad-ar-nordnet-one-och-hur-fungerar-det |
-| Avanza Auto 1–6 | Sex specialfonder (fond-i-fond) | Förvaltning 0,35 %, årlig avgift 0,39 % (Auto 1–5) och 0,40 % (Auto 6) | Stigande risk 1→6; aktieandel per nivå UNVERIFIED | Avanza API guide/788395, 788394 m.fl., 2026-09-24 |
+| Avanza Auto 1–6 | Sex specialfonder (fond-i-fond) | Förvaltning 0,35 %, årlig avgift 0,39 % (Auto 1–5) och 0,40 % (Auto 6) | Se tabellen nedan | Avanza API guide/788395, 788394 m.fl., 2026-09-24 |
 | SAVR Global by Vanguard | En global ETF, inte robot | 0,15 % per år, "helt utan courtage och växlingsavgift" | 100 % aktier, över 2 000 bolag | https://savr.com/sv/savr-global |
 | "SAVR Autopilot" | Ingen träff på savr.com | UNVERIFIED, finns troligen inte | | sökning på savr.com 2026-09-24 |
+
+**Avanza Auto, aktieexponering per fond.** Läst 2026-10-06 i fondbolagets faktablad (PRIIP KID, alla sex upprättade 2026-05-26), hämtade via `https://www.avanza.se/_api/fund-reference/reference/{id}/prospectus`. Avgifterna i faktabladen stämmer med raden ovan (0,35 % plus 0,04 % transaktionskostnader, Auto 6 0,05 %).
+
+| Fond | Avanza-id | Tillåtet spann | Normalexponering |
+| --- | --- | --- | ---: |
+| Avanza Auto 1 | 788395 | 10–40 % | ca 20 % |
+| Avanza Auto 2 | 788396 | 25–55 % | ca 40 % |
+| Avanza Auto 3 | 788397 | 40–70 % | ca 60 % |
+| Avanza Auto 4 | 788398 | 55–85 % | ca 80 % |
+| Avanza Auto 5 | 788393 | 70–100 % | ca 100 % |
+| Avanza Auto 6 | 788394 | 85–120 % | anges inte |
+
+Auto 6 får alltså ligga över 100 % med hjälp av derivat. Sajten visar normalexponeringen för Auto 1–5 och spannet för Auto 6.
 
 "Nordnet Smart Spar" heter i dag Nordnet One. Sekundärkällor som anger 0,25–0,40 % eller 0,5 % för Avanza Auto är inaktuella mot primärkällorna ovan.
 

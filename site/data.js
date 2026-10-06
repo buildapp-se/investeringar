@@ -64,7 +64,7 @@ export const FONDER = [
 export const ROBOTAR = [
   { namn: 'Nordnet One', url: 'https://www.nordnet.se/faq/handel-vardepapper/fonder-etfer/nordnet-one/vad-ar-nordnet-one-och-hur-fungerar-det', avgift: '0,35 %', aktieandel: '30, 60 eller 100 %', minsta: null },
   { namn: 'Lysa', url: 'https://www.lysa.se/avgifter', avgift: '0,36 %', aktieandel: '0–100 %', minsta: '100 kr' },
-  { namn: 'Avanza Auto', url: null, avgift: '0,39–0,40 %', aktieandel: null, minsta: null },
+  { namn: 'Avanza Auto', url: null, avgift: '0,39–0,40 %', aktieandel: '20, 40, 60, 80 eller 100 %. Auto 6: 85–120 %', minsta: null },
   { namn: 'Opti', url: 'https://www.opti.se/faq', avgift: 'ca 0,70 %', aktieandel: 'Nivå 1–9 eller 100 %', minsta: '200 kr' },
 ];
 
