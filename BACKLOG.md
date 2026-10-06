@@ -50,5 +50,5 @@ Fynd från cockpitens granskningskolumner (Lighthouse mobil, W3C, UX-skript, hea
 
 Fynd från den automatiska sviten (aifabriken `tools/audit-suite.ts`: headers, npm audit, secrets, Actions, markup, axe). Mätvärdena står som `(automated)`-rader under `## Audits` i CONTEXT.md.
 
-- [ ] `[P3]` npm audit kan inte köras: `site/` saknar `package-lock.json`. Checka in en låsfil.
+- [x] `[P3]` (rättad 2026-10-06: `site/package-lock.json` incheckad, `npm audit` kör och ger 0 sårbarheter, projektet har inga beroenden) npm audit kan inte köras: `site/` saknar `package-lock.json`. Checka in en låsfil.
 - [ ] `[P3]` WCAG: bara inloggningsskärmen mäts (axe 0 fel, 6 element med oavgjord kontrast). Sidorna bakom lösenordet kräver ett inloggat tillstånd i svitens inventarie.
