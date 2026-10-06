@@ -2,7 +2,7 @@
 schemaVersion: 1
 status: active
 currentGoal: Omläggningen 2026-09-24 är byggd och publicerad. Nästa är Patriks genomläsning av sajten.
-nextAction: Patrik granskar grenen batch/2026-10-06 (fyra commits, inte mergad, inte publicerad) och läser sedan buildapp.se/investeringar och säger vad som ska bort eller flyttas. Kör lokalt med node server.mjs i site/, port 4173.
+nextAction: Patrik granskar grenen batch/2026-10-06 (inte mergad, inte publicerad) och läser sedan buildapp.se/investeringar och säger vad som ska bort eller flyttas. Kör lokalt med node server.mjs i site/, port 4173.
 blockers: []
 reviewedAt: 2026-10-06
 ---
