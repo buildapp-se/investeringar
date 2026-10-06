@@ -23,7 +23,8 @@ Lägg nya forumtrådar, fondnamn, ETF:er och korta kommentarer här. Fynd bearbe
 - [ ] **[P1] Publiceringsförberedelser och mätning.** Hosting är vald och verifierad 2026-09-09: GitHub Pages från `buildapp-se/investeringar`, live på buildapp.se/investeringar, deploy vid push till `master` efter att testerna gått igenom. Sidan ligger bakom en klientsidesgrind, är märkt som prototyp och har `noindex` på alla tre sidorna. Kvar: ta bort grinden och `noindex` när uppgifterna är klara, och först därefter Search Console, Cloudflare Web Analytics och teknisk SEO. Att indexera en prototyp skadar den riktiga lanseringen.
 
 - [x] **[P2] Kontrollera Opti och Avanza Auto.** Klart 2026-10-06. Avanza Auto: aktieexponering per fond läst i faktabladen (normalt 20, 40, 60, 80 och 100 % för Auto 1–5, Auto 6 85–120 %) och införd på sajten. Opti: 0,50 % är inklusive moms enligt opti.se/portfolj. Optis aktieandel per nivå 1–9 står inte på någon publik sida, bara i appen, så sajten visar fortsatt "Nivå 1–9 eller 100 %". Se [avgifter-plattformar-robotar.md](docs/research/avgifter-plattformar-robotar.md).
-- [ ] **[P3] Länderantal för FTSE- och Solactive-ETF:erna.** Saknas för VGLA, WEBN, VWCE, FWIA, VFEA, IS3N m.fl.
+- [x] **[P3] Länderantal för FTSE- och Solactive-ETF:erna.** Klart 2026-10-06 för åtta av tio: VGLA, VWCE, FWIA (49), SPYI (47), VFEA, IS3N (24), IUSN (23), ZPRX (15), antal länder i indexet enligt FTSE Russells och MSCI:s egna faktablad. VFEA:s 24 är härledd, se [etf-kandidater.md](docs/research/etf-kandidater.md).
+- [ ] **[P3] Länderantal för WEBN och AVWS.** Solactives faktablad visar länderna bara som diagram och Avantis bara de fem största. Kräver fondens fullständiga innehavslista. Visas som "–" på sajten.
 
 ## P2 · Senare utbyggnad
 
