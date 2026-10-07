@@ -2,9 +2,9 @@
 schemaVersion: 1
 status: active
 currentGoal: Omläggningen 2026-09-24 är byggd och publicerad. Nästa är Patriks genomläsning av sajten.
-nextAction: Patrik granskar grenen batch/2026-10-06 (inte mergad, inte publicerad) och läser sedan buildapp.se/investeringar och säger vad som ska bort eller flyttas. Kör lokalt med node server.mjs i site/, port 4173.
+nextAction: Patrik läser buildapp.se/investeringar och säger vad som ska bort eller flyttas. Kör lokalt med node server.mjs i site/, port 4173.
 blockers: []
-reviewedAt: 2026-10-06
+reviewedAt: 2026-10-07
 ---
 
 **2026-09-24, audits från aifabriken (`tools/audit-run.mjs`).** Actions: `persist-credentials: false` på checkout i deploy.yml (zizmor artipacked). Nya auditrader Secrets och Actions, båda pass.
@@ -94,7 +94,7 @@ Cross-project run from elwyn-dash with aifabriken `tools/audit-suite.ts` (header
 
 ## Nattbatch 2026-10-06, grenen `batch/2026-10-06`
 
-Fyra punkter ur BACKLOG.md, arbetade i en separat worktree, committade på grenen och pushade som backup. Inget är mergat till `master` och inget är publicerat.
+Fyra punkter ur BACKLOG.md, arbetade i en separat worktree, committade på grenen. Mergat till `master` och deployat 2026-10-07 på Patriks order.
 
 - Fondbolagens egna faktablad lästa för Avanza Global, Swedbank Robur Access Global och Storebrand Global All Countries: total avgift 0,10 %, 0,24 % och 0,32 %, samma som sajten redan visar. Därmed är kandidatverifieringen klar så när som på SAVR och Montrose.
 - Avanza Auto har fått aktieandel i robottabellen. Optis 0,50 % är inklusive moms.
