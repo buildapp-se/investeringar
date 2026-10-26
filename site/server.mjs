@@ -2,7 +2,7 @@
 // behovs den for att oppna prototypen. Kors med: node server.mjs
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
-import { extname, join, normalize } from 'node:path';
+import { extname, join, normalize, sep } from 'node:path';
 
 const ROT = import.meta.dirname;
 // Fel MIME-typ pa CSS gor att webblasaren tyst vagrar tillampa stilmallen,
@@ -18,9 +18,17 @@ const TYPER = {
 const PORT = Number(process.env.PORT) || 4173;
 
 createServer(async (req, res) => {
-  const rel = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^([/\\])+/, '');
+  // Trasig kodning (/%ff) kastar: svara 400 i stallet for att servern dor.
+  let rel;
+  try {
+    rel = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^([/\\])+/, '');
+  } catch {
+    res.writeHead(400).end('Ogiltig adress');
+    return;
+  }
   const fil = join(ROT, rel === '' ? 'index.html' : rel);
-  if (!fil.startsWith(ROT)) { res.writeHead(403).end('Nej'); return; }
+  // Med avgransaren, annars slapps en syskonmapp som borjar likadant (site-x) igenom.
+  if (!fil.startsWith(ROT + sep)) { res.writeHead(403).end('Nej'); return; }
   try {
     const data = await readFile(fil);
     res.writeHead(200, { 'Content-Type': TYPER[extname(fil)] ?? 'application/octet-stream' }).end(data);
