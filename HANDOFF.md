@@ -4,12 +4,16 @@ status: active
 currentGoal: Omläggningen 2026-09-24 är byggd och publicerad. Nästa är Patriks genomläsning av sajten.
 nextAction: Patrik läser buildapp.se/investeringar och säger vad som ska bort eller flyttas. Kör lokalt med node server.mjs i site/, port 4173.
 blockers: []
-reviewedAt: 2026-10-07
+reviewedAt: 2026-10-26
 ---
 
 **2026-09-24, audits från aifabriken (`tools/audit-run.mjs`).** Actions: `persist-credentials: false` på checkout i deploy.yml (zizmor artipacked). Nya auditrader Secrets och Actions, båda pass.
 
 # Överlämning
+
+## 2026-10-26: OWASP
+
+OWASP-granskning (Gemini 3.8 Flash, granskad av Claude): förhandsservern `site/server.mjs` dog på `/%ff`, svarar nu 400 (`8a07b1b`). Lanens high om grinden avvisad: grinden är medvetet bara klientsidig.
 
 ## 2026-09-24: omläggningen
 
