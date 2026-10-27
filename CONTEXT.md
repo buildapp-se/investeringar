@@ -56,12 +56,11 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - Lighthouse: 2026-09-16, pass, a11y 100 after the contrast fix, best practices 100, SEO 60 (noindex by design, meta description added) (mobile, no perf)
 - Markup: 2026-09-16, pass, W3C 0 errors after the fix; 0 broken links
 - UX: 2026-09-16, warn, 2 targets under 44 px left after the fix (two 13 px checkboxes, the label is the target), number fields not interact-tested
-- npm audit: 2026-09-24, n/a, no package.json
+- npm audit: 2026-10-27, n/a, no package.json
 - Secrets: 2026-09-24, pass, gitleaks 0 findings in 31 commits
 - Actions: 2026-09-24, pass, zizmor 0 high, 0 medium, 0 low
 - WCAG 2.2 AA: 2026-09-24, warn, axe 4.13.0 0 violations on buildapp.se/investeringar (mobile, one page); manual keyboard pass not done
 - Headers (automated): 2026-10-06, fail, 1 targets; 1 failed, 0 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
-- npm audit (automated): 2026-10-06, blocked, 1 targets; 0 failed, 1 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
 - Secrets (automated): 2026-10-06, pass, 2 targets; 0 failed, 0 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
 - Actions (automated): 2026-10-06, pass, zizmor 0 high, 0 medium, 0 low; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
 - Markup (automated): 2026-10-06, blocked, 1 targets; 0 failed, 1 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a2/investeringar.json
