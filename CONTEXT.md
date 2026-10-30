@@ -67,6 +67,6 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - WCAG 2.2 AA (automated): 2026-10-06, blocked, 1 targets; 0 failed, 1 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a2/investeringar.json
 - OG image: 2026-10-27, n/a, private page behind a gate, never shared as a link preview
 - Database: 2026-10-25, none, localStorage
-- OWASP Top 10: 2026-10-26, pass, code review (Gemini 3.8 Flash, reviewed by Claude); fixed in the local preview server: `/%ff` crashed it (now 400), root check gets a separator; rejected: the gate is client-side by design (`site/grind.js` says so, nothing secret behind it); lows left: `server.mjs` and tests published with Pages, no year cap in the calculator loop, research tool parses XML without defusedxml (own trusted sources)
+- OWASP Top 10: 2026-10-30, warn, code review (Mistral Large, medium and high checked by Claude), no live probe; 0 high, 1 medium: no CSP in repo, zone CSP lacks script-src (shared zone rule)
 - ZAP baseline: 2026-10-27, n/a, static site on buildapp.se with a client-side gate only, no server, cookies or forms; headers, TLS and markup are covered by their own columns
 - Dependabot: 2026-10-29, pass, 0 open alerts
