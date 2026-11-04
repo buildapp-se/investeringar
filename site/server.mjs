@@ -14,7 +14,6 @@ const TYPER = {
   '.mjs': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.svg': 'image/svg+xml',
-  '.png': 'image/png',
 };
 const PORT = Number(process.env.PORT) || 4173;
 
