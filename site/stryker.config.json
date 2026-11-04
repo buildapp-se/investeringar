@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "Mutationstest av räknelogiken (audit-kolumnen Mutation). Kör i site/: npm i --no-save @stryker-mutator/core@9 && npx stryker run. UI-skripten muteras inte, och data.js är källbelagda siffror, inte logik.",
+  "testRunner": "command",
+  "commandRunner": { "command": "node test-avgifter.mjs && node test-belaning.mjs" },
+  "coverageAnalysis": "off",
+  "mutate": ["avgifter.js", "belaning.js"],
+  "reporters": ["clear-text", "progress", "html", "json"],
+  "htmlReporter": { "fileName": "reports/mutation/mutation.html" },
+  "jsonReporter": { "fileName": "reports/mutation/mutation.json" },
+  "concurrency": 4,
+  "timeoutMS": 10000
+}

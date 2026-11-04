@@ -7,3 +7,7 @@ prototyp-*.png
 design/canvas/*.html
 !design/canvas/*.dc.html
 verktyg/.cache/
+
+# Stryker (mutation test), run locally in site/
+site/reports/
+site/.stryker-tmp/
