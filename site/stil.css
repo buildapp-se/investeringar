@@ -24,7 +24,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema="ljust"]) {
     --paper: #141517; --paper-subtle: #191b1e; --surface: #1e2023;
-    --ink: #eeeeec; --ink-2: #a5a5a0; --ink-3: #787873;
+    --ink: #eeeeec; --ink-2: #a5a5a0; --ink-3: #8f8f8a; /* ink-3 var #787873, 3,7:1 mot ytan */
     --divider: #2c2f33; --divider-light: #24272a;
     --accent: #94c8a8; --accent-2: #7fb896; --accent-soft: #1c2a22;
     --varning: #dcae5f; --varning-soft: #29220f;
@@ -35,7 +35,7 @@
 }
 :root[data-tema="morkt"] {
   --paper: #141517; --paper-subtle: #191b1e; --surface: #1e2023;
-  --ink: #eeeeec; --ink-2: #a5a5a0; --ink-3: #787873;
+  --ink: #eeeeec; --ink-2: #a5a5a0; --ink-3: #8f8f8a;
   --divider: #2c2f33; --divider-light: #24272a;
   --accent: #94c8a8; --accent-2: #7fb896; --accent-soft: #1c2a22;
   --varning: #dcae5f; --varning-soft: #29220f;

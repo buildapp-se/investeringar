@@ -6,6 +6,17 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Breda ETF:er som går att köpa hos Avanza och Nordnet, och hur du får lägsta belåningsräntan hos Avanza, Nordnet och Montrose.">
 <title>ETF och belåning · buildapp.se</title>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="ETF och belåning · buildapp.se">
+<meta property="og:description" content="Breda ETF:er som går att köpa hos Avanza och Nordnet, och hur du får lägsta belåningsräntan hos Avanza, Nordnet och Montrose.">
+<meta property="og:url" content="https://buildapp.se/investeringar/etf-belaning.html">
+<meta property="og:image" content="https://buildapp.se/investeringar/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="buildapp.se / investeringar: Vad ränta på ränta gör med ditt sparande">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="ikon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +51,7 @@
 
 <section class="wrap bred forst" id="etfer">
   <h1>ETF:er</h1>
-  <div class="tabellhalla">
+  <div class="tabellhalla" tabindex="0" role="region" aria-label="ETF:er">
     <table>
       <thead><tr>
         <th scope="col">ETF</th><th scope="col">Avgift</th><th scope="col">Innehav</th><th scope="col">Länder</th>
@@ -54,7 +65,7 @@
 
 <section class="wrap bred tat" id="havstang">
   <h2 class="rubrik2">Fonder med inbyggd belåning</h2>
-  <div class="tabellhalla">
+  <div class="tabellhalla" tabindex="0" role="region" aria-label="Fonder med inbyggd belåning">
     <table>
       <thead><tr><th scope="col">Fond</th><th scope="col">Avgift</th><th scope="col" class="vanster">Lånekostnad</th><th scope="col" class="vanster">Index</th><th scope="col" class="vanster">Var</th></tr></thead>
       <tbody id="havstangrader"></tbody>
@@ -71,7 +82,7 @@
     <p class="mening">Jag har <input id="kapital" class="lang" type="number" min="0" max="100000000" step="50000" value="500000" aria-label="Eget kapital i kronor"> kr i globala indexfonder.</p>
   </div>
 
-  <div class="tabellhalla" style="margin-top:20px">
+  <div class="tabellhalla" tabindex="0" role="region" aria-label="Belåning per plattform" style="margin-top:20px">
     <table>
       <thead><tr><th scope="col">Plattform</th><th scope="col">Lägsta ränta</th><th scope="col">Låna högst</th><th scope="col">Ränta per år</th><th scope="col" class="vanster">Så bygger du portföljen</th></tr></thead>
       <tbody id="bastarader"></tbody>
@@ -81,7 +92,7 @@
   <div class="plattformar" id="plattformar"></div>
 
   <h3 class="rubrik3">Belåningsvärde per värdepapper</h3>
-  <div class="tabellhalla smal">
+  <div class="tabellhalla smal" tabindex="0" role="region" aria-label="Belåningsvärde per värdepapper">
     <table>
       <thead><tr><th scope="col">Värdepapper</th><th scope="col">Avanza</th><th scope="col">Nordnet</th></tr></thead>
       <tbody id="vardrader"></tbody>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- Källa till site/og.png (1200x630), delningsbilden. Deployas inte (bara site/ publiceras).
+     Rendera: öppna i headless Chromium vid 1200x630 när typsnitten laddats och ta en skärmbild
+     av vyn. Färger och typsnitt från site/stil.css (ljust tema), märket är site/ikon.svg. -->
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Manrope:wght@400;600&display=block" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #fbfbf9; color: #16160f; font-family: Manrope, sans-serif;
+    display: flex; align-items: center; gap: 72px; padding: 0 100px; position: relative;
+  }
+  body::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: #22382c; }
+  .mark { width: 240px; height: 240px; flex: none; box-shadow: 0 2px 4px rgba(20,20,10,.05), 0 14px 40px rgba(20,20,10,.09); border-radius: 52px; }
+  .copy { display: flex; flex-direction: column; }
+  .marke { font-size: 24px; font-weight: 600; letter-spacing: .01em; }
+  .marke .del { color: #6f6f68; font-weight: 400; }
+  .marke .sida { color: #5c5c56; font-weight: 400; }
+  h1 { font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 72px; line-height: 1.08; letter-spacing: -.01em; margin-top: 26px; }
+  p { font-size: 26px; line-height: 1.5; color: #5c5c56; margin-top: 26px; max-width: 700px; }
+</style>
+</head>
+<body>
+  <svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" aria-hidden="true"><rect width="256" height="256" rx="56" fill="#22382C"/><path fill="#94C8A8" d="M0 206C140 206 236 160 256 56V200A56 56 0 0 1 200 256H56A56 56 0 0 1 0 200Z"/></svg>
+  <div class="copy">
+    <div class="marke">buildapp.se <span class="del">/</span> <span class="sida">investeringar</span></div>
+    <h1>Vad ränta på ränta gör med ditt sparande</h1>
+    <p>Räknare, globala indexfonder, fondrobotar, ETF:er och forskningen bakom.</p>
+  </div>
+</body>
+</html>
