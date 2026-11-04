@@ -33,10 +33,17 @@ export function startaGrind() {
 
   const overlay = document.createElement('div');
   overlay.className = 'grind';
+  // Sidan bakom ar redan ritad. Utan inert gick det att tabba in i den, osynligt
+  // under overlayen, och den raknades inte som ett eget omrade for skarmlasare.
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-labelledby', 'grind-rubrik');
+  const bakom = [...document.body.children];
+  bakom.forEach(el => { el.inert = true; });
   overlay.innerHTML = `
     <form class="grindruta" novalidate>
       <p class="ogonbryn">Prototyp · inte publicerad</p>
-      <h1>Den här sidan är under uppbyggnad</h1>
+      <h1 id="grind-rubrik">Den här sidan är under uppbyggnad</h1>
       <p>Jämförelsen är en prototyp. Flera uppgifter är ännu inte kontrollerade mot förstahandskälla, och ingenting här ska användas som underlag för att placera pengar.</p>
       <label for="grind-ord">Lösenord</label>
       <input id="grind-ord" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required>
@@ -57,6 +64,7 @@ export function startaGrind() {
     }
     try { localStorage.setItem(NYCKEL, FACIT); } catch { /* privat lage: slapp in anda, en gang per flik */ }
     overlay.remove();
+    bakom.forEach(el => { el.inert = false; });
     document.body.style.overflow = '';
   });
 
