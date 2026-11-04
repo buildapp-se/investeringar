@@ -7,6 +7,8 @@ blockers: []
 reviewedAt: 2026-10-26
 ---
 
+**2026-11-04, förbättringsrunda (gren `claude/forbattringar-2026-11-04`, PR #1, inte mergad eller deployad).** Bara kod och markup, inga siffror eller fondtexter. (1) Mörkt tema: `--ink-3` `#787873` gav 3,67:1 mot korten, nu `#8f8f8a` (lägst 4,61:1). (2) De sex tabellhållarna har `tabindex="0"`, `role="region"` och etikett, så ETF-tabellen går att rulla med tangentbord på 390 px. (3) Grinden är `role="dialog"` med `aria-modal`, sidan bakom `inert` tills ordet är rätt; förut gick Skift+Tab in i den dolda sidan. (4) `site/og.png` från nya `og.source.html` i roten, og- och twitter-taggar på alla tre sidor, `favicon-32.png` som reserv, `server.mjs` serverar `.png` rätt. Audit-raden OG ändrad från n/a till pass (lokal kontroll); grinden och `noindex` orörda, vill Patrik vänta med förhandsbild till lanseringen går steget att plocka bort. Verifierat lokalt: testerna (6 + 6 + självtest) gröna, axe 0 överträdelser på alla tre sidor vid 390 och 1280 px, ljust och mörkt, grind och sida. Inte mätt live.
+
 **2026-09-24, audits från aifabriken (`tools/audit-run.mjs`).** Actions: `persist-credentials: false` på checkout i deploy.yml (zizmor artipacked). Nya auditrader Secrets och Actions, båda pass.
 
 # Överlämning
