@@ -34,7 +34,14 @@ provar('varje plattform i data.js har en giltig basta niva', () => {
   }
 });
 
+provar('noll kapital och noll grans ger noll i lan, inget fel', () => {
+  assert.equal(maxLan(0, { grans: 0.10, motTotal: true }), 0);
+  assert.equal(maxLan(100000, { grans: 0, motTotal: true }), 0);
+});
+
 provar('ogiltiga varden kastar RangeError', () => {
+  assert.throws(() => maxLan(NaN, { grans: 0.1, motTotal: true }), RangeError);
+  assert.throws(() => maxLan(1000, { grans: -0.1, motTotal: true }), RangeError);
   assert.throws(() => maxLan(-1, { grans: 0.1, motTotal: true }), RangeError);
   assert.throws(() => maxLan(1000, { grans: 1, motTotal: true }), RangeError);
 });

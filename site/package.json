@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node test-avgifter.mjs",
+    "test": "node test-avgifter.mjs && node test-belaning.mjs",
     "start": "node server.mjs"
   }
 }

@@ -39,10 +39,24 @@ provar('ogiltiga varden kastar RangeError', () => {
   assert.throws(() => rantaPaRanta({ engangsinsattning: -1, manadssparande: 0, ar: 5, raknesats: 0.07 }), RangeError);
 });
 
+provar('negativt manadssparande och raknesats pa -100 % eller lagre kastar', () => {
+  assert.throws(() => rantaPaRanta({ engangsinsattning: 0, manadssparande: -1, ar: 5, raknesats: 0.07 }), RangeError);
+  assert.throws(() => rantaPaRanta({ engangsinsattning: 1000, manadssparande: 0, ar: 5, raknesats: -1 }), RangeError);
+  assert.throws(() => rantaPaRanta({ engangsinsattning: 1000, manadssparande: 0, ar: 5, raknesats: NaN }), RangeError);
+});
+
+provar('negativ raknesats over -100 % raknas: 1 000 x 0,5^2', () => {
+  const r = rantaPaRanta({ engangsinsattning: 1000, manadssparande: 0, ar: 2, raknesats: -0.5, perioderPerAr: 1 });
+  assert.ok(Math.abs(r.slutvarde - 250) < 1e-9, `fick ${r.slutvarde}`);
+});
+
 provar('formatering foljer svenska konventioner', () => {
   assert.equal(kronor(18400), '18 400 kr');
   assert.equal(kronor(531664), '531 664 kr');
   assert.equal(procent(0.002), '0,20 %');
+  assert.equal(kronor(1234567), '1 234 567 kr');
+  assert.equal(kronor(999.6), '1 000 kr');
+  assert.equal(procent(0.07, 0), '7 %');
 });
 
 console.log(fel === 0 ? '\nAlla kontroller gick igenom.' : `\n${fel} kontroll(er) misslyckades.`);
