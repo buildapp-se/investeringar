@@ -49,6 +49,50 @@ Stitch Förslag E som ytskikt: serif i rubriker, pappersvit bakgrund, mörkgrön
 
 Google Search Console och Cloudflare Web Analytics är valda för mätning, inom nollbudgeten. Ingen analytics är konfigurerad.
 
+## Architecture
+
+Statisk sajt i `site/` utan byggsteg. Siffrorna skrivs för hand i `site/data.js` med källa och datum i `docs/research/`.
+
+```mermaid
+graph LR
+  subgraph SITE["site/, statiska sidor"]
+    INDEX[index.html, ränta på ränta]
+    ETF[etf-belaning.html]
+    FORSK[forskning.html]
+    DATA[data.js, siffror]
+    CALC[avgifter.js och belaning.js]
+    COMMON[gemensamt.js och grind.js]
+  end
+
+  RESEARCH[docs/research/ källor och datum]
+  FI[FI fondinnehavsregister]
+  FITOOL[verktyg/fi-fondinnehav.py]
+  CI[GitHub Actions, tester och versionsmärkning]
+  PAGES[GitHub Pages]
+
+  FI --> FITOOL
+  FITOOL -.->|underlag| RESEARCH
+  RESEARCH -.->|för hand| DATA
+  DATA --> INDEX
+  DATA --> ETF
+  CALC --> INDEX
+  CALC --> ETF
+  COMMON --> INDEX
+  COMMON --> ETF
+  COMMON --> FORSK
+  SITE --> CI
+  CI -->|push till master| PAGES
+```
+
+## Stack
+
+- Frontend: statisk HTML, CSS och ES-moduler utan ramverk eller byggsteg
+- Data: `site/data.js`, handskrivna siffror med källor i `docs/research/`
+- Verktyg: `verktyg/fi-fondinnehav.py`, Python med bara standardbiblioteket
+- Tester: `site/test-avgifter.mjs`, `site/test-belaning.mjs` och `fi-fondinnehav.py --test`, körs i CI före publicering
+- Lokalt: `node site/server.mjs` på port 4173
+- Hosting: GitHub Pages via GitHub Actions vid push till `master`
+
 ## Audits
 Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; conventions in elwyn-dash `docs/security.md`.
 - Headers: 2026-09-16, pass, 6 of 6 on buildapp.se via a host-scoped Transform Rule on the zone, measured after the change
