@@ -11,6 +11,10 @@ reviewedAt: 2026-10-26
 
 # Överlämning
 
+## 2026-11-04: mutationstest
+
+Gren `claude/mutation-2026-11-04`, PR #2, inte mergad. Stryker 9 med command runner mot `test-avgifter.mjs` och `test-belaning.mjs` på `site/avgifter.js` och `site/belaning.js`, den enda räknelogiken (UI-skripten och `data.js` muteras inte): 85,06 % före, 94,25 % efter (87 mutanter). Nya kontroller: negativt månadssparande, räknesats -100 % och NaN kastar, negativ räknesats över -100 % räknas, noll kapital och noll gräns ger noll lån, NaN och negativ gräns kastar, miljonbelopp och avrundning i `kronor()`. De fem som överlever är felmeddelanden i `RangeError`, som sidan aldrig visar (räknaren skriver ett streck). `npm test` i `site/` kör nu båda testfilerna, som CI redan gjorde. Ingen bugg, ingen produktionskod ändrad, inga siffror, fondtexter eller källor rörda. Kör i `site/`: `npm i --no-save @stryker-mutator/core@9 && npx stryker run`.
+
 ## 2026-10-26: OWASP
 
 OWASP-granskning (Gemini 3.8 Flash, granskad av Claude): förhandsservern `site/server.mjs` dog på `/%ff`, svarar nu 400 (`8a07b1b`). Lanens high om grinden avvisad: grinden är medvetet bara klientsidig.

@@ -70,3 +70,4 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - OWASP Top 10: 2026-10-30, warn, code review (Mistral Large, medium and high checked by Claude), no live probe; 0 high, 1 medium: no CSP in repo, zone CSP lacks script-src (shared zone rule)
 - ZAP baseline: 2026-10-27, n/a, static site on buildapp.se with a client-side gate only, no server, cookies or forms; headers, TLS and markup are covered by their own columns
 - Dependabot: 2026-10-29, pass, 0 open alerts
+- Mutation: 2026-11-04, Stryker 94,25 % on avgifter.js and belaning.js (85,06 % before, 87 mutants); 5 survivors are error messages the page never shows
