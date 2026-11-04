@@ -40,7 +40,7 @@
 
 <section class="wrap bred forst" id="etfer">
   <h1>ETF:er</h1>
-  <div class="tabellhalla">
+  <div class="tabellhalla" tabindex="0" role="region" aria-label="ETF:er">
     <table>
       <thead><tr>
         <th scope="col">ETF</th><th scope="col">Avgift</th><th scope="col">Innehav</th><th scope="col">Länder</th>
@@ -54,7 +54,7 @@
 
 <section class="wrap bred tat" id="havstang">
   <h2 class="rubrik2">Fonder med inbyggd belåning</h2>
-  <div class="tabellhalla">
+  <div class="tabellhalla" tabindex="0" role="region" aria-label="Fonder med inbyggd belåning">
     <table>
       <thead><tr><th scope="col">Fond</th><th scope="col">Avgift</th><th scope="col" class="vanster">Lånekostnad</th><th scope="col" class="vanster">Index</th><th scope="col" class="vanster">Var</th></tr></thead>
       <tbody id="havstangrader"></tbody>
@@ -71,7 +71,7 @@
     <p class="mening">Jag har <input id="kapital" class="lang" type="number" min="0" max="100000000" step="50000" value="500000" aria-label="Eget kapital i kronor"> kr i globala indexfonder.</p>
   </div>
 
-  <div class="tabellhalla" style="margin-top:20px">
+  <div class="tabellhalla" tabindex="0" role="region" aria-label="Belåning per plattform" style="margin-top:20px">
     <table>
       <thead><tr><th scope="col">Plattform</th><th scope="col">Lägsta ränta</th><th scope="col">Låna högst</th><th scope="col">Ränta per år</th><th scope="col" class="vanster">Så bygger du portföljen</th></tr></thead>
       <tbody id="bastarader"></tbody>
@@ -81,7 +81,7 @@
   <div class="plattformar" id="plattformar"></div>
 
   <h3 class="rubrik3">Belåningsvärde per värdepapper</h3>
-  <div class="tabellhalla smal">
+  <div class="tabellhalla smal" tabindex="0" role="region" aria-label="Belåningsvärde per värdepapper">
     <table>
       <thead><tr><th scope="col">Värdepapper</th><th scope="col">Avanza</th><th scope="col">Nordnet</th></tr></thead>
       <tbody id="vardrader"></tbody>
