@@ -45,7 +45,7 @@ En begriplig friskrivning och information om risk, ansvar, reklam och integritet
 
 ## Design och mätning
 
-Stitch Förslag E som ytskikt: serif i rubriker, pappersvit bakgrund, mörkgrön accent. Systemtema som standard, manuell växlare. Scenariot styrs av en läsbar mening med redigerbara fält, inte reglage.
+Stitch Förslag E som ytskikt: serif i rubriker, pappersvit bakgrund, mörkgrön accent. Delningsbilden `site/og.png` (1200x630) ritas från `og.source.html` i repots rot (deployas inte) med samma färger, typsnitt och märket ur `site/ikon.svg`; `site/favicon-32.png` är en PNG-kopia av märket för webbläsare utan SVG-favicon. Systemtema som standard, manuell växlare. Scenariot styrs av en läsbar mening med redigerbara fält, inte reglage.
 
 Google Search Console och Cloudflare Web Analytics är valda för mätning, inom nollbudgeten. Ingen analytics är konfigurerad.
 
@@ -109,7 +109,7 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - Actions (automated): 2026-10-06, pass, zizmor 0 high, 0 medium, 0 low; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
 - Markup (automated): 2026-10-06, blocked, 1 targets; 0 failed, 1 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a2/investeringar.json
 - WCAG 2.2 AA (automated): 2026-10-06, blocked, 1 targets; 0 failed, 1 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a2/investeringar.json
-- OG image: 2026-10-27, n/a, private page behind a gate, never shared as a link preview
+- OG image: 2026-11-04, pass, 1200x630 PNG, https://buildapp.se/investeringar/og.png, og and twitter tags on all three pages, rendered from og.source.html; checked locally only, verdict reflects the local check until deployed (the page is still behind the gate and noindex)
 - Database: 2026-10-25, none, localStorage
 - OWASP Top 10: 2026-10-30, warn, code review (Mistral Large, medium and high checked by Claude), no live probe; 0 high, 1 medium: no CSP in repo, zone CSP lacks script-src (shared zone rule)
 - ZAP baseline: 2026-10-27, n/a, static site on buildapp.se with a client-side gate only, no server, cookies or forms; headers, TLS and markup are covered by their own columns
