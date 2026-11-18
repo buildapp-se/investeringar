@@ -4,7 +4,7 @@ status: active
 currentGoal: Omläggningen 2026-09-24 är byggd och publicerad. Nästa är Patriks genomläsning av sajten.
 nextAction: Patrik läser buildapp.se/investeringar och säger vad som ska bort eller flyttas. Kör lokalt med node server.mjs i site/, port 4173.
 blockers: []
-reviewedAt: 2026-11-05
+reviewedAt: 2026-11-18
 ---
 
 **2026-11-04, förbättringsrunda (gren `claude/forbattringar-2026-11-04`, PR #1, mergad 2026-11-04).** Bara kod och markup, inga siffror eller fondtexter. (1) Mörkt tema: `--ink-3` `#787873` gav 3,67:1 mot korten, nu `#8f8f8a` (lägst 4,61:1). (2) De sex tabellhållarna har `tabindex="0"`, `role="region"` och etikett, så ETF-tabellen går att rulla med tangentbord på 390 px. (3) Grinden är `role="dialog"` med `aria-modal`, sidan bakom `inert` tills ordet är rätt; förut gick Skift+Tab in i den dolda sidan. (4) `site/og.png` från nya `og.source.html` i roten, og- och twitter-taggar på alla tre sidor, `favicon-32.png` som reserv, `server.mjs` serverar `.png` rätt. **Steg 4 återställt vid merge (revert 02c8405)**: delningsbild utan förhandsbild före lansering är ett inspelat beslut (audit-raden OG står kvar som n/a), så det står kvar tills Patrik säger annat. Reverten tar också bort `favicon-32.png` och png-typen i `server.mjs`, som låg i samma commit. Ångra med `git revert 02c8405`. **2026-11-05: återinfört på Patriks ja** (`git revert 02c8405`), eftersom sajten kan öppnas för fler senare; grinden och `noindex` är orörda. Verifierat lokalt: testerna (6 + 6 + självtest) gröna, axe 0 överträdelser på alla tre sidor vid 390 och 1280 px, ljust och mörkt, grind och sida. Inte mätt live.
@@ -122,3 +122,9 @@ Inte kontrollerat: hur den längre Avanza Auto-cellen ser ut i webbläsaren på 
 
 Överhoppat eftersom det kräver Patrik: avgifter hos SAVR och Montrose (inloggning), öppna beslut och kravbekräftelse, implementationen som väntar på den, affiliate och informationskrav, kontaktadressen (provmejl), godkännandeflödet i GitHub (repoinställningar), publicering, kolumner på mobil (smak), engelsk version, konton, Golden Butterfly, blogg. Faktakontrollen av de fem breda researchdokumenten, fulltextgranskningen av forskningskällorna och datakällor för automatisk hämtning är granskningsarbete som inte ryms som en avgränsad leverans. WCAG bakom grinden ska lösas i aifabrikens svit, inte här.
 
+## Backlogsvep 2026-11-18
+
+Obevakat svep, gren `claude/sweep-2026-11-18`. Bara BACKLOG och HANDOFF ändrade, ingen kod, inga siffror.
+
+- Kontaktadressen: MX och SPF för buildapp.se pekar på Cloudflare Email Routing. Provmejlet är kvar, markerat `[needs-info]` i BACKLOG.
+- Överhoppat: SAVR och Montrose (inloggning), öppna beslut och implementationen efter dem, godkännandeflödet (repoinställningar), publicering (grinden ligger kvar tills uppgifterna är klara). Faktakontrollen av researchunderlaget, fulltextgranskningen, affiliate- och informationskraven och ETF-datakällorna är granskningsarbete utan avgränsad leverans för ett obevakat svep, samma bedömning som 2026-10-06.
