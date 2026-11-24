@@ -36,4 +36,5 @@ createServer(async (req, res) => {
   } catch {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('Hittades inte');
   }
-}).listen(PORT, () => console.log(`Prototypen kors pa http://localhost:${PORT}`));
+  // Bara loopback: utan vard lyssnar Node pa alla granssnitt, alltsa hela wifi:t.
+}).listen(PORT, '127.0.0.1', () => console.log(`Prototypen kors pa http://localhost:${PORT}`));
