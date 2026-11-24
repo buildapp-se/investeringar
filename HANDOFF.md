@@ -157,3 +157,7 @@ Worktree `C:\dev\investeringar-deep-1124`, gren `deep/2026-11-24`, pushad till `
 - **UX:** skriptet 7 av 7 lokalt förbi grinden (`addInitScript` som sätter `grind-oppen`, kopia av skriptet som togs bort efteråt). Granskningen: läget är ok (Jakob, Peak-End, Tesler: standardscenariot räknar direkt), utom att "Forskning" och temaknapparna ligger dolda i headerns scrollrad på 390 px. Smak, ligger i BACKLOG under Granskning 2026-11-24.
 
 Överhoppat: faktakontrollen av de fyra återstående Gemini-dokumenten (stor research, inte avgränsad), AVWS-länder (ingen innehavsfil), WCAG bakom grinden (aifabrikens svit).
+
+## Funktionspass 2026-11-24, klar
+
+Worktree `C:\dev\_wt\investeringar-1124f`, gren `feat/2026-11-24`. Två användarsynliga ändringar i `site/`, se BACKLOG under Funktionspass 2026-11-24: scenariot i adressen (delbar länk) och kapitalet på belåningssidan sparat, samt tomt fält som "–" i stället för 0 %. `npm test` grönt, kontrollerat i Chrome lokalt. Övriga öppna punkter kräver Patrik (inloggning, smak, beslut) eller är research.

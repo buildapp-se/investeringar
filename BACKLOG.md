@@ -66,3 +66,8 @@ Djuppass: mutationstest, UX-granskning (`ux-audit`, lokalt förbi grinden) och d
 Gemini 4 Neon High, kodgranskning; varje fynd prövat av Claude mot `origin/master`. Sju fynd: ett rättat (`server.mjs` lyssnade på alla gränssnitt, nu 127.0.0.1), ett kvar nedan, fem avvisade (räknarloopen redan rättad i `f65f42c`; grinden är medvetet klientsidig; Google Fonts utan SRI och Actions på majortaggar litar bara på Google och GitHub, som redan serverar sidan; FI-skriptet hämtar bara från fi.se över https och körs lokalt).
 
 - [ ] `[P3]` CSP saknas i repot och zonens CSP på buildapp.se saknar `script-src` (var medium 2026-10-30, nu låg: ingen osäker data når `innerHTML`, allt kommer från `data.js`). En strikt `script-src 'self'` kräver att de tre inline-modulerna flyttas till egna filer och att `style`-attributen blir klasser. Regeln på zonen delas av alla appar på buildapp.se, så valet mellan meta-CSP i sidorna och en sökvägsregel på zonen är Patriks.
+
+## Funktionspass 2026-11-24
+
+- [x] `[P1]` (klart 2026-11-24, `35bdb55`; del av "delning, lokala val" i implementationspunkten) Delbar länk: startsidans scenario står i adressen och `etf-belaning.html` minns kapitalet (`?kapital=`, localStorage). Länk går före sparat, som går före standard; trasiga värden (`?ar=abc`, `1e400`) faller tillbaka. Test i `test-avgifter.mjs`, kontrollerat i Chrome lokalt: länken `?manad=5000&ar=20&sats=6.5` gav 2 410 748 kr, samma som `rantaPaRanta` i node.
+- [x] `[P2]` (rättad 2026-11-24, `9c7eef2`) Tomt procentfält räknade med 0 % och visade "Ränta på ränta ger 0 kr"; tomt år gav "Du har efter 0 år". Nu "–" i alla rutor, och ett ofullständigt scenario sparas inte. Kontrollerat i Chrome lokalt.
