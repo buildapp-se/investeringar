@@ -71,3 +71,10 @@ Gemini 4 Neon High, kodgranskning; varje fynd prövat av Claude mot `origin/mast
 
 - [x] `[P1]` (klart 2026-11-24, `35bdb55`; del av "delning, lokala val" i implementationspunkten) Delbar länk: startsidans scenario står i adressen och `etf-belaning.html` minns kapitalet (`?kapital=`, localStorage). Länk går före sparat, som går före standard; trasiga värden (`?ar=abc`, `1e400`) faller tillbaka. Test i `test-avgifter.mjs`, kontrollerat i Chrome lokalt: länken `?manad=5000&ar=20&sats=6.5` gav 2 410 748 kr, samma som `rantaPaRanta` i node.
 - [x] `[P2]` (rättad 2026-11-24, `9c7eef2`) Tomt procentfält räknade med 0 % och visade "Ränta på ränta ger 0 kr"; tomt år gav "Du har efter 0 år". Nu "–" i alla rutor, och ett ofullständigt scenario sparas inte. Kontrollerat i Chrome lokalt.
+
+## Buggjakt 2026-11-24
+
+Playwright headless mot `node server.mjs` lokalt, 390 och 1440 px, sv-SE: alla fält med tomt, decimalkomma, noll, negativt, mycket stort och `1e400`, omladdning, bakåt, tangentbord, grinden med fel ord.
+
+- [x] `[P2]` (rättad 2026-11-24, `f7cd683`) Startsidan visade "Du har efter 2.5 år" med punkt, och "efter -3 år" eller "efter 0 år" bredvid streck. Nu "2,5" och "–". Kontrollerat i Chromium lokalt.
+- [x] `[P2]` (rättad 2026-11-24, `f7cd683`) Belåningssidan räknade tomt eller negativt kapital som 0 kr, sparade 0, och en omladdning visade "0" i fältet. Nu "–" i lån och ränta, och bara giltigt kapital sparas, som på startsidan. Kontrollerat i Chromium lokalt.

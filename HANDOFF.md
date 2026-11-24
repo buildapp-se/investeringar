@@ -161,3 +161,7 @@ Worktree `C:\dev\investeringar-deep-1124`, gren `deep/2026-11-24`, pushad till `
 ## Funktionspass 2026-11-24, klar
 
 Worktree `C:\dev\_wt\investeringar-1124f`, gren `feat/2026-11-24`. Två användarsynliga ändringar i `site/`, se BACKLOG under Funktionspass 2026-11-24: scenariot i adressen (delbar länk) och kapitalet på belåningssidan sparat, samt tomt fält som "–" i stället för 0 %. `npm test` grönt, kontrollerat i Chrome lokalt. Övriga öppna punkter kräver Patrik (inloggning, smak, beslut) eller är research.
+
+## Buggjakt 2026-11-24, klar
+
+Worktree `C:\dev\_wt\investeringar-1124h`, gren `hunt/2026-11-24`. Två användarsynliga buggar rättade i `site/`, se BACKLOG under Buggjakt 2026-11-24. Inget nytt test i `npm test`: felen satt i sidornas inline-skript, som testfilerna inte når; kontrollerat med ett Playwright-skript mot den lokala servern. Övrigt utan fynd: tangentbordsordning, grinden (fokus, fel ord, fokus stannar i dialogen), ingen sidled-scroll på någon sida vid 390 px, decimalkomma i fälten tas emot som tal i Chromium med sv-SE. Öppna P3-punkter kräver Patrik eller är research.
