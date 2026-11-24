@@ -8,7 +8,7 @@ Verifiering: "V" = jag läste siffran i källan själv (sida/PDF/abstract). "S" 
 1. **Därför slår indexfonden nästan alla aktiva fonder**
    S&P Dow Jones Indices, SPIVA Europe Scorecard Year-End 2024
    https://www.spglobal.com/spdji/en/spiva/article/spiva-europe-year-end-2024/
-   V: Fondviktat snitt över kategorier: 93 % av europeiska aktiefonder sämre än sitt index över 10 år (79 % av räntefonderna); 50 % av alla fonder nedlagda eller sammanslagna över 15 år.
+   V: Fondviktat snitt över kategorier: 93 % av europeiska aktiefonder sämre än sitt index över 10 år (79 % av räntefonderna). (Rättat 2026-11-24: siffran "50 % nedlagda över 15 år" som stod här kommer från SPIVA New Zealand, se Fulltextgranskning nedan.)
    Not: /spiva-europe/ (utan årtal) pekar alltid på senaste rapporten (nu YE2025, som på sidan bara lyfter 1-årssiffror: 71 % av globalfonder i euro sämre än S&P World 2025). Årtalslänken är stabil.
 
 2. **Bara var femte aktiv fond slår indexalternativet**
@@ -104,6 +104,30 @@ Verifiering: "V" = jag läste siffran i källan själv (sida/PDF/abstract). "S" 
 
 Hittade ingen stark primärkälla med rubrikvärdig siffra. "Missa de bästa dagarna"-siffror kommer nästan bara från fondbolagsmaterial (J.P. Morgan m.fl.), som jag valde bort. Sharpe (1975), Likely Gains from Market Timing, FAJ, DOI 10.2469/faj.v31.n2.60, sägs visa att en tajmare måste ha rätt ~74 % av åren, men artikeln är låst och siffran bara bekräftad sekundärt: använd inte utan att läsa den.
 Om ett verktyg duger: SEC:s ränta-på-ränta-kalkylator, https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator (resolvar, 200). Inte forskning. Sajten har redan egna kalkyler, så troligen överflödig.
+
+## Fulltextgranskning 2026-11-24
+
+Gäller de 13 källor som står på forskningssidan. Per källa: vad som lästes, om fyndet ovan håller, och begränsningen som rubriken inte säger. "Fulltext" = hela texten läst i källans egen PDF eller sida; "abstract" = bara sammanfattningen, från förlaget, OpenAlex eller Semantic Scholar.
+
+| # | Rubrik på sajten | Läst | Fyndet | Begränsning |
+|---|---|---|---|---|
+| 1 | Därför slår indexfonden nästan alla aktiva fonder | Fulltext, SPIVA Europe YE2024 (PDF via sidan, headless Chrome) | 93 % av aktiefonderna och 79 % av räntefonderna sämre än index över 10 år, fondviktat snitt över kategorierna: stämmer. **Fel ovan:** "50 % nedlagda eller sammanslagna över 15 år" står i SPIVA New Zealand, som laddas in under Europarapporten på samma sida. Europarapporten säger att 5 % av fonderna lades ned eller slogs ihop under 2024 och att mer än hälften av fonderna försvann innan de fick tio års historik i 10 av 31 kategorier. | Europeiska fonder i euro, pund m.fl., inte svenska fondspararens hela utbud. Ettårssiffrorna varierar stort (Danmark 2024: 3 % sämre). Rapporten är märkt "for use with institutions only". |
+| 2 | Därför slår bara var femte aktiv fond indexet | Fulltext, Morningstars artikel 2026-02-18 | "About one out of every five active funds topped the average of their passive rivals over the 10 years through 2025": stämmer. | Amerikanska fonder (9 200 fonder, ca 67 % av USA:s fondmarknad). Jämför mot snittet av passiva fonder i samma kategori, inte mot index. Ränte- och fastighetsfonder klarade sig klart bättre än aktiefonder. |
+| 3 | Därför måste den genomsnittliga aktiva förvaltaren förlora | Fulltext, Sharpes egen kopia | Stämmer ordagrant (påstående 1 och 2). | Gäller genomsnittet, inte varje förvaltare, och bara om passiv definieras som att äga hela den valda marknaden i marknadsvikt. Säger inget om vilken enskild aktiv fond som går sämre. |
+| 4 | Därför är låg avgift det bästa tecknet på en bra fond | Fulltext, Morningstars artikel (Kinnel 2016) | 62 % mot 20 % för amerikanska aktiefonder, "3 times as likely": stämmer. | USA, perioden 2010–2015. "Lyckas" = överlevde och slog kategorisnittet, inte index. Artikeln säger själv att avgiften ska vara första eller andra filtret, inte det enda. |
+| 5 | Därför kostar det dig att handla ofta | Fulltext, författarnas PDF | 66 465 hushåll 1991–1996, de som handlade mest 11,4 % per år mot marknadens 17,9 %: stämmer. | Före kostnader var skillnaden liten; förlusten kommer av courtage och spread. Kunder hos en amerikansk lågprismäklare, med 1990-talets courtage. Snitthushållet fick 16,4 % netto. |
+| 6 | Därför går din indexfond bättre än din kompis aktiehandel | Fulltext, författarnas PDF | 3,8 procentenheter per år för privatpersonerna, +1,5 för institutionerna: stämmer. | Taiwan 1995–1999. 66 % av förlusten är courtage och transaktionsskatt (32 + 34 %); resten är dålig handel (27 %) och tajming (7 %). |
+| 7 | Därför kan du inte daytrada dig rik | Abstract (OpenAlex, förlagets sida bakom Cloudflare-kontroll) | 74 % av volymen från handlare med förlusthistorik, 97 % förlorar sannolikt på framtida daytrading: stämmer. | Taiwan, daytrading, inte vanligt aktieköp. Fulltexten inte läst. |
+| 9 | Därför ska du inte handla enskilda aktier | Abstract (Semantic Scholar) | Flertalet aktier i CRSP sedan 1926 sämre än statsskuldväxlar, 4 % av bolagen står för hela nettovinsten: stämmer. | USA 1926–2016. Mäter att äga enstaka aktier livet ut, inte att handla med dem; poängen är skevheten, som gör att en liten portfölj oftast missar vinnarna. Fulltexten (SSRN 2900447) inte läst, SSRN blockerar. |
+| 10 | Därför kan du inte tajma marknaden | Fulltext, Morningstars artikel (Mind the Gap 2026) | 8,7 % mot 9,9 %, gap 1,2 procentenheter (ca 12 %): stämmer. | **Rubriken är starkare än källan för aktiefonder:** för amerikanska aktiefonder var gapet bara 12,8 % mot 13,3 %, och artikeln kallar det "a great outcome". Gapet kommer mest från volatila fondtyper. Mäter spararnas faktiska in- och utflöden, inte försök att tajma. |
+| 11 | Därför tjänar fondspararen mindre än fonden | Abstract (universitetsarkivets sida); PDF:en bakom Cloudflare-kontroll | 1,56 % per år 1991–2004, både aktiva fonder och indexfonder: stämmer. | Amerikanska aktiefonder. Störst i fonder med försäljningsavgift (load) och i fonder som gått bra, alltså jakt på förra årets vinnare. |
+| 12 | Därför säger förra årets vinnarfond ingenting om nästa år | Fulltext, rapportens sida (headless Chrome), YE2025 publicerad 2026-05-07 | Ingen toppkvartilsfond från 2021 kvar i toppkvartilen till 2025 utom småbolag, 4,5 % mot slumpens 6,25 %: stämmer. | **Rubriken är starkare än källan på kort sikt:** samma rapport visar att 29 % av toppkvartilens storbolagsfonder 2023 låg kvar två år till, och 49 % av topphalvan, ungefär dubbelt så mycket som slumpen. Det som håller är femårsperspektivet. USA. |
+| 15 | Därför ska du sprida pengarna över hela världen | Abstract (OpenAlex) | Total risk sjunker med antalet värdepapper och med hur oberoende de är, så utländska aktier ger stor riskminskning: stämmer. | Från 1974. Urval av länder och period är inte kontrollerat, eftersom fulltexten är låst hos Taylor & Francis. Att effekten är lika stor i dag följer inte av artikeln. |
+| 16 | Därför litar vi för mycket på hemmamarknaden | Abstract, i NBER:s inskannade PDF (januari 1991, sidan läst som bild; resten av de 15 sidorna inte läst) | 98 % Japan, 94 % USA, 82 % Storbritannien, förväntad hemmaavkastning flera hundra punkter högre: stämmer. | Tre länder, innehav före 1991. Avkastningsförväntan är härledd ur "a simple model", inte uppmätt. |
+
+Inte omlästa nu: 8 (Boys Will Be Boys), 13 (Carhart) och 14 (Fama-French) står inte på sajten. Abstracten för 13 och 14 lästes i OpenAlex 2026-11-24 och stämmer med fynden ovan; 13 är därmed V (abstract) i stället för S.
+
+Kvar för punkten i BACKLOG: fulltext för 7, 9, 11, 15 och 16, som bara gick att läsa som abstract; sajtens rubriker 10 och 12 bör Patrik ta ställning till (de är redaktionella).
 
 ## Övrigt
 
