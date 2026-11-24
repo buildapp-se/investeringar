@@ -1,5 +1,26 @@
 # Research: De Absolut Lägsta Avgifterna och Kostnadsoptimering
 
+## Faktakontroll 2026-11-24
+
+Påståendena nedan i dokumentet är kontrollerade mot förstahandskällor. Resten av dokumentet är oförändrat Gemini-underlag och ska läsas med den här listan bredvid. Inget här får utse ett billigaste alternativ på sajten.
+
+| Påstående i dokumentet | Utfall | Källa, läst 2026-11-24 |
+|---|---|---|
+| Avanza Zero 0,00 %, index OMXS30 | Avgiften stämmer (förvaltning 0,00 %, transaktionskostnad 0,00 %). **Indexet är fel:** SIX30RXC (SIX Sweden 30), inte OMXS30. | Fondens faktablad (PRIIP KID) upprättat 2026-11-16, via `https://www.avanza.se/_api/fund-reference/reference/41567/prospectus` |
+| Nordnet Indexfond Sverige 0,00 % | Obelagt. Fonden gav ingen träff i Avanzas sökning och Nordnets sida lästes inte. | – |
+| SPYL (IE000XZSV718) 0,03 %, fysisk, Xetra | Stämmer: TER 0,03 %, "Replicated", Xetra-ticker SPYL. | SSGA faktablad per 2026-10-31, `factsheet-emea-en_gb-spyl-gy.pdf`; Avanzas sökning |
+| Amundi Prime Global, ISIN LU1931974692, 0,05 % | **ISIN inaktuellt:** fonden finns nu som IE0009DRDY20 (F50A/F50B på Xetra hos Avanza); LU-ISIN:et ger ingen träff hos Amundi eller Avanza. TER 0,05 %, index Solactive GBS Developed Markets Large & Mid Cap, fysisk: stämmer. | Amundis produkt-API; Avanzas sökning |
+| Invesco S&P 500 (IE00B3YCGJ38) 0,05 %, syntetisk | Stämmer, men ofullständigt: löpande avgift 0,05 % **plus swapavgift 0,07 %** som ligger inbakad i swapavkastningen. Xetra-tickern är P500, inte SPXS. | Invescos faktablad per 2026-10-31 |
+| Invesco S&P 500 slår netto-index med 0,15–0,25 % per år | **Riktningen stämmer, storleken är fel:** fonden slog S&P 500 Net TR varje kalenderår 2016–2025 med 0,31–0,67 procentenheter, 315,50 % mot 300,16 % över tio år till 2026-10-31. Historik, ingen garanti. | Invescos faktablad per 2026-10-31 |
+| Undantaget följer av "US H.R. 3221 Section 871(m)" | **Fel lagreferens:** 26 U.S.C. § 871(m) kom till genom Pub. L. 111–147 § 541(a). Lagtexten själv nämner inget undantag för breda index; var undantaget står (förordning) är inte läst. | 26 U.S.C. § 871, Cornell LII |
+| WEBN 0,07 %, index "Solactive GBS Global Markets All Cap" | Avgiften stämmer. **Indexet är fel:** Large & Mid Cap, inte All Cap. | Amundis produkt-API |
+| Avanza Global 0,09 % | **Fel:** 0,10 % total årlig kostnad (0,08 % förvaltning + 0,02 % transaktion). Påståendet om källskatt efter flytten är inte kontrollerat. | kandidater-verifierade.md punkt 4; Avanzas fondguide-API `productFee` 0,1 |
+| DNB Global Indeks via Fondo, 0,11 % + 0,15 % | **Faller:** Fondo säljer inte till privatpersoner. DNB Global Indeks S kostar 0,21 % totalt enligt faktabladet, och någon "kickback-sänkning till 0,11 %" är inte belagd. | kopvagar.md; kandidater-verifierade.md punkt 2 |
+| Växling Avanza och Nordnet 0,25 % per riktning, Montrose 0,12 % | Stämmer för automatisk växling. Saknas: Avanza manuellt 0,125 %, Nordnet valutakonto 0,075 %, Montrose 0,3 % på utländska fonder. | kopvagar.md, prislistorna lästa 2026-09-09 |
+| Montrose courtage 0,15 % (minst 19 kr) | Stämmer för Xetra (Tyskland 19 SEK); i Norden och USA är minimum 1 SEK. | kopvagar.md |
+| Brytpunkt 12,5 år och slutsatsen om 15–20 år | Räkningen bygger på Avanza Global 0,09 %; med 0,10 % blir den 10 år. Slutsatsen "15–20 år" följer inte av räkningen. Sajten har ingen brytpunkt sedan omläggningen 2026-09-24. | Egen räkning |
+| SAVR Global by Vanguard (VGVF) 0,15 % totalt | Obelagt, inte kontrollerat. | – |
+
 Status: Detaljerad kartläggning av marknadens lägsta fond- och ETF-avgifter (0,00 % till 0,09 %), dolda skattefördelar (syntetiska ETF:er och Section 871(m)), samt totalkostnadskalkyler (Total Cost of Ownership - TCO).
 
 ---
