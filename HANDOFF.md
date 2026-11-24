@@ -4,7 +4,7 @@ status: active
 currentGoal: Omläggningen 2026-09-24 är byggd och publicerad. Nästa är Patriks genomläsning av sajten.
 nextAction: Patrik läser buildapp.se/investeringar och säger vad som ska bort eller flyttas. Kör lokalt med node server.mjs i site/, port 4173.
 blockers: []
-reviewedAt: 2026-11-18
+reviewedAt: 2026-11-24
 ---
 
 **2026-11-04, förbättringsrunda (gren `claude/forbattringar-2026-11-04`, PR #1, mergad 2026-11-04).** Bara kod och markup, inga siffror eller fondtexter. (1) Mörkt tema: `--ink-3` `#787873` gav 3,67:1 mot korten, nu `#8f8f8a` (lägst 4,61:1). (2) De sex tabellhållarna har `tabindex="0"`, `role="region"` och etikett, så ETF-tabellen går att rulla med tangentbord på 390 px. (3) Grinden är `role="dialog"` med `aria-modal`, sidan bakom `inert` tills ordet är rätt; förut gick Skift+Tab in i den dolda sidan. (4) `site/og.png` från nya `og.source.html` i roten, og- och twitter-taggar på alla tre sidor, `favicon-32.png` som reserv, `server.mjs` serverar `.png` rätt. **Steg 4 återställt vid merge (revert 02c8405)**: delningsbild utan förhandsbild före lansering är ett inspelat beslut (audit-raden OG står kvar som n/a), så det står kvar tills Patrik säger annat. Reverten tar också bort `favicon-32.png` och png-typen i `server.mjs`, som låg i samma commit. Ångra med `git revert 02c8405`. **2026-11-05: återinfört på Patriks ja** (`git revert 02c8405`), eftersom sajten kan öppnas för fler senare; grinden och `noindex` är orörda. Verifierat lokalt: testerna (6 + 6 + självtest) gröna, axe 0 överträdelser på alla tre sidor vid 390 och 1280 px, ljust och mörkt, grind och sida. Inte mätt live.
@@ -52,7 +52,7 @@ Tester: `node test-avgifter.mjs` (ränta på ränta mot sluten formel) och
 
 - Montrose och SAVR: faktisk kostnad per fond kräver inloggning, Patriks att göra om det ska bli exakt.
 - Opti: aktieandel per nivå 1–9 står inte på någon publik sida (0,50 % är inklusive moms, avgjort 2026-10-06).
-- Länderantal saknas för WEBN och AVWS. VFEA:s 24 är härledd och ska läsas om när FTSE Emergings septemberfaktablad finns.
+- Länderantal saknas för AVWS. WEBN (46) och VFEA (23, inte 24) väntar i PR #4 sedan 2026-11-24.
 - En researchagent skickade Patriks mejladress som kontaktparameter till Unpaywall API (två anrop). Rapporterat till Patrik 2026-09-24.
 
 ## Publicering
@@ -128,3 +128,15 @@ Obevakat svep, gren `claude/sweep-2026-11-18`. Bara BACKLOG och HANDOFF ändrade
 
 - Kontaktadressen: MX och SPF för buildapp.se pekar på Cloudflare Email Routing. Provmejlet är kvar, markerat `[needs-info]` i BACKLOG.
 - Överhoppat: SAVR och Montrose (inloggning), öppna beslut och implementationen efter dem, godkännandeflödet (repoinställningar), publicering (grinden ligger kvar tills uppgifterna är klara). Faktakontrollen av researchunderlaget, fulltextgranskningen, affiliate- och informationskraven och ETF-datakällorna är granskningsarbete utan avgränsad leverans för ett obevakat svep, samma bedömning som 2026-10-06.
+
+## Backlogsvep 2026-11-24
+
+Obevakat svep, worktree `C:\dev\investeringar-sweep-1124`, gren `sweep/2026-11-24` (bara docs, pushad till `master`) och `sweep/2026-11-24-lander` (sajtens siffror, PR #4, väntar på Patriks Merge enligt det redaktionella flödet). Klart:
+
+- **Länderantal (PR #4):** VFEA 24 → 23, eftersom Grekland flyttats till FTSE Developed; WEBN – → 46 ur fondens innehav via Amundis API. MSCI- och övriga FTSE-tal omlästa, oförändrade. Källor i `etf-kandidater.md`.
+- **ETF-datakällor:** innehavsfiler utan inloggning för 8 av 17 ETF:er (Amundi, State Street, DWS), med anrop och fallgropar i `etf-kandidater.md`, avsnittet Data sources.
+- **Forskningskällorna:** fynd och begränsning per källa för forskningssidans 13 länkar i `forskningslankar.md`. Rättat: "50 % nedlagda över 15 år" kom från SPIVA Nya Zeeland.
+- **Faktakontroll:** tabell överst i `lagsta-avgifter-och-kostnadsoptimering.md`, 14 påståenden, flera fel.
+- Sajten på 390 px lokalt: ingen sidled-scroll på någon av de tre sidorna.
+
+Patriks att avgöra: PR #4; rubrikerna "Därför kan du inte tajma marknaden" och "Därför säger förra årets vinnarfond ingenting om nästa år", som är starkare än källorna (se Fulltextgranskning i `forskningslankar.md`). Arbetsmetod: spglobal-sidorna och SPIVA-PDF:en går att läsa via headless Chrome (fetch inifrån sidan); OUP och digitalcommons.unl.edu visar Cloudflare-kontroll även där, så abstract hämtas från OpenAlex (`api.openalex.org/works/https://doi.org/<DOI>`) eller Semantic Scholar.
