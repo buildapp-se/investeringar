@@ -160,17 +160,24 @@ document.getElementById('vardrader').innerHTML = BELANINGSVARDE.map(v => `<tr>
   <td>${esc(v.namn)}</td><td>${procent(v.avanza, 0)}</td><td>${v.nordnet === null ? '<span class="dampad liten">säljs ej</span>' : procent(v.nordnet, 0)}</td></tr>`).join('');
 
 function ritaBasta() {
-  // "1e400" ger Infinity, och kronor() kastar da: rakna med noll i stallet.
-  const tal = Number(document.getElementById('kapital').value);
-  const kapital = Number.isFinite(tal) && tal > 0 ? tal : 0;
-  try { localStorage.setItem('kapital', String(kapital)); } catch {}
-  history.replaceState(null, '', '?kapital=' + kapital + location.hash);
+  // Tomt, negativt eller "1e400" ar en saknad uppgift: streck, och inget sparas.
+  // Forut raknades det som 0 kr och sparades, sa en omladdning visade "0" i faltet.
+  const text = document.getElementById('kapital').value;
+  const kapital = text === '' ? NaN : Number(text);
+  if (Number.isFinite(kapital) && kapital >= 0) {
+    try { localStorage.setItem('kapital', String(kapital)); } catch {}
+    history.replaceState(null, '', '?kapital=' + kapital + location.hash);
+  }
   document.getElementById('bastarader').innerHTML = BELANING.map(p => {
-    const lan = maxLan(kapital, p.basta);
+    let lan = streck, ranta = streck;
+    try {
+      const l = maxLan(kapital, p.basta);
+      [lan, ranta] = [kronor(l), kronor(l * p.basta.ranta)];
+    } catch {}
     return `<tr><td><span class="produktnamn">${esc(p.namn)}</span></td>
       <td class="billigast">${procent(p.basta.ranta)}</td>
-      <td>${kronor(lan)}</td>
-      <td>${kronor(lan * p.basta.ranta)}</td>
+      <td>${lan}</td>
+      <td>${ranta}</td>
       <td class="text liten">${esc(p.recept)}</td></tr>`;
   }).join('');
 }

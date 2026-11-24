@@ -178,14 +178,15 @@ function rakna() {
     // Adressen bar scenariot, sa en kopierad lank visar samma rakning.
     history.replaceState(null, '', '?' + new URLSearchParams(v) + location.hash);
   }
-  document.getElementById('res-ar').textContent = Number.isFinite(v.ar) ? v.ar : '–';
   try {
     const r = rantaPaRanta({ engangsinsattning: v.engang, manadssparande: v.manad, ar: v.ar, raknesats: v.sats / 100 });
     document.getElementById('res-insatt').textContent = kronor(r.insatt);
     document.getElementById('res-ranta').textContent = kronor(r.avkastning);
     document.getElementById('res-slut').textContent = kronor(r.slutvarde);
+    // Decimalkomma ("2,5 år"), och inget "efter -3 år" bredvid streck.
+    document.getElementById('res-ar').textContent = v.ar.toLocaleString('sv-SE');
   } catch {
-    for (const id of ['res-insatt', 'res-ranta', 'res-slut']) document.getElementById(id).textContent = '–';
+    for (const id of ['res-ar', 'res-insatt', 'res-ranta', 'res-slut']) document.getElementById(id).textContent = '–';
   }
 }
 
