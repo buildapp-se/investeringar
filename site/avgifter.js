@@ -20,20 +20,27 @@ export function rantaPaRanta(scenario) {
 
   const perioderPerAr = scenario.perioderPerAr ?? 12;
   const perioder = Math.round(scenario.ar * perioderPerAr);
-  const tillvaxt = Math.pow(1 + scenario.raknesats, 1 / perioderPerAr) - 1;
+  const lnTillvaxt = Math.log1p(scenario.raknesats) / perioderPerAr;
+  const tillvaxt = Math.expm1(lnTillvaxt);
   const insattningPerPeriod = scenario.manadssparande * 12 / perioderPerAr;
 
-  let kapital = scenario.engangsinsattning;
-  let insatt = scenario.engangsinsattning;
-  for (let i = 0; i < perioder; i++) {
-    kapital = (kapital + insattningPerPeriod) * (1 + tillvaxt);
-    insatt += insattningPerPeriod;
-  }
+  // Sluten form av "insattning, sedan tillvaxt" varje period. En loop per manad
+  // lasade fliken i sekunder nar nagon skrev ett orimligt antal ar.
+  const okning = Math.expm1(perioder * lnTillvaxt); // (1 + tillvaxt)^perioder - 1
+  const sparat = tillvaxt === 0
+    ? insattningPerPeriod * perioder
+    : insattningPerPeriod * okning / tillvaxt * (1 + tillvaxt);
+  const kapital = scenario.engangsinsattning * (1 + okning) + sparat;
+  const insatt = scenario.engangsinsattning + insattningPerPeriod * perioder;
   return { insatt, avkastning: kapital - insatt, slutvarde: kapital };
 }
 
-/** Formaterar kronor med mellanslag som tusentalsavgransare. */
+/**
+ * Formaterar kronor med mellanslag som tusentalsavgransare.
+ * @throws {RangeError} om beloppet inte ar ett andligt tal, sa sidan visar ett streck.
+ */
 export function kronor(varde) {
+  if (!Number.isFinite(varde)) throw new RangeError(`Inget belopp: ${varde}`);
   return Math.round(varde).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kr';
 }
 

@@ -160,7 +160,9 @@ document.getElementById('vardrader').innerHTML = BELANINGSVARDE.map(v => `<tr>
   <td>${esc(v.namn)}</td><td>${procent(v.avanza, 0)}</td><td>${v.nordnet === null ? '<span class="dampad liten">säljs ej</span>' : procent(v.nordnet, 0)}</td></tr>`).join('');
 
 function ritaBasta() {
-  const kapital = Math.max(0, Number(document.getElementById('kapital').value) || 0);
+  // "1e400" ger Infinity, och kronor() kastar da: rakna med noll i stallet.
+  const tal = Number(document.getElementById('kapital').value);
+  const kapital = Number.isFinite(tal) && tal > 0 ? tal : 0;
   document.getElementById('bastarader').innerHTML = BELANING.map(p => {
     const lan = maxLan(kapital, p.basta);
     return `<tr><td><span class="produktnamn">${esc(p.namn)}</span></td>

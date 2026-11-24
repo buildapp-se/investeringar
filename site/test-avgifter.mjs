@@ -59,5 +59,19 @@ provar('formatering foljer svenska konventioner', () => {
   assert.equal(procent(0.07, 0), '7 %');
 });
 
+provar('orimligt manga ar raknas direkt, utan att lasa sidan', () => {
+  // En loop per manad tog 3 s vid 100 miljoner ar och lasta fliken for varje tangent.
+  const t = performance.now();
+  const r = rantaPaRanta({ engangsinsattning: 0, manadssparande: 2000, ar: 1e8, raknesats: 0.07 });
+  assert.ok(performance.now() - t < 50, `tog ${Math.round(performance.now() - t)} ms`);
+  assert.equal(r.insatt, 2000 * 12 * 1e8);
+});
+
+provar('belopp som inte ar andliga kastar i stallet for "Infinity kr"', () => {
+  assert.throws(() => kronor(Infinity), RangeError);
+  assert.throws(() => kronor(NaN), RangeError);
+  assert.equal(kronor(-1500), '-1 500 kr');
+});
+
 console.log(fel === 0 ? '\nAlla kontroller gick igenom.' : `\n${fel} kontroll(er) misslyckades.`);
 process.exit(fel === 0 ? 0 : 1);
