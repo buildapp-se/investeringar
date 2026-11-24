@@ -142,3 +142,14 @@ Obevakat svep, worktree `C:\dev\investeringar-sweep-1124`, gren `sweep/2026-11-2
 Patriks att avgöra: PR #4; rubrikerna "Därför kan du inte tajma marknaden" och "Därför säger förra årets vinnarfond ingenting om nästa år", som är starkare än källorna (se Fulltextgranskning i `forskningslankar.md`). Arbetsmetod: spglobal-sidorna och SPIVA-PDF:en går att läsa via headless Chrome (fetch inifrån sidan); OUP och digitalcommons.unl.edu visar Cloudflare-kontroll även där, så abstract hämtas från OpenAlex (`api.openalex.org/works/https://doi.org/<DOI>`) eller Semantic Scholar.
 
 Deploy 2026-11-24: `deploy-pages@v4` svarade "No artifacts named github-pages" fast uppladdningen lyckats, i 3 av 4 körningar (push, omkörning och `gh workflow run deploy.yml`); githubstatus visade inga störningar. En körning gick igenom, så buildapp.se/investeringar serverar 181d8e4; senare commits ändrar inte `site/`. Faller nästa deploy också: prova `upload-pages-artifact@v4` som kontoret kör, eller `deploy-pages@v5`.
+
+## Djuppass 2026-11-24
+
+Worktree `C:\dev\investeringar-deep-1124`, gren `deep/2026-11-24`, pushad till `master`. Klart:
+
+- **Deploy:** eget `deploy`-jobb (`needs: build`, miljön `github-pages`) och `upload-pages-artifact@v4`, som kontoret. Svar på stycket ovan.
+- **Räknaren:** `rantaPaRanta` räknar i sluten form (`expm1`/`log1p`) i stället för en loop per månad. Loopen tog 3 s per tangent vid 100 miljoner år och visade "Infinity kr". `kronor()` kastar nu på Infinity och NaN, så sidan visar "–". Samma slutvärden som förut på fem scenarier (fyra decimaler). Test skrivet först och sett falla.
+- **Mutation:** 93,62 % (94,25 %), 94 mutanter; de sex som överlever är felmeddelanden i `RangeError`. Kör: `npx stryker run --concurrency 2` i `site/`.
+- **UX:** skriptet 7 av 7 lokalt förbi grinden (`addInitScript` som sätter `grind-oppen`, kopia av skriptet som togs bort efteråt). Granskningen: läget är ok (Jakob, Peak-End, Tesler: standardscenariot räknar direkt), utom att "Forskning" och temaknapparna ligger dolda i headerns scrollrad på 390 px. Smak, ligger i BACKLOG under Granskning 2026-11-24.
+
+Överhoppat: faktakontrollen av de fyra återstående Gemini-dokumenten (stor research, inte avgränsad), AVWS-länder (ingen innehavsfil), WCAG bakom grinden (aifabrikens svit).

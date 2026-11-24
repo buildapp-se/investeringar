@@ -52,3 +52,11 @@ Fynd från den automatiska sviten (aifabriken `tools/audit-suite.ts`: headers, n
 
 - [x] `[P3]` (rättad 2026-10-06: `site/package-lock.json` incheckad, `npm audit` kör och ger 0 sårbarheter, projektet har inga beroenden) npm audit kan inte köras: `site/` saknar `package-lock.json`. Checka in en låsfil.
 - [ ] `[P3]` WCAG: bara inloggningsskärmen mäts (axe 0 fel, 6 element med oavgjord kontrast). Sidorna bakom lösenordet kräver ett inloggat tillstånd i svitens inventarie.
+
+## Granskning 2026-11-24
+
+Djuppass: mutationstest, UX-granskning (`ux-audit`, lokalt förbi grinden) och deployflödet.
+
+- [x] `[P2]` (rättad 2026-11-24, `f65f42c`: sluten form i `rantaPaRanta`, `kronor()` kastar på Infinity och NaN, test först) Räknaren låste fliken: en loop per månad tog 330 ms vid 10 000 000 år och 3 s vid 100 000 000, för varje tangent, och visade "Infinity kr". Nu 1–3 ms och "–". Belåningsfältet på `etf-belaning.html` räknar med 0 kr vid "1e400" i stället för att kasta.
+- [x] `[P2]` (rättad 2026-11-24, `85358bc`: deploy i eget jobb som i GitHubs mall, `upload-pages-artifact@v4`) Deploy föll i 3 av 4 körningar 2026-11-24 med "No artifacts named github-pages".
+- [ ] `[P3]` UX, `index.html`, `etf-belaning.html`, `forskning.html` på 390 px: headerns navigering är en scrollrad med dold scrollbar, så "Forskning" och temaknapparna ligger utanför skärmen utan tecken på att det finns mer. Forskningssidan nås också via rutan "Forskningen" på startsidan. Smak: radbrytning, fade i kanten eller kortare etiketter. Patriks beslut.

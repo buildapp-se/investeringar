@@ -99,7 +99,7 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - TLS: 2026-09-16, pass, SSL Labs A+ on buildapp.se, TLS 1.2 minimum and HSTS since today
 - Lighthouse: 2026-09-16, pass, a11y 100 after the contrast fix, best practices 100, SEO 60 (noindex by design, meta description added) (mobile, no perf)
 - Markup: 2026-09-16, pass, W3C 0 errors after the fix; 0 broken links
-- UX: 2026-09-16, warn, 2 targets under 44 px left after the fix (two 13 px checkboxes, the label is the target), number fields not interact-tested
+- UX: 2026-11-24, warn, 7 of 7 script checks pass (--interact, all three pages past the gate, local); review: at 390 px Forskning and the theme buttons sit off-screen in the header's scroll row with no cue (was 2026-09-16 warn, two 13 px checkboxes)
 - npm audit: 2026-10-27, n/a, no package.json
 - Secrets: 2026-09-24, pass, gitleaks 0 findings in 31 commits
 - Actions: 2026-09-24, pass, zizmor 0 high, 0 medium, 0 low
@@ -114,4 +114,4 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - OWASP Top 10: 2026-10-30, warn, code review (Mistral Large, medium and high checked by Claude), no live probe; 0 high, 1 medium: no CSP in repo, zone CSP lacks script-src (shared zone rule)
 - ZAP baseline: 2026-10-27, n/a, static site on buildapp.se with a client-side gate only, no server, cookies or forms; headers, TLS and markup are covered by their own columns
 - Dependabot: 2026-10-29, pass, 0 open alerts
-- Mutation: 2026-11-04, Stryker 94,25 % on avgifter.js and belaning.js (85,06 % before, 87 mutants); 5 survivors are error messages the page never shows
+- Mutation: 2026-11-24, Stryker 93,62 % on avgifter.js and belaning.js (94,25 % on 2026-11-04, 94 mutants after the closed-form rewrite); 6 survivors, all RangeError messages the page never shows (it prints a dash)
