@@ -171,11 +171,14 @@ const falt = ['manad', 'engang', 'ar', 'sats'];
 const STANDARD = { manad: 2000, engang: 0, ar: 30, sats: 7 };
 
 function rakna() {
-  const v = Object.fromEntries(falt.map(f => [f, Number(document.getElementById(f).value)]));
-  try { localStorage.setItem('ranta', JSON.stringify(v)); } catch {}
-  // Adressen bar scenariot, sa en kopierad lank visar samma rakning.
-  history.replaceState(null, '', '?' + new URLSearchParams(v) + location.hash);
-  document.getElementById('res-ar').textContent = v.ar;
+  // Tomt falt ar en saknad uppgift, inte noll: tom procent raknade forut med 0 % och visade "0 kr".
+  const v = Object.fromEntries(falt.map(f => { const t = document.getElementById(f).value; return [f, t === '' ? NaN : Number(t)]; }));
+  if (Object.values(v).every(Number.isFinite)) {
+    try { localStorage.setItem('ranta', JSON.stringify(v)); } catch {}
+    // Adressen bar scenariot, sa en kopierad lank visar samma rakning.
+    history.replaceState(null, '', '?' + new URLSearchParams(v) + location.hash);
+  }
+  document.getElementById('res-ar').textContent = Number.isFinite(v.ar) ? v.ar : '–';
   try {
     const r = rantaPaRanta({ engangsinsattning: v.engang, manadssparande: v.manad, ar: v.ar, raknesats: v.sats / 100 });
     document.getElementById('res-insatt').textContent = kronor(r.insatt);
