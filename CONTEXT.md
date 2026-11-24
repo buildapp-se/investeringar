@@ -111,7 +111,7 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - WCAG 2.2 AA (automated): 2026-10-06, blocked, 1 targets; 0 failed, 1 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a2/investeringar.json
 - OG image: 2026-11-04, pass, 1200x630 PNG, https://buildapp.se/investeringar/og.png, og and twitter tags on all three pages, rendered from og.source.html; checked locally only, verdict reflects the local check until deployed (the page is still behind the gate and noindex)
 - Database: 2026-10-25, none, localStorage
-- OWASP Top 10: 2026-10-30, warn, code review (Mistral Large, medium and high checked by Claude), no live probe; 0 high, 1 medium: no CSP in repo, zone CSP lacks script-src (shared zone rule)
+- OWASP Top 10: 2026-11-24, warn, code review (Gemini 4 Neon High, every finding checked by Claude), no live probe; 0 high, 0 medium open; 1 low: no CSP in repo, zone CSP lacks script-src (BACKLOG, OWASP review 2026-11-24) (earlier: 2026-10-30, warn, Mistral Large, 1 medium, the same CSP gap)
 - ZAP baseline: 2026-10-27, n/a, static site on buildapp.se with a client-side gate only, no server, cookies or forms; headers, TLS and markup are covered by their own columns
 - Dependabot: 2026-10-29, pass, 0 open alerts
 - Mutation: 2026-11-24, Stryker 93,62 % on avgifter.js and belaning.js (94,25 % on 2026-11-04, 94 mutants after the closed-form rewrite); 6 survivors, all RangeError messages the page never shows (it prints a dash)

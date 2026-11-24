@@ -60,3 +60,9 @@ Djuppass: mutationstest, UX-granskning (`ux-audit`, lokalt förbi grinden) och d
 - [x] `[P2]` (rättad 2026-11-24, `f65f42c`: sluten form i `rantaPaRanta`, `kronor()` kastar på Infinity och NaN, test först) Räknaren låste fliken: en loop per månad tog 330 ms vid 10 000 000 år och 3 s vid 100 000 000, för varje tangent, och visade "Infinity kr". Nu 1–3 ms och "–". Belåningsfältet på `etf-belaning.html` räknar med 0 kr vid "1e400" i stället för att kasta.
 - [x] `[P2]` (rättad 2026-11-24, `85358bc`: deploy i eget jobb som i GitHubs mall, `upload-pages-artifact@v4`) Deploy föll i 3 av 4 körningar 2026-11-24 med "No artifacts named github-pages".
 - [ ] `[P3]` UX, `index.html`, `etf-belaning.html`, `forskning.html` på 390 px: headerns navigering är en scrollrad med dold scrollbar, så "Forskning" och temaknapparna ligger utanför skärmen utan tecken på att det finns mer. Forskningssidan nås också via rutan "Forskningen" på startsidan. Smak: radbrytning, fade i kanten eller kortare etiketter. Patriks beslut.
+
+## OWASP review, 2026-11-24
+
+Gemini 4 Neon High, kodgranskning; varje fynd prövat av Claude mot `origin/master`. Sju fynd: ett rättat (`server.mjs` lyssnade på alla gränssnitt, nu 127.0.0.1), ett kvar nedan, fem avvisade (räknarloopen redan rättad i `f65f42c`; grinden är medvetet klientsidig; Google Fonts utan SRI och Actions på majortaggar litar bara på Google och GitHub, som redan serverar sidan; FI-skriptet hämtar bara från fi.se över https och körs lokalt).
+
+- [ ] `[P3]` CSP saknas i repot och zonens CSP på buildapp.se saknar `script-src` (var medium 2026-10-30, nu låg: ingen osäker data når `innerHTML`, allt kommer från `data.js`). En strikt `script-src 'self'` kräver att de tre inline-modulerna flyttas till egna filer och att `style`-attributen blir klasser. Regeln på zonen delas av alla appar på buildapp.se, så valet mellan meta-CSP i sidorna och en sökvägsregel på zonen är Patriks.
