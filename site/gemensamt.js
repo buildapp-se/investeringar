@@ -15,3 +15,17 @@ export function startaTema() {
   satt(sparat);
 }
 
+
+/**
+ * Startvarden for en raknare: standard, sedan sparat, sedan lanken (?manad=5000).
+ * Bara nycklar som finns i standard och bara andliga tal tas med, sa en trasig
+ * lank eller ett gammalt sparat varde ger standardvardet i stallet for ett tomt falt.
+ * @param {Record<string, number>} standard
+ * @param {string} sok location.search
+ * @param {Record<string, unknown> | null} sparat
+ */
+export function startvarden(standard, sok, sparat) {
+  const lank = new URLSearchParams(sok);
+  const tal = v => (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) && Number.isFinite(Number(v)) ? Number(v) : undefined;
+  return Object.fromEntries(Object.entries(standard).map(([k, s]) => [k, tal(lank.get(k)) ?? tal(sparat?.[k]) ?? s]));
+}

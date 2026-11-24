@@ -117,7 +117,7 @@
 <script type="module">
 import { maxLan } from './belaning.js';
 import { kronor, procent } from './avgifter.js';
-import { startaTema } from './gemensamt.js';
+import { startaTema, startvarden } from './gemensamt.js';
 import { startaGrind } from './grind.js';
 import { BELANING, BELANINGSVARDE, ETFER, HAVSTANG, SENAST_KONTROLLERAD } from './data.js';
 
@@ -163,6 +163,8 @@ function ritaBasta() {
   // "1e400" ger Infinity, och kronor() kastar da: rakna med noll i stallet.
   const tal = Number(document.getElementById('kapital').value);
   const kapital = Number.isFinite(tal) && tal > 0 ? tal : 0;
+  try { localStorage.setItem('kapital', String(kapital)); } catch {}
+  history.replaceState(null, '', '?kapital=' + kapital + location.hash);
   document.getElementById('bastarader').innerHTML = BELANING.map(p => {
     const lan = maxLan(kapital, p.basta);
     return `<tr><td><span class="produktnamn">${esc(p.namn)}</span></td>
@@ -172,6 +174,9 @@ function ritaBasta() {
       <td class="text liten">${esc(p.recept)}</td></tr>`;
   }).join('');
 }
+let sparat = null;
+try { sparat = { kapital: localStorage.getItem('kapital') }; } catch {}
+document.getElementById('kapital').value = startvarden({ kapital: 500000 }, location.search, sparat).kapital;
 document.getElementById('kapital').addEventListener('input', ritaBasta);
 ritaBasta();
 </script>

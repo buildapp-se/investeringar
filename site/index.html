@@ -155,7 +155,7 @@
 
 <script type="module">
 import { rantaPaRanta, kronor, procent } from './avgifter.js';
-import { startaTema } from './gemensamt.js';
+import { startaTema, startvarden } from './gemensamt.js';
 import { startaGrind } from './grind.js';
 import { FONDER, PLATTFORMAR, ROBOTAR, SENAST_KONTROLLERAD } from './data.js';
 
@@ -173,6 +173,8 @@ const STANDARD = { manad: 2000, engang: 0, ar: 30, sats: 7 };
 function rakna() {
   const v = Object.fromEntries(falt.map(f => [f, Number(document.getElementById(f).value)]));
   try { localStorage.setItem('ranta', JSON.stringify(v)); } catch {}
+  // Adressen bar scenariot, sa en kopierad lank visar samma rakning.
+  history.replaceState(null, '', '?' + new URLSearchParams(v) + location.hash);
   document.getElementById('res-ar').textContent = v.ar;
   try {
     const r = rantaPaRanta({ engangsinsattning: v.engang, manadssparande: v.manad, ar: v.ar, raknesats: v.sats / 100 });
@@ -205,8 +207,9 @@ function ritaFonder() {
     <td>${esc(r.avgift)}</td><td>${esc(r.aktieandel ?? '–')}</td><td>${esc(r.minsta ?? '–')}</td></tr>`).join('');
 }
 
-let start = STANDARD;
-try { start = { ...STANDARD, ...JSON.parse(localStorage.getItem('ranta') || '{}') }; } catch {}
+let sparat = null;
+try { sparat = JSON.parse(localStorage.getItem('ranta') || 'null'); } catch {}
+const start = startvarden(STANDARD, location.search, sparat);
 for (const f of falt) {
   const el = document.getElementById(f);
   el.value = start[f];

@@ -2,6 +2,7 @@
 
 import { strict as assert } from 'node:assert';
 import { rantaPaRanta, kronor, procent } from './avgifter.js';
+import { startvarden } from './gemensamt.js';
 
 let fel = 0;
 function provar(namn, fn) {
@@ -71,6 +72,19 @@ provar('belopp som inte ar andliga kastar i stallet for "Infinity kr"', () => {
   assert.throws(() => kronor(Infinity), RangeError);
   assert.throws(() => kronor(NaN), RangeError);
   assert.equal(kronor(-1500), '-1 500 kr');
+});
+
+provar('delad lank vinner over sparat, som vinner over standard', () => {
+  const standard = { manad: 2000, engang: 0, ar: 30, sats: 7 };
+  const v = startvarden(standard, '?manad=5000&sats=6.5&okand=9', { manad: 1000, ar: 20 });
+  assert.deepEqual(v, { manad: 5000, engang: 0, ar: 20, sats: 6.5 });
+});
+
+provar('trasiga varden i lank eller sparat hoppas over', () => {
+  const standard = { manad: 2000, ar: 30 };
+  assert.deepEqual(startvarden(standard, '?manad=abc&ar=', { manad: 'x', ar: null }), standard);
+  assert.deepEqual(startvarden(standard, '?ar=1e400', {}), standard);
+  assert.deepEqual(startvarden(standard, '', null), standard);
 });
 
 console.log(fel === 0 ? '\nAlla kontroller gick igenom.' : `\n${fel} kontroll(er) misslyckades.`);
