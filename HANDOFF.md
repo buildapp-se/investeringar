@@ -140,3 +140,5 @@ Obevakat svep, worktree `C:\dev\investeringar-sweep-1124`, gren `sweep/2026-11-2
 - Sajten på 390 px lokalt: ingen sidled-scroll på någon av de tre sidorna.
 
 Patriks att avgöra: PR #4; rubrikerna "Därför kan du inte tajma marknaden" och "Därför säger förra årets vinnarfond ingenting om nästa år", som är starkare än källorna (se Fulltextgranskning i `forskningslankar.md`). Arbetsmetod: spglobal-sidorna och SPIVA-PDF:en går att läsa via headless Chrome (fetch inifrån sidan); OUP och digitalcommons.unl.edu visar Cloudflare-kontroll även där, så abstract hämtas från OpenAlex (`api.openalex.org/works/https://doi.org/<DOI>`) eller Semantic Scholar.
+
+Deploy 2026-11-24: `deploy-pages` svarade "No artifacts named github-pages" två gånger fast uppladdningen lyckats (även vid omkörning av samma körning); en ny körning med `gh workflow run deploy.yml` gick igenom och buildapp.se/investeringar serverar 181d8e4.
