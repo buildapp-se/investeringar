@@ -39,7 +39,18 @@ jobs:
       - name: Versionsmärk moduler och stilmall
         run: sed -i -E "s|(from '\./[a-z-]+\.js)'|\1?v=${GITHUB_SHA}'|g; s|(href=\"stil\.css)\"|\1?v=${GITHUB_SHA}\"|g" site/*.html
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: site
-      - uses: actions/deploy-pages@v4
+
+  # Eget jobb som i GitHubs mall: i samma jobb hittade deploy-pages ofta inte
+  # artefakten som just laddats upp (3 av 4 korningar 2026-11-24).
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
