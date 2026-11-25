@@ -61,6 +61,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+.vantar body { visibility: hidden; } /* se skriptet i head: bara dar blocking=render saknas (Firefox) */
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 

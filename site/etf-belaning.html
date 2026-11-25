@@ -27,6 +27,8 @@
 <link rel="modulepreload" href="./grind.js">
 <link rel="modulepreload" href="./data.js">
 <!-- I head med blocking=render: forsta ritningen vantar tills skriptet fyllt tabellerna, satt temat och lagt grinden. Sist i body ritades sidan forst och tabellerna hoppade in efterat (CLS 0,6 pa etf-belaning.html vid 1440 px). Moduler i head kors anda forst nar hela sidan ar tolkad. -->
+<!-- Firefox stoder inte blocking=render och ritade sidan innan modulen kort: tabellerna hoppade, grinden och sparat tema kom efterat. Dold tills startaGrind() kort, hogst 3 s om en modul inte laddas. -->
+<script>if (!('blocking' in HTMLScriptElement.prototype)) { document.documentElement.classList.add('vantar'); setTimeout(() => document.documentElement.classList.remove('vantar'), 3000); }</script>
 <script type="module" blocking="render">
 import { maxLan } from './belaning.js';
 import { kronor, procent } from './avgifter.js';

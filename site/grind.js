@@ -29,6 +29,9 @@ function oppnad() {
  * ar redan laddad, overlayen ligger bara over den.
  */
 export function startaGrind() {
+  // Forst: Firefox fokuserar inte faltet i en dold sida (se 'vantar' i sidornas head).
+  // Modulen kor klart i samma uppgift, sa tabellerna ar fyllda innan nasta ritning.
+  document.documentElement.classList.remove('vantar');
   if (oppnad()) return;
 
   const overlay = document.createElement('div');
