@@ -181,3 +181,7 @@ Worktree `C:\dev\_wt\investeringar-1125c`, gren `scen/2026-11-25`, pushad till `
 ## P3-funktionspass 2026-11-25, klar
 
 Worktree `C:\dev\_wt\investeringar-1125p`, gren `p3/2026-11-25`. Inga byggbara punkter: varje öppen P3-punkt är Patriks beslut, research, zoninställningar eller går inte att nå. Motivering per punkt i BACKLOG under P3-funktionspass 2026-11-25. Bara BACKLOG och HANDOFF ändrade.
+
+## Webbläsarpass 2026-11-25, klar
+
+Worktree `C:\dev\_wt\investeringar-1125x`, gren `xb/2026-11-25`. Samma flöden i Chromium, Firefox och WebKit (Playwright, iPhone 13-profil), se BACKLOG under Webbläsarpass 2026-11-25. Tre skillnader rättade i `site/`: adressen skrivs när inmatningen stannat (WebKit kastade efter 100 `replaceState`), fälten minst 16 px (iPhone zoomar annars vid fokus; ej provat på riktig iPhone), och Firefox, som saknar `blocking="render"`, ritar inte sidan innan modulen kört. `npm test` grönt. Skripten ligger i `%TEMP%\aifabriken-lanes\xb-investeringar\`.
