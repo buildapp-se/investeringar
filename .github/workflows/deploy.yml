@@ -35,9 +35,11 @@ jobs:
       # medan index.html far tio minuter. En besokare kan darfor se en ny sida
       # med gamla siffror, och siffror med kalla och kontrolldatum ar hela
       # tjansten. Versionsmarkningen med commitens sha gor varje publicering
-      # till en ny URL for modulerna och stilmallen.
+      # till en ny URL for modulerna och stilmallen. modulepreload-lankarna
+      # (href="./x.js") maste fa samma ?v= som importerna, annars hamtas
+      # varje modul tva ganger.
       - name: Versionsmärk moduler och stilmall
-        run: sed -i -E "s|(from '\./[a-z-]+\.js)'|\1?v=${GITHUB_SHA}'|g; s|(href=\"stil\.css)\"|\1?v=${GITHUB_SHA}\"|g" site/*.html
+        run: sed -i -E "s|(from '\./[a-z-]+\.js)'|\1?v=${GITHUB_SHA}'|g; s|(href=\"stil\.css)\"|\1?v=${GITHUB_SHA}\"|g; s|(href=\"\./[a-z-]+\.js)\"|\1?v=${GITHUB_SHA}\"|g" site/*.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
