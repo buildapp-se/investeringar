@@ -103,7 +103,8 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - npm audit: 2026-10-27, n/a, no package.json
 - Secrets: 2026-09-24, pass, gitleaks 0 findings in 31 commits
 - Actions: 2026-09-24, pass, zizmor 0 high, 0 medium, 0 low
-- WCAG 2.2 AA: 2026-09-24, warn, axe 4.13.0 0 violations on buildapp.se/investeringar (mobile, one page); manual keyboard pass not done
+- WCAG 2.2 AA: 2026-11-25, warn, axe 4.14.0 0 violations live on all three pages past the gate at 390 and 1440 px, and on the gate at 390 px (was 2026-09-24, one page); manual screen reader pass not done
+- Speed: 2026-11-25, pass, live, Playwright: 390 px with 4x CPU and Slow 4G (150 ms, 1,6 Mbit/s) LCP 0,66 to 0,97 s, 1440 px about 0,2 s; CLS at most 0,0093 on every page at both widths (etf-belaning.html was 0,60 to 0,66 at 1440 px); transfer 118 KB on index (was 194), 109 KB on forskning (184), 193 KB on etf-belaning (195); biggest asset the Newsreader font
 - Headers (automated): 2026-10-27, pass, 6 of 6 on buildapp.se/investeringar, Observatory B+ on buildapp.se
 - Secrets (automated): 2026-10-06, pass, 2 targets; 0 failed, 0 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
 - Actions (automated): 2026-10-06, pass, zizmor 0 high, 0 medium, 0 low; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
