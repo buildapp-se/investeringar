@@ -82,7 +82,8 @@ function ritaBasta() {
   const kapital = text === '' ? NaN : Number(text);
   if (Number.isFinite(kapital) && kapital >= 0) {
     try { localStorage.setItem('kapital', String(kapital)); } catch {}
-    history.replaceState(null, '', '?kapital=' + kapital + location.hash);
+    // URLSearchParams kodar "+" i "1e+21"; ihopklistrat lastes det som mellanslag och lanken gav 500 000.
+    history.replaceState(null, '', '?' + new URLSearchParams({ kapital }) + location.hash);
   }
   document.getElementById('bastarader').innerHTML = BELANING.map(p => {
     let lan = streck, ranta = streck;

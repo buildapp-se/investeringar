@@ -41,7 +41,8 @@ export function rantaPaRanta(scenario) {
  */
 export function kronor(varde) {
   if (!Number.isFinite(varde)) throw new RangeError(`Inget belopp: ${varde}`);
-  return Math.round(varde).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kr';
+  // BigInt: fran 1e21 ger toString() exponentform ("1e+21"), som regexen nedan sonderdelade.
+  return BigInt(Math.round(varde)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kr';
 }
 
 /** Formaterar procent med decimalkomma. */

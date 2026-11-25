@@ -74,6 +74,12 @@ provar('belopp som inte ar andliga kastar i stallet for "Infinity kr"', () => {
   assert.equal(kronor(-1500), '-1 500 kr');
 });
 
+provar('belopp fran 1e21 skrivs med alla siffror, inte "1.0 000e+21 kr"', () => {
+  // 700 ar med 7 % ger runt 1e26 kr; toString() gav exponentform som tusentalsregexen sonderdelade.
+  assert.equal(kronor(1e21), '1 000 000 000 000 000 000 000 kr');
+  assert.equal(kronor(-2.5e21), '-2 500 000 000 000 000 000 000 kr');
+});
+
 provar('delad lank vinner over sparat, som vinner over standard', () => {
   const standard = { manad: 2000, engang: 0, ar: 30, sats: 7 };
   const v = startvarden(standard, '?manad=5000&sats=6.5&okand=9', { manad: 1000, ar: 20 });
