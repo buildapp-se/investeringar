@@ -165,3 +165,7 @@ Worktree `C:\dev\_wt\investeringar-1124f`, gren `feat/2026-11-24`. Två använda
 ## Buggjakt 2026-11-24, klar
 
 Worktree `C:\dev\_wt\investeringar-1124h`, gren `hunt/2026-11-24`. Två användarsynliga buggar rättade i `site/`, se BACKLOG under Buggjakt 2026-11-24. Inget nytt test i `npm test`: felen satt i sidornas inline-skript, som testfilerna inte når; kontrollerat med ett Playwright-skript mot den lokala servern. Övrigt utan fynd: tangentbordsordning, grinden (fokus, fel ord, fokus stannar i dialogen), ingen sidled-scroll på någon sida vid 390 px, decimalkomma i fälten tas emot som tal i Chromium med sv-SE. Öppna P3-punkter kräver Patrik eller är research.
+
+## Buggjakt 2, 2026-11-24, klar
+
+Worktree `C:\dev\_wt\investeringar-1124k`, gren `hunt2/2026-11-24`. Täckte det buggjakt 1 inte gick: externa länkar, 404-sidan, återbesök (tema, sparade värden, bakåt), blockerade typsnitt och saknad `data.js`. Två fynd rättade, se BACKLOG under Buggjakt 2. Inget nytt test: en länk och en statisk sida, inget i räknelogiken. Utan fynd: titlar, bilder, ankarlänkar, decimalkomma, konsolfel. Fallet `data.js` når inte fram visar streck och ingen grind; lämnat, eftersom det inte syns något okontrollerat innehåll då.

@@ -78,3 +78,11 @@ Playwright headless mot `node server.mjs` lokalt, 390 och 1440 px, sv-SE: alla f
 
 - [x] `[P2]` (rättad 2026-11-24, `f7cd683`) Startsidan visade "Du har efter 2.5 år" med punkt, och "efter -3 år" eller "efter 0 år" bredvid streck. Nu "2,5" och "–". Kontrollerat i Chromium lokalt.
 - [x] `[P2]` (rättad 2026-11-24, `f7cd683`) Belåningssidan räknade tomt eller negativt kapital som 0 kr, sparade 0, och en omladdning visade "0" i fältet. Nu "–" i lån och ränta, och bara giltigt kapital sparas, som på startsidan. Kontrollerat i Chromium lokalt.
+
+## Buggjakt 2, 2026-11-24
+
+Natten mot 2026-11-25. Alla 53 externa länkar i `site/` hämtade med curl (GET, följer omdirigeringar), sidorna i headless Chromium vid 390 och 1440 px: titlar, trasiga bilder, konsolfel, döda ankarlänkar, punkt som decimaltecken, sidled-scroll, tema och värden kvar efter navigering och bakåt, Google Fonts blockerade.
+
+- [x] `[P2]` (rättad 2026-11-25) IUSQ:s faktabladslänk på `etf-belaning.html` gick till BlackRocks felsida: fonden heter nu iShares MSCI All Country World och PDF:en har ny adress. Ny länk ger PDF med samma ISIN. Siffrorna på raden är inte omlästa.
+- [x] `[P3]` (rättad 2026-11-25) En felskriven adress under `/investeringar/` gav GitHubs engelska "Page not found". Nu `site/404.html` på svenska med länk till startsidan.
+- [ ] `[P3]` Inte kontrollerbara utifrån: SPIVA-länkarna (spglobal.com svarar 403 på hela sajten mot både curl och headless Chromium i natt), OUP-DOI:n och Bogleheads (Cloudflare-kontroll). Svepet 2026-11-24 läste spglobal-sidorna via headless Chrome enligt HANDOFF; i natt inte testat.

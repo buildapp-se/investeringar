@@ -36,7 +36,7 @@ Availability: searched by ISIN on 2026-09-24 via Avanza's public search API (`/_
 3b. VGLD: KID https://fund-docs.vanguard.com/ie000cvum3n6_priipskid_en.pdf (not parsed) ; availability from broker search.
 4. SPYI: SSGA factsheet (dated 31 Aug 2026 / data 31 Jul 2026) https://www.ssga.com/library-content/products/factsheets/etfs/emea/factsheet-emea-en_gb-spyi-gy.pdf
 5. FWIA: Invesco factsheet as of 2026-08-31 https://www.invesco.com/content/dam/invesco/emea/en/product-documents/etf/share-class/factsheet/IE000716YHJ7_factsheet_en.pdf ; [jE] https://www.justetf.com/en/etf-profile.html?isin=IE000716YHJ7
-6. IUSQ: iShares factsheet, data as at 2026-07-31 https://www.ishares.com/uk/individual/en/literature/fact-sheet/ssac-ishares-msci-acwi-ucits-etf-fund-fact-sheet-en-gb.pdf ; [jE] https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259
+6. IUSQ: iShares factsheet, data as at 2026-07-31 https://www.ishares.com/uk/individual/en/literature/fact-sheet/ssac-ishares-msci-all-country-world-ucits-etf-fund-fact-sheet-en-gb.pdf (the old `...-msci-acwi-...` address redirects to an error page since the fund was renamed iShares MSCI All Country World, link fixed 2026-11-25; figures not re-read) ; [jE] https://www.justetf.com/en/etf-profile.html?isin=IE00B6R52259
 7. SCWX: DWS factsheet as of 2026-08-31 https://etf.dws.com/download/asset/fd7b8b84-4314-4c4c-8cf1-1ddb770d323c ; [jE] https://www.justetf.com/en/etf-profile.html?isin=LU2903252349
 8. EUNL: iShares factsheet, data as at 2026-08-31 https://www.ishares.com/uk/individual/en/literature/fact-sheet/swda-ishares-core-msci-world-ucits-etf-fund-fact-sheet-en-gb.pdf
 9. SPPW: SSGA factsheet (31 Aug 2026) https://www.ssga.com/library-content/products/factsheets/etfs/emea/factsheet-emea-en_gb-sppw-gy.pdf
