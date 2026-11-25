@@ -28,7 +28,7 @@
 <!-- I head med blocking=render: forsta ritningen vantar tills skriptet fyllt tabellerna, satt temat och lagt grinden. Sist i body ritades sidan forst och tabellerna hoppade in efterat (CLS 0,6 pa etf-belaning.html vid 1440 px). Moduler i head kors anda forst nar hela sidan ar tolkad. -->
 <script type="module" blocking="render">
 import { rantaPaRanta, kronor, procent } from './avgifter.js';
-import { startaTema, startvarden } from './gemensamt.js';
+import { startaTema, startvarden, skrivAdress } from './gemensamt.js';
 import { startaGrind } from './grind.js';
 import { FONDER, PLATTFORMAR, ROBOTAR, SENAST_KONTROLLERAD } from './data.js';
 
@@ -49,7 +49,7 @@ function rakna() {
   if (Object.values(v).every(Number.isFinite)) {
     try { localStorage.setItem('ranta', JSON.stringify(v)); } catch {}
     // Adressen bar scenariot, sa en kopierad lank visar samma rakning.
-    history.replaceState(null, '', '?' + new URLSearchParams(v) + location.hash);
+    skrivAdress(v);
   }
   try {
     const r = rantaPaRanta({ engangsinsattning: v.engang, manadssparande: v.manad, ar: v.ar, raknesats: v.sats / 100 });

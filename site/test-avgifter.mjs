@@ -2,7 +2,7 @@
 
 import { strict as assert } from 'node:assert';
 import { rantaPaRanta, kronor, procent } from './avgifter.js';
-import { startvarden } from './gemensamt.js';
+import { startvarden, skrivAdress } from './gemensamt.js';
 
 let fel = 0;
 function provar(namn, fn) {
@@ -92,6 +92,17 @@ provar('trasiga varden i lank eller sparat hoppas over', () => {
   assert.deepEqual(startvarden(standard, '?ar=1e400', {}), standard);
   assert.deepEqual(startvarden(standard, '', null), standard);
 });
+
+// Safari kastar efter 100 replaceState pa 10 s, sa en hallen piltangent gav fel siffror (WebKit, Playwright).
+{
+  const anrop = [];
+  globalThis.location = { hash: '#x' };
+  globalThis.history = { replaceState: (a, b, url) => { if (anrop.length >= 1) throw new Error('SecurityError'); anrop.push(url); } };
+  for (let i = 1; i <= 150; i++) skrivAdress({ manad: 1000 + i });
+  await new Promise(r => setTimeout(r, 400));
+  provar('adressen skrivs en gang nar inmatningen stannat, med sista vardet', () => assert.deepEqual(anrop, ['?manad=1150#x']));
+  provar('en vagrad replaceState kastar inte vidare', () => { skrivAdress({ manad: 1 }); });
+}
 
 console.log(fel === 0 ? '\nAlla kontroller gick igenom.' : `\n${fel} kontroll(er) misslyckades.`);
 process.exit(fel === 0 ? 0 : 1);

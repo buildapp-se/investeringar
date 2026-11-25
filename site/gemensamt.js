@@ -29,3 +29,16 @@ export function startvarden(standard, sok, sparat) {
   const tal = v => (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) && Number.isFinite(Number(v)) ? Number(v) : undefined;
   return Object.fromEntries(Object.entries(standard).map(([k, s]) => [k, tal(lank.get(k)) ?? tal(sparat?.[k]) ?? s]));
 }
+
+let adressVantar;
+/**
+ * Skriver scenariot i adressen nar inmatningen stannat. Safari kastar efter 100
+ * replaceState pa 10 s, sa en hallen piltangent avbrot rakningen och visade fel siffror.
+ * @param {Record<string, string | number>} varden
+ */
+export function skrivAdress(varden) {
+  clearTimeout(adressVantar);
+  adressVantar = setTimeout(() => {
+    try { history.replaceState(null, '', '?' + new URLSearchParams(varden) + location.hash); } catch {}
+  }, 250);
+}

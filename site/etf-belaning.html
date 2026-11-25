@@ -30,7 +30,7 @@
 <script type="module" blocking="render">
 import { maxLan } from './belaning.js';
 import { kronor, procent } from './avgifter.js';
-import { startaTema, startvarden } from './gemensamt.js';
+import { startaTema, startvarden, skrivAdress } from './gemensamt.js';
 import { startaGrind } from './grind.js';
 import { BELANING, BELANINGSVARDE, ETFER, HAVSTANG, SENAST_KONTROLLERAD } from './data.js';
 
@@ -80,7 +80,7 @@ function ritaBasta() {
   if (Number.isFinite(kapital) && kapital >= 0) {
     try { localStorage.setItem('kapital', String(kapital)); } catch {}
     // URLSearchParams kodar "+" i "1e+21"; ihopklistrat lastes det som mellanslag och lanken gav 500 000.
-    history.replaceState(null, '', '?' + new URLSearchParams({ kapital }) + location.hash);
+    skrivAdress({ kapital });
   }
   document.getElementById('bastarader').innerHTML = BELANING.map(p => {
     let lan = streck, ranta = streck;
