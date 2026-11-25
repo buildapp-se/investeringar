@@ -185,3 +185,7 @@ Worktree `C:\dev\_wt\investeringar-1125p`, gren `p3/2026-11-25`. Inga byggbara p
 ## Webbläsarpass 2026-11-25, klar
 
 Worktree `C:\dev\_wt\investeringar-1125x`, gren `xb/2026-11-25`. Samma flöden i Chromium, Firefox och WebKit (Playwright, iPhone 13-profil), se BACKLOG under Webbläsarpass 2026-11-25. Tre skillnader rättade i `site/`: adressen skrivs när inmatningen stannat (WebKit kastade efter 100 `replaceState`), fälten minst 16 px (iPhone zoomar annars vid fokus; ej provat på riktig iPhone), och Firefox, som saknar `blocking="render"`, ritar inte sidan innan modulen kört. `npm test` grönt. Skripten ligger i `%TEMP%\aifabriken-lanes\xb-investeringar\`.
+
+## Inställningspass 2026-11-25, klar
+
+Worktree `C:\dev\_wt\investeringar-1125t`, gren `prefs/2026-11-25`. Svensk text utan fel. Mörkt tema, minskad rörelse, 200 % text och tvingade färger provade med headless Playwright, se BACKLOG under Inställningspass 2026-11-25. Rättat i `site/`: headern bryter rad över 700 px, belopp med hårt mellanslag och resultatrutor som går till en kolumn vid stor text, synligt val i tvingade färger. `npm test` grönt. Skripten i `%TEMP%\aifabriken-lanes\prefs-investeringar\`.
