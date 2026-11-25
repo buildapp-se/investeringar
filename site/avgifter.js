@@ -36,13 +36,14 @@ export function rantaPaRanta(scenario) {
 }
 
 /**
- * Formaterar kronor med mellanslag som tusentalsavgransare.
+ * Formaterar kronor med hart mellanslag (U+00A0) som tusentalsavgransare och fore "kr",
+ * sa beloppet inte bryts mitt i ("720" pa en rad, "000 kr" pa nasta) vid stor text.
  * @throws {RangeError} om beloppet inte ar ett andligt tal, sa sidan visar ett streck.
  */
 export function kronor(varde) {
   if (!Number.isFinite(varde)) throw new RangeError(`Inget belopp: ${varde}`);
   // BigInt: fran 1e21 ger toString() exponentform ("1e+21"), som regexen nedan sonderdelade.
-  return BigInt(Math.round(varde)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kr';
+  return BigInt(Math.round(varde)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kr';
 }
 
 /** Formaterar procent med decimalkomma. */

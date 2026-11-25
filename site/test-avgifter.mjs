@@ -3,6 +3,8 @@
 import { strict as assert } from 'node:assert';
 import { rantaPaRanta, kronor, procent } from './avgifter.js';
 import { startvarden, skrivAdress } from './gemensamt.js';
+// Hart mellanslag: "720 000 kr" brot annars mellan 720 och 000 i resultatrutorna vid 200 % text.
+const nb = s => s.replaceAll(' ', ' ');
 
 let fel = 0;
 function provar(namn, fn) {
@@ -52,11 +54,11 @@ provar('negativ raknesats over -100 % raknas: 1 000 x 0,5^2', () => {
 });
 
 provar('formatering foljer svenska konventioner', () => {
-  assert.equal(kronor(18400), '18 400 kr');
-  assert.equal(kronor(531664), '531 664 kr');
+  assert.equal(kronor(18400), nb('18 400 kr'));
+  assert.equal(kronor(531664), nb('531 664 kr'));
   assert.equal(procent(0.002), '0,20 %');
-  assert.equal(kronor(1234567), '1 234 567 kr');
-  assert.equal(kronor(999.6), '1 000 kr');
+  assert.equal(kronor(1234567), nb('1 234 567 kr'));
+  assert.equal(kronor(999.6), nb('1 000 kr'));
   assert.equal(procent(0.07, 0), '7 %');
 });
 
@@ -71,13 +73,13 @@ provar('orimligt manga ar raknas direkt, utan att lasa sidan', () => {
 provar('belopp som inte ar andliga kastar i stallet for "Infinity kr"', () => {
   assert.throws(() => kronor(Infinity), RangeError);
   assert.throws(() => kronor(NaN), RangeError);
-  assert.equal(kronor(-1500), '-1 500 kr');
+  assert.equal(kronor(-1500), nb('-1 500 kr'));
 });
 
 provar('belopp fran 1e21 skrivs med alla siffror, inte "1.0 000e+21 kr"', () => {
   // 700 ar med 7 % ger runt 1e26 kr; toString() gav exponentform som tusentalsregexen sonderdelade.
-  assert.equal(kronor(1e21), '1 000 000 000 000 000 000 000 kr');
-  assert.equal(kronor(-2.5e21), '-2 500 000 000 000 000 000 000 kr');
+  assert.equal(kronor(1e21), nb('1 000 000 000 000 000 000 000 kr'));
+  assert.equal(kronor(-2.5e21), nb('-2 500 000 000 000 000 000 000 kr'));
 });
 
 provar('delad lank vinner over sparat, som vinner over standard', () => {

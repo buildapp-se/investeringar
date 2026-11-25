@@ -240,3 +240,20 @@ table.nivaer td:first-child { min-width: 0; }
 section.wrap.tat { padding-top: 0; }
 .mening input.lang { width: 7.5em; }
 @media (max-width: 700px) { .resultat { grid-template-columns: 1fr 1fr; gap: 10px; } .kort { padding: 14px; } .kort .tal { font-size: 21px; } .lanktext { font-size: 16px; } }
+
+/* Over 700 px fick headern inte plats vid 701 px (21 px sidled-scroll) eller vid 200 % text:
+   navigeringen bryter till en egen rad i stallet. Under 700 px galler scrollraden ovan. */
+@media (min-width: 701px) {
+  header .wrap { height: auto; min-height: 66px; flex-wrap: wrap; }
+  nav { flex-wrap: wrap; }
+}
+/* Rutorna faller till en kolumn nar texten ar stor (em, inte px). Belopp med hart mellanslag
+   bryts bara om de inte far plats alls, till exempel vid 700 ar. */
+@media (max-width: 700px) { .resultat { grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5em), 1fr)); } }
+.kort .tal { overflow-wrap: anywhere; }
+/* Tvingade farger (Windows kontrastteman) tar bort bakgrunder: valt tema och aktuell sida
+   syntes bara som fetstil, och temaknapparna saknade kant. */
+@media (forced-colors: active) {
+  .temaval button { border: 1px solid ButtonText; }
+  .temaval button[aria-pressed="true"], nav a[aria-current="page"] { forced-color-adjust: none; background: Highlight; color: HighlightText; }
+}
