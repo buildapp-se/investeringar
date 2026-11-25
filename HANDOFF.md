@@ -173,3 +173,7 @@ Worktree `C:\dev\_wt\investeringar-1124k`, gren `hunt2/2026-11-24`. Täckte det 
 ## Fartpass 2026-11-25, klar
 
 Worktree `C:\dev\_wt\investeringar-1125s`, gren `speed/2026-11-25`, pushad till `master` och deployad (b3963cb live). Fart, tillgänglighet och metadata mätt live med headless Playwright före och efter, se BACKLOG under Fartpass 2026-11-25 och raderna Speed och WCAG i CONTEXT. Ändrat: typsnittsurvalet per sida, `modulepreload` (deploy.yml versionsmärker nu även `href="./x.js"`, annars hämtas modulerna två gånger), sidskriptet flyttat till head med `blocking="render"`. Mätskripten ligger utanför repot, i `%TEMP%\aifabriken-lanes\speed-investeringar\`.
+
+## Scenariojakt 2026-11-25, klar
+
+Worktree `C:\dev\_wt\investeringar-1125c`, gren `scen/2026-11-25`, pushad till `master` och deployad (f424ead live). Fem scenarier i flera steg mot den lokala servern, skripten i `%TEMP%\aifabriken-lanes\scen-investeringar\`; vad de täckte står i BACKLOG under Scenariojakt 2026-11-25. Två små buggar rättade (`kronor()` från 1e21, belåningslänken kodade inte `+`), typsnitten flyttade från Google Fonts till `site/fonter/` utan CSP-ändring, grindknappen ärver typsnittet. `npm test` grönt, fart mätt live före och efter. Patriks att avgöra: om en öppnad delad länk ska få skriva över ens eget sparade scenario.

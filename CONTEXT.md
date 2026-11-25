@@ -104,7 +104,7 @@ Read by the cockpit Audits tab. One `- Label: YYYY-MM-DD, result` per check; con
 - Secrets: 2026-09-24, pass, gitleaks 0 findings in 31 commits
 - Actions: 2026-09-24, pass, zizmor 0 high, 0 medium, 0 low
 - WCAG 2.2 AA: 2026-11-25, warn, axe 4.14.0 0 violations live on all three pages past the gate at 390 and 1440 px, and on the gate at 390 px (was 2026-09-24, one page); manual screen reader pass not done
-- Speed: 2026-11-25, pass, live, Playwright: 390 px with 4x CPU and Slow 4G (150 ms, 1,6 Mbit/s) LCP 0,66 to 0,97 s, 1440 px about 0,2 s; CLS at most 0,0093 on every page at both widths (etf-belaning.html was 0,60 to 0,66 at 1440 px); transfer 118 KB on index (was 194), 109 KB on forskning (184), 193 KB on etf-belaning (195); biggest asset the Newsreader font
+- Speed: 2026-11-25, pass, live, Playwright: 390 px with 4x CPU and Slow 4G (150 ms, 1,6 Mbit/s) LCP 0,68 to 1,07 s, 1440 px 0,11 to 0,31 s; CLS at most 0,012 on every page at both widths (etf-belaning.html was 0,60 to 0,66 at 1440 px); fonts self-hosted since the second pass (etf-belaning.html LCP at 390 px 1,20 and 1,35 s before, 0,93 to 0,99 s after); transfer 117 KB on index, 108 KB on forskning, 180 KB on etf-belaning; biggest asset the Newsreader font
 - Headers (automated): 2026-10-27, pass, 6 of 6 on buildapp.se/investeringar, Observatory B+ on buildapp.se
 - Secrets (automated): 2026-10-06, pass, 2 targets; 0 failed, 0 blocked; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
 - Actions (automated): 2026-10-06, pass, zizmor 0 high, 0 medium, 0 low; evidence C:/dev/aifabriken/.runs/audits/2026-10-06-batch-a/investeringar.json
