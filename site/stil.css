@@ -112,7 +112,8 @@ nav a[aria-current="page"] { color: var(--ink); font-weight: 600; background: va
 .panel { background: var(--surface); border: 1px solid var(--divider); padding: 30px; box-shadow: var(--skugga); }
 .mening { font-size: clamp(17px, 2.3vw, 22px); line-height: 2; font-family: Newsreader, Georgia, serif; }
 .mening input {
-  font-family: Manrope, sans-serif; font-size: .74em; font-weight: 700;
+  /* Minst 16 px: Safari pa iPhone zoomar in sidan nar ett mindre falt far fokus (12,6 px vid 390 px). */
+  font-family: Manrope, sans-serif; font-size: max(16px, .74em); font-weight: 700;
   background: var(--accent-soft); color: var(--ink); border: 0; border-bottom: 2px solid var(--accent-2);
   padding: 2px 8px; width: 5.4em; text-align: right; border-radius: 4px 4px 0 0;
 }
@@ -167,7 +168,7 @@ footer { border-top: 1px solid var(--divider); padding: 60px 0 44px; background:
 .grindruta h1 { font-family: Newsreader, Georgia, serif; font-size: clamp(26px, 4vw, 36px); font-weight: 400; line-height: 1.2; }
 .grindruta p { color: var(--ink-2); font-size: 15px; }
 .grindruta label { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); }
-.grindruta input { font: inherit; padding: 11px 13px; border: 1px solid var(--divider); border-radius: 4px; background: var(--surface); color: var(--ink); }
+.grindruta input { font: inherit; font-size: max(16px, 1em); padding: 11px 13px; border: 1px solid var(--divider); border-radius: 4px; background: var(--surface); color: var(--ink); }
 .grindruta input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .grindruta .knapp { justify-self: start; font: inherit; } /* utan font: inherit ritades knappen i Arial */
 .grindfel { color: var(--varning); font-size: 13.5px; }
