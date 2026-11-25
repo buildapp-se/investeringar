@@ -23,11 +23,81 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400&family=Manrope:wght@300;400;600;700&display=swap">
 <link rel="stylesheet" href="stil.css">
-<!-- Modulerna hittas annars forst nar tolkaren nar skriptet sist i body, efter forsta ritningen. Tabellerna fylldes da i efterhand och sidan hoppade (CLS 0,6 pa etf-belaning.html). -->
+<!-- Modulerna hamtas parallellt med stilmallen i stallet for nar tolkaren natt skriptet. -->
 <link rel="modulepreload" href="./avgifter.js">
 <link rel="modulepreload" href="./gemensamt.js">
 <link rel="modulepreload" href="./grind.js">
 <link rel="modulepreload" href="./data.js">
+<!-- I head med blocking=render: forsta ritningen vantar tills skriptet fyllt tabellerna, satt temat och lagt grinden. Sist i body ritades sidan forst och tabellerna hoppade in efterat (CLS 0,6 pa etf-belaning.html vid 1440 px). Moduler i head kors anda forst nar hela sidan ar tolkad. -->
+<script type="module" blocking="render">
+import { rantaPaRanta, kronor, procent } from './avgifter.js';
+import { startaTema, startvarden } from './gemensamt.js';
+import { startaGrind } from './grind.js';
+import { FONDER, PLATTFORMAR, ROBOTAR, SENAST_KONTROLLERAD } from './data.js';
+
+startaGrind();
+startaTema();
+for (const el of document.querySelectorAll('[data-kontrolldatum]')) el.textContent = SENAST_KONTROLLERAD;
+
+const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const antal = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+const lank = (text, url) => url ? `<a href="${esc(url)}" rel="noopener">${esc(text)}</a>` : esc(text);
+
+const falt = ['manad', 'engang', 'ar', 'sats'];
+const STANDARD = { manad: 2000, engang: 0, ar: 30, sats: 7 };
+
+function rakna() {
+  // Tomt falt ar en saknad uppgift, inte noll: tom procent raknade forut med 0 % och visade "0 kr".
+  const v = Object.fromEntries(falt.map(f => { const t = document.getElementById(f).value; return [f, t === '' ? NaN : Number(t)]; }));
+  if (Object.values(v).every(Number.isFinite)) {
+    try { localStorage.setItem('ranta', JSON.stringify(v)); } catch {}
+    // Adressen bar scenariot, sa en kopierad lank visar samma rakning.
+    history.replaceState(null, '', '?' + new URLSearchParams(v) + location.hash);
+  }
+  try {
+    const r = rantaPaRanta({ engangsinsattning: v.engang, manadssparande: v.manad, ar: v.ar, raknesats: v.sats / 100 });
+    document.getElementById('res-insatt').textContent = kronor(r.insatt);
+    document.getElementById('res-ranta').textContent = kronor(r.avkastning);
+    document.getElementById('res-slut').textContent = kronor(r.slutvarde);
+    // Decimalkomma ("2,5 år"), och inget "efter -3 år" bredvid streck.
+    document.getElementById('res-ar').textContent = v.ar.toLocaleString('sv-SE');
+  } catch {
+    for (const id of ['res-ar', 'res-insatt', 'res-ranta', 'res-slut']) document.getElementById(id).textContent = '–';
+  }
+}
+
+/** En plattformscell: fondavgift plus plattformsavgift, "säljs ej" eller "–". */
+function kopcell(f, k) {
+  if (k === null) return '<td class="dampad">–</td>';
+  if (k.finns === false) return '<td class="dampad liten">säljs ej</td>';
+  const total = procent(f.arligAvgift + k.plattform);
+  return `<td>${k.tak ? `<span class="liten dampad">högst</span> ${total}` : total}</td>`;
+}
+
+function ritaFonder() {
+  document.getElementById('fondrubrik').innerHTML = '<tr><th scope="col">Fond</th><th scope="col">Innehav</th><th scope="col">Fondavgift</th>'
+    + PLATTFORMAR.map(p => `<th scope="col">${p.namn}</th>`).join('') + '</tr>';
+  document.getElementById('fondrader').innerHTML = FONDER.map(f => `<tr>
+    <td><span class="produktnamn">${lank(f.namn, f.url)}</span>${f.isin ? `<span class="produktmeta">${esc(f.isin)}</span>` : ''}</td>
+    <td>${f.bredd ? `${antal(f.bredd.innehav)} i ${f.bredd.lander} länder` : '<span class="dampad">–</span>'}</td>
+    <td>${procent(f.arligAvgift)}</td>
+    ${PLATTFORMAR.map(p => kopcell(f, f.kop[p.id])).join('')}</tr>`).join('');
+  document.getElementById('robotrader').innerHTML = ROBOTAR.map(r => `<tr>
+    <td><span class="produktnamn">${lank(r.namn, r.url)}</span></td>
+    <td>${esc(r.avgift)}</td><td>${esc(r.aktieandel ?? '–')}</td><td>${esc(r.minsta ?? '–')}</td></tr>`).join('');
+}
+
+let sparat = null;
+try { sparat = JSON.parse(localStorage.getItem('ranta') || 'null'); } catch {}
+const start = startvarden(STANDARD, location.search, sparat);
+for (const f of falt) {
+  const el = document.getElementById(f);
+  el.value = start[f];
+  el.addEventListener('input', rakna);
+}
+rakna();
+ritaFonder();
+</script>
 </head>
 <body>
 
@@ -158,74 +228,5 @@
   </div>
 </footer>
 
-<script type="module">
-import { rantaPaRanta, kronor, procent } from './avgifter.js';
-import { startaTema, startvarden } from './gemensamt.js';
-import { startaGrind } from './grind.js';
-import { FONDER, PLATTFORMAR, ROBOTAR, SENAST_KONTROLLERAD } from './data.js';
-
-startaGrind();
-startaTema();
-for (const el of document.querySelectorAll('[data-kontrolldatum]')) el.textContent = SENAST_KONTROLLERAD;
-
-const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-const antal = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-const lank = (text, url) => url ? `<a href="${esc(url)}" rel="noopener">${esc(text)}</a>` : esc(text);
-
-const falt = ['manad', 'engang', 'ar', 'sats'];
-const STANDARD = { manad: 2000, engang: 0, ar: 30, sats: 7 };
-
-function rakna() {
-  // Tomt falt ar en saknad uppgift, inte noll: tom procent raknade forut med 0 % och visade "0 kr".
-  const v = Object.fromEntries(falt.map(f => { const t = document.getElementById(f).value; return [f, t === '' ? NaN : Number(t)]; }));
-  if (Object.values(v).every(Number.isFinite)) {
-    try { localStorage.setItem('ranta', JSON.stringify(v)); } catch {}
-    // Adressen bar scenariot, sa en kopierad lank visar samma rakning.
-    history.replaceState(null, '', '?' + new URLSearchParams(v) + location.hash);
-  }
-  try {
-    const r = rantaPaRanta({ engangsinsattning: v.engang, manadssparande: v.manad, ar: v.ar, raknesats: v.sats / 100 });
-    document.getElementById('res-insatt').textContent = kronor(r.insatt);
-    document.getElementById('res-ranta').textContent = kronor(r.avkastning);
-    document.getElementById('res-slut').textContent = kronor(r.slutvarde);
-    // Decimalkomma ("2,5 år"), och inget "efter -3 år" bredvid streck.
-    document.getElementById('res-ar').textContent = v.ar.toLocaleString('sv-SE');
-  } catch {
-    for (const id of ['res-ar', 'res-insatt', 'res-ranta', 'res-slut']) document.getElementById(id).textContent = '–';
-  }
-}
-
-/** En plattformscell: fondavgift plus plattformsavgift, "säljs ej" eller "–". */
-function kopcell(f, k) {
-  if (k === null) return '<td class="dampad">–</td>';
-  if (k.finns === false) return '<td class="dampad liten">säljs ej</td>';
-  const total = procent(f.arligAvgift + k.plattform);
-  return `<td>${k.tak ? `<span class="liten dampad">högst</span> ${total}` : total}</td>`;
-}
-
-function ritaFonder() {
-  document.getElementById('fondrubrik').innerHTML = '<tr><th scope="col">Fond</th><th scope="col">Innehav</th><th scope="col">Fondavgift</th>'
-    + PLATTFORMAR.map(p => `<th scope="col">${p.namn}</th>`).join('') + '</tr>';
-  document.getElementById('fondrader').innerHTML = FONDER.map(f => `<tr>
-    <td><span class="produktnamn">${lank(f.namn, f.url)}</span>${f.isin ? `<span class="produktmeta">${esc(f.isin)}</span>` : ''}</td>
-    <td>${f.bredd ? `${antal(f.bredd.innehav)} i ${f.bredd.lander} länder` : '<span class="dampad">–</span>'}</td>
-    <td>${procent(f.arligAvgift)}</td>
-    ${PLATTFORMAR.map(p => kopcell(f, f.kop[p.id])).join('')}</tr>`).join('');
-  document.getElementById('robotrader').innerHTML = ROBOTAR.map(r => `<tr>
-    <td><span class="produktnamn">${lank(r.namn, r.url)}</span></td>
-    <td>${esc(r.avgift)}</td><td>${esc(r.aktieandel ?? '–')}</td><td>${esc(r.minsta ?? '–')}</td></tr>`).join('');
-}
-
-let sparat = null;
-try { sparat = JSON.parse(localStorage.getItem('ranta') || 'null'); } catch {}
-const start = startvarden(STANDARD, location.search, sparat);
-for (const f of falt) {
-  const el = document.getElementById(f);
-  el.value = start[f];
-  el.addEventListener('input', rakna);
-}
-rakna();
-ritaFonder();
-</script>
 </body>
 </html>
