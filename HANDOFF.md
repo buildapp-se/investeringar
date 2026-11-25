@@ -177,3 +177,7 @@ Worktree `C:\dev\_wt\investeringar-1125s`, gren `speed/2026-11-25`, pushad till 
 ## Scenariojakt 2026-11-25, klar
 
 Worktree `C:\dev\_wt\investeringar-1125c`, gren `scen/2026-11-25`, pushad till `master` och deployad (f424ead live). Fem scenarier i flera steg mot den lokala servern, skripten i `%TEMP%\aifabriken-lanes\scen-investeringar\`; vad de täckte står i BACKLOG under Scenariojakt 2026-11-25. Två små buggar rättade (`kronor()` från 1e21, belåningslänken kodade inte `+`), typsnitten flyttade från Google Fonts till `site/fonter/` utan CSP-ändring, grindknappen ärver typsnittet. `npm test` grönt, fart mätt live före och efter. Patriks att avgöra: om en öppnad delad länk ska få skriva över ens eget sparade scenario.
+
+## P3-funktionspass 2026-11-25, klar
+
+Worktree `C:\dev\_wt\investeringar-1125p`, gren `p3/2026-11-25`. Inga byggbara punkter: varje öppen P3-punkt är Patriks beslut, research, zoninställningar eller går inte att nå. Motivering per punkt i BACKLOG under P3-funktionspass 2026-11-25. Bara BACKLOG och HANDOFF ändrade.
